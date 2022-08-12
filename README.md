@@ -1,4 +1,4 @@
-# epidemic_frntend 
+# epidemic_frontend 
 
 ## Project setup
 ```
