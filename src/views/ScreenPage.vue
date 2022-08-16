@@ -17,16 +17,16 @@
             href="https://m.yangshipin.cn/static/2020/c0126.html?tab=history_list"
             :class="{ active: isActive == 4 }"
             data-index="4"
-            >热点直播</a
+            >疫情地图</a
           >
           <a
             href="https://voice.baidu.com/act/newpneumonia/newpneumonia"
             :class="{ active: isActive == 5 }"
             data-index="5"
-            >更多资讯</a
+            >人口流动</a
           >
-          <li :class="{ active: isActive == 6 }" data-index="6">切换国外</li>
-          <li :class="{ active: isActive == 7 }" data-index="7">返回</li>
+          <li :class="{ active: isActive == 6 }" data-index="6">防疫政策</li>
+          <li :class="{ active: isActive == 7 }" data-index="7">核酸检测</li>
         </ul>
       </div>
     </header>
@@ -40,7 +40,7 @@
             <p>{{ data }}</p>
           </div>
           <div class="show_box total_box">
-            <div v-if="show1" class="flex-column total_item">
+            <div v-if=show1 class="flex-column total_item">
               <p>累计确诊</p>
               <h3>{{ this.chinaTotal.confirm }}</h3>
               <h4>较昨日</h4>
