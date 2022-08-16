@@ -799,6 +799,12 @@ export default {
         this.$refs[type].screenAdapter()
       })
     },
+    changeSize1(type) {
+      this.fullScreenStatus[type] = !this.fullScreenStatus[type]
+      this.$nextTick(() => {
+        this.$refs[type].screenAdapter()
+      })
+    },
   },
   watch: {
     news() {

@@ -4,6 +4,7 @@ import MapPage from '../views/MapPage'
 import ScreenPage from '../views/ScreenPage'
 import MonthPage from '../views/MonthPage'
 import CountryTopPage from '../views/CountryTopPage'
+import CovidDetectPage from "../views/CovidDetectPage";
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,9 @@ const routes = [{
   {
     path: '/countrytop',
     component: CountryTopPage
+  },{
+  path: '/coviddetect',
+    component: CovidDetectPage
   }
 
 ]
