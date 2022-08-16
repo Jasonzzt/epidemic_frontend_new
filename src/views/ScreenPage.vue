@@ -187,7 +187,7 @@
               fullScreenStatus.map ? 'show_box h fullscreen' : 'show_box h',
             ]"
           >
-            <myMap ref="map" v-if="show1"></myMap>
+            <myMap ref="map" v-if="show3"></myMap>
             <div
               @click="changeSize('map')"
               :class="[fullScreenStatus.map ? 'compress' : 'expand']"
@@ -297,9 +297,8 @@
 .screen-page {
   width: 100%;
   height: 100%;
-  background: #00065b url(../../public/static/img/bg.jpg) no-repeat;
   background-size: 100% 100%;
-  background-position: 0 0;
+  background: #00065b url(../../public/static/img/bg.jpg) no-repeat 0 0;
 }
 
 .roll {
@@ -613,6 +612,7 @@ export default {
       isActive: 0,
       show1: false,
       show2: false,
+      show3:true,
       news: null,
       hot: null,
       data: '',
@@ -690,9 +690,10 @@ export default {
     },
 
     async getCountryData() {
-      const url = 'https://view.inews.qq.com/g2/getOnsInfo',
+      const url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
         params = { name: 'disease_h5' }
-      const res = await this.$jsonp(url, params)
+      // const res = await this.$jsonp(url, params)
+      const res = await this.$http.get(url)
       const obj = JSON.parse(res.data)
 
       this.allDataList = obj.areaTree[0].children.map((item) => ({

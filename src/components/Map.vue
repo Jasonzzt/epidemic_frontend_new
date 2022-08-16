@@ -1,20 +1,20 @@
 <template>
   <div class="com-container">
     <div class="com-chart" ref="map_ref"></div>
-    <!-- <div class="button">
-      <span
-        data-index="0"
-        :class="{ current: isActive == 0 }"
-        @click="handClick('现有确诊', allNowDataList, $event)"
-        >现有确诊</span
-      >
-      <span
-        data-index="1"
-        :class="{ current: isActive == 1 }"
-        @click="handClick('累计确诊', allDataList, $event)"
-        >累计确诊</span
-      >
-    </div> -->
+<!--     <div class="button">-->
+<!--      <span-->
+<!--        data-index="0"-->
+<!--        :class="{ current: isActive == 0 }"-->
+<!--        @click="handClick('现有确诊', allNowDataList, $event)"-->
+<!--        >现有确诊</span-->
+<!--      >-->
+<!--      <span-->
+<!--        data-index="1"-->
+<!--        :class="{ current: isActive == 1 }"-->
+<!--        @click="handClick('累计确诊', allDataList, $event)"-->
+<!--        >累计确诊</span-->
+<!--      >-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
   methods: {
     async initChart() {
       this.chartInstance = this.$echarts.init(this.$refs.map_ref)
-      const ret = await this.$http.get('./static/lib/china.json')
+      const ret = await this.$http.get('../static/lib/china.json')
       this.$echarts.registerMap('china', ret.data)
 
       const initOption = {
@@ -199,7 +199,7 @@ export default {
   position: relative;
 }
 
-/* .button {
+ .button {
   position: absolute;
   left: 2%;
   top: 2%;
@@ -222,5 +222,5 @@ span {
   background-color: #ccdeff;
   border-color: #ccdeff;
   color: #222;
-} */
+}
 </style>
