@@ -32,16 +32,18 @@
           >
           <!-- 防疫政策页面 -->
           <!-- PolicyPage-->
-          <li :class="{ active: isActive == 6 }" data-index="6">防疫政策</li>
-
+          <a
+              @click="pushto3"
+              :class="{ active: isActive == 6 }"
+              data-index="6"
+          >防疫政策</a>
           <!-- 核酸检测页面 -->
           <!-- CovidDetectionPage -->
           <a
-              @click="pushto"
+              @click="pushto4"
               :class="{ active: isActive == 7 }"
               data-index="7"
           >核酸检测</a>
-<!--        <li :class="{ active: isActive == 7 }" data-index="7">核酸检测</li>-->
 
         </ul>
       </div>
@@ -709,7 +711,11 @@ export default {
         }, 1000)
       }
     },
-    pushto(){
+    pushto3(){
+      router.push('/policy')
+    },
+
+    pushto4(){
       router.push('/coviddetect')
     },
 
