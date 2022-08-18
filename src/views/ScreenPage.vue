@@ -2,6 +2,7 @@
   <div class="screen-page">
     <!-- 标题栏 -->
     <header>
+      <!-- 全国疫情地图页面的数据显示标题栏 -->
       <div ref="a" class="header-box">
         <ul @click="handClick" class="left-ul">
           <li :class="{ active: isActive == 0 }" data-index="0">现存确诊</li>
@@ -11,22 +12,37 @@
         </ul>
       </div>
       <h1 class="title">新冠病毒疫情可视化</h1>
+      <!--切换四个页面的标题栏-->
       <div ref="a" class="header-box">
         <ul @click="clickIndex" class="right-ul">
+          <!-- 疫情地图页面-->
           <a
             href="https://m.yangshipin.cn/static/2020/c0126.html?tab=history_list"
             :class="{ active: isActive == 4 }"
             data-index="4"
             >疫情地图</a
           >
+          <!-- 人口流动页面 -->
+          <!-- PopulationPage-->
           <a
             href="https://voice.baidu.com/act/newpneumonia/newpneumonia"
             :class="{ active: isActive == 5 }"
             data-index="5"
             >人口流动</a
           >
+          <!-- 防疫政策页面 -->
+          <!-- PolicyPage-->
           <li :class="{ active: isActive == 6 }" data-index="6">防疫政策</li>
-          <li :class="{ active: isActive == 7 }" data-index="7">核酸检测</li>
+
+          <!-- 核酸检测页面 -->
+          <!-- CovidDetectionPage -->
+          <a
+              @click="pushto"
+              :class="{ active: isActive == 7 }"
+              data-index="7"
+          >核酸检测</a>
+<!--        <li :class="{ active: isActive == 7 }" data-index="7">核酸检测</li>-->
+
         </ul>
       </div>
     </header>
@@ -40,9 +56,11 @@
             <p>{{ data }}</p>
           </div>
           <div class="show_box total_box">
+            <!-- 累计确诊数据 chinaTotal.confirm-->
             <div v-if=show1 class="flex-column total_item">
               <p>累计确诊</p>
               <h3>{{ this.chinaTotal.confirm }}</h3>
+              <!-- 与昨日相比情况（无变化/新增/减少） -->
               <h4>较昨日</h4>
               <p class="total_bottom">
                 <img
@@ -59,6 +77,7 @@
                 <span>{{ this.chinaAdd.confirm }}</span>
               </p>
             </div>
+            <!-- 现存确诊数据 chinaTotal.nowConfirm-->
             <div v-if="show1" class="flex-column total_item">
               <p>现存确诊</p>
               <h3>{{ this.chinaTotal.nowConfirm }}</h3>
@@ -78,6 +97,7 @@
                 <span>{{ this.chinaAdd.nowConfirm }}</span>
               </p>
             </div>
+            <!-- 现存确诊数据 chinaTotal.nowConfirm-->
             <div v-if="show1" class="flex-column total_item">
               <p>境外输入</p>
               <h3>{{ this.chinaTotal.importedCase }}</h3>
