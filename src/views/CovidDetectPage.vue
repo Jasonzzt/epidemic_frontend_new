@@ -2,15 +2,40 @@
 <!--  <div :style="background" class="bgBackground">-->
 <!--  </div>-->
   <div class="com-page1">
-    <h>核酸检测点查询</h>
-    <hr>
+    <el-page-header @back="goBack" content=" ">
+    </el-page-header>
+<!--    <el-breadcrumb separator="/">-->
+<!--      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
+<!--      <el-breadcrumb-item :to="{ path: '/' }">活动管理</el-breadcrumb-item>-->
+<!--      <el-breadcrumb-item :to="{ path: '/' }">活动列表</el-breadcrumb-item>-->
+<!--      <el-breadcrumb-item :to="{ path: '/' }">活动详情</el-breadcrumb-item>-->
+<!--    </el-breadcrumb>-->
+    <el-container>
+      <el-header >核酸检测点查询
+        <i class="el-icon-coordinate"></i> </el-header>
+      <hr>
+      <el-container>
+        <el-aside width="600px">-
+        <img src="../../public/static/img/coviddetect.png" width="600">
+
+        </el-aside>
+
+
+      <el-main>请选择想要查询核酸检测点所在的城市: <br>
+      <br>
     <div class="block">
       <span class="demonstration">省份  （城市）</span>
       <el-cascader
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
+      <el-button type="primary"  icon="el-icon-search" >   搜索</el-button>
     </div>
+
+      </el-main>
+      </el-container>
+    </el-container>
+
   </div>
 
 
@@ -45,11 +70,24 @@
   background: #00065b url(../../public/static/img/bg1.jpg) no-repeat 0 0;
 }
 
+.el-header {
+  color: oldlace;
+  text-align: center;
+  line-height: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
 
+.el-main {
+
+  text-align: center;
+  line-height: 40px;
+}
 
 </style>
 
 <script>
+import router from "@/router";
+
 export default {
   data() {
     return {
@@ -60,7 +98,10 @@ export default {
   methods: {
     handleChange(value) {
       console.log(value);
-    }
+    },
+    goBack() {
+      router.push('/')
+    },
   }
 };
 </script>
