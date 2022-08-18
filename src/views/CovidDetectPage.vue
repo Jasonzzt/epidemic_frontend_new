@@ -11,12 +11,12 @@
 <!--      <el-breadcrumb-item :to="{ path: '/' }">活动详情</el-breadcrumb-item>-->
 <!--    </el-breadcrumb>-->
     <el-container>
-      <el-header >核酸检测点查询
+      <el-header style="font-size: 35px;font-family:Microsoft YaHei">核酸检测点查询
         <i class="el-icon-coordinate"></i> </el-header>
       <hr>
       <el-container>
-        <el-aside width="600px">-
-        <img src="../../public/static/img/coviddetect.png" width="600">
+        <el-aside width="500px">-
+        <img src="../../public/static/img/covid-19detect.png" width="500px">
 
         </el-aside>
 
