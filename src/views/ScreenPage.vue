@@ -616,6 +616,7 @@ aside {
 import myMap from '../components/Map'
 import month from '../components/Month'
 import countrytop from '../components/CountryTop'
+import router from "@/router";
 export default {
   components: {
     myMap,
@@ -707,6 +708,9 @@ export default {
           this.changeKeyframe()
         }, 1000)
       }
+    },
+    pushto(){
+      router.push('/coviddetect')
     },
 
     async getCountryData() {
