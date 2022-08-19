@@ -18,19 +18,20 @@
                 :options="options"
                 @change="handleChange"></el-cascader>
 
-          <div class="block">
-            <span class="demonstration">日期 </span>
+
+            <span class="demonstration" style="margin-left: 50px">日期</span>
             <el-date-picker
                 v-model="value1"
                 type="date"
-                placeholder="选择日期">
+                placeholder="选择日期"
+                style="margin-left: 20px"
+            >
             </el-date-picker>
             <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px" >   搜索</el-button>
             <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
             <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
             <!--      </ul>-->
 
-          </div>
   </div>
           <el-divider></el-divider>
           <el-row :gutter="40">
