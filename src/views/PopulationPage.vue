@@ -9,8 +9,7 @@
       </el-header>
 <!--      <hr>-->
       <el-container>
-
-        <el-main>请选择想要查询核酸检测点所在的城市 : <br>
+        <el-main style="font-size: 22px; font-family: PingFang SC">请选择想要查询核酸检测点所在的城市 : <br>
           <br>
           <div class="block">
             <span class="demonstration">省份  （城市）</span>
@@ -18,12 +17,17 @@
                 v-model="value"
                 :options="options"
                 @change="handleChange"></el-cascader>
-            <el-button type="primary"  icon="el-icon-search" >   搜索</el-button>
+            <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px" >   搜索</el-button>
             <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
             <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
             <!--      </ul>-->
 
           </div>
+          <el-divider></el-divider>
+          <el-row :gutter="40">
+            <el-col :span="12"><div>出发地</div><div class="grid-content bg-purple">在京人员非必要不前往7天内出现本土疫情的县，确需前往的应提前向所在社区、单位报告，出现涉疫风险的按照要求就地落实管控措施。严控本地中高风险区及其他涉疫风险人员出京。</div></el-col>
+            <el-col :span="12"><div>目的地</div><div class="grid-content bg-purple">在京人员非必要不前往7天内出现本土疫情的县，确需前往的应提前向所在社区、单位报告，出现涉疫风险的按照要求就地落实管控措施。严控本地中高风险区及其他涉疫风险人员出京。</div></el-col>
+          </el-row>
 
         </el-main>
       </el-container>

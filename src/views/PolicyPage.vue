@@ -6,7 +6,7 @@
     <el-page-header @back="goBack" content=" ">
     </el-page-header>
     <el-header style="font-size: 35px;font-family:Microsoft YaHei">防疫政策查询  </el-header>
-    <el-main style="font-size: 22px">请选择出发地与目的地所在城市: <br>
+    <el-main style="font-size: 22px; font-family: PingFang SC">请选择出发地与目的地所在城市: <br>
       <br>
       <div class="block">
         <span class="demonstration">出发地 （城市）</span>
