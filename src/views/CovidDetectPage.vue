@@ -13,15 +13,14 @@
     <el-container>
       <el-header style="font-size: 35px;font-family:Microsoft YaHei">核酸检测点查询
         <i class="el-icon-coordinate"></i> </el-header>
-      <el-divider></el-divider>
+<!--      <el-divider></el-divider>-->
       <el-container>
 <!--        <el-aside width="500px">-
         <img src="../../public/static/img/covid-19detect.png" width="500px">
 
         </el-aside>-->
+      <el-main style="font-size: 22px">请选择想要查询核酸检测点所在的城市 : <br>
 
-      <el-main style="font-size: 25px">请选择想要查询核酸检测点所在的城市: <br>
-      <br>
     <div class="block">
       <span class="demonstration">省份  （城市）</span>
       <el-cascader
@@ -47,10 +46,6 @@
                 prop="name"
                 label="检测点"
                 width="350">
-            </el-table-column>
-            <el-table-column
-                prop="address"
-                label="地址">
             </el-table-column>
           </el-table>
         </div>

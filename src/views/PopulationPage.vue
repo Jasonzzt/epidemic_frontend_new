@@ -7,10 +7,10 @@
     <el-container>
       <el-header style="font-size: 35px;font-family:Microsoft YaHei">人口流动
       </el-header>
-      <hr>
+<!--      <hr>-->
       <el-container>
 
-        <el-main>请选择想要查询核酸检测点所在的城市: <br>
+        <el-main>请选择想要查询核酸检测点所在的城市 : <br>
           <br>
           <div class="block">
             <span class="demonstration">省份  （城市）</span>
