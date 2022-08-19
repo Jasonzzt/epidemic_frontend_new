@@ -28,7 +28,7 @@
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
-      <el-button type="primary"  icon="el-icon-search" >   搜索</el-button>
+      <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px">   搜索</el-button>
 <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
 <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
 <!--      </ul>-->
