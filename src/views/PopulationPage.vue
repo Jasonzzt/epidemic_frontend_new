@@ -5,8 +5,8 @@
     <el-page-header @back="goBack" content=" ">
     </el-page-header>
     <el-container>
-      <el-header style="font-size: 35px;font-family:Microsoft YaHei">人口流动
-      </el-header>
+      <el-header style="font-size: 35px;font-family:Microsoft YaHei">人口流动数据
+        <i class="el-icon-user-solid"></i> </el-header>
 <!--      <hr>-->
       <el-container>
         <el-main style="font-size: 22px; font-family: PingFang SC">请选择想要查询核酸检测点所在的城市 : <br>

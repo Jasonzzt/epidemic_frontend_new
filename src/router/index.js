@@ -7,6 +7,7 @@ import CountryTopPage from '../views/CountryTopPage'
 import CovidDetectPage from "../views/CovidDetectPage";
 import PolicyPage from "@/views/PolicyPage";
 import PopulationPage from "@/views/PopulationPage";
+import PredictionPage from "@/views/PredictionPage";
 Vue.use(VueRouter)
 
 const routes = [{
@@ -37,6 +38,9 @@ const routes = [{
   },{
     path: '/population',
     component: PopulationPage
+  },{
+    path: '/prediction',
+    component: PredictionPage
   },
 
 

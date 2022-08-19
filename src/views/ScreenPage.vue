@@ -17,10 +17,10 @@
         <ul @click="clickIndex" class="right-ul">
           <!-- 疫情地图页面-->
           <a
-            href="https://m.yangshipin.cn/static/2020/c0126.html?tab=history_list"
+              @click="pushto1"
             :class="{ active: isActive == 4 }"
             data-index="4"
-            >疫情地图</a
+            >疫情预测</a
           >
           <!-- 人口流动页面 -->
           <!-- PopulationPage-->
@@ -712,6 +712,9 @@ export default {
       }
     },
 
+    pushto1(){
+      router.push('/prediction')
+    },
     pushto2(){
       router.push('/population')
     },

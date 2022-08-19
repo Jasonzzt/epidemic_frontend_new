@@ -4,12 +4,7 @@
   <div class="com-page1">
     <el-page-header @back="goBack" content=" ">
     </el-page-header>
-<!--    <el-breadcrumb separator="/">-->
-<!--      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>-->
-<!--      <el-breadcrumb-item :to="{ path: '/' }">活动管理</el-breadcrumb-item>-->
-<!--      <el-breadcrumb-item :to="{ path: '/' }">活动列表</el-breadcrumb-item>-->
-<!--      <el-breadcrumb-item :to="{ path: '/' }">活动详情</el-breadcrumb-item>-->
-<!--    </el-breadcrumb>-->
+
     <el-container>
       <el-header style="font-size: 35px;font-family:Microsoft YaHei">核酸检测点查询
         <i class="el-icon-coordinate"></i> </el-header>
