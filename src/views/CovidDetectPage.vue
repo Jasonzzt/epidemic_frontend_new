@@ -27,7 +27,7 @@
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
-      <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px">   搜索</el-button>
+      <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px">搜索</el-button>
 <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
 <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
 <!--      </ul>-->
@@ -46,6 +46,10 @@
                 prop="name"
                 label="检测点"
                 width="350">
+            </el-table-column>
+            <el-table-column
+                prop="address"
+                label="地址">
             </el-table-column>
           </el-table>
         </div>

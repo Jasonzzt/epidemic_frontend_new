@@ -10,6 +10,7 @@
     "axios": "^0.27.2",
     "core-js": "^2.6.5",
     "element-ui": "^2.15.9",
+    "iview": "^3.5.4",
     "jsonp": "^0.2.1",
     "v-distpicker": "^2.0.8",
     "view-design": "^4.7.0",

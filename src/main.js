@@ -24,6 +24,9 @@ Vue.prototype.$http = axios
 // 将全局Echarts挂载到Vue的原型上
 Vue.prototype.$echarts = window.echarts
 Vue.config.productionTip = false
+// import iView from 'iview';
+// import 'iview/dist/styles/iview.css'  //iview的样式文件，必须引入
+// Vue.use(iView);
 
 new Vue({
   router,
