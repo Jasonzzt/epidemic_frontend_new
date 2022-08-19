@@ -17,14 +17,22 @@
                 v-model="value"
                 :options="options"
                 @change="handleChange"></el-cascader>
+
+          <div class="block">
+            <span class="demonstration">日期 </span>
+            <el-date-picker
+                v-model="value1"
+                type="date"
+                placeholder="选择日期">
+            </el-date-picker>
             <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px" >   搜索</el-button>
             <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
             <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
             <!--      </ul>-->
 
           </div>
+  </div>
           <el-divider></el-divider>
-
           <el-row :gutter="40">
             <el-col :span="12"><div>迁入来源地Top10</div><div class="grid-content bg-purple">    <el-table
                 :data="tableData1"
@@ -73,6 +81,7 @@
               </el-table-column>
             </el-table></div></el-col>
           </el-row>
+
         </el-main>
       </el-container>
     </el-container>
@@ -160,6 +169,13 @@ import router from "@/router";
 export default {
   data() {
     return {
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
+      value1: '',
+      value2: '',
       tableData1: [],
       tableData2:[],
       value: [],
