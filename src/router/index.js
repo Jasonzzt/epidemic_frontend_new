@@ -6,7 +6,7 @@ import MonthPage from '../views/MonthPage'
 import CountryTopPage from '../views/CountryTopPage'
 import CovidDetectPage from "../views/CovidDetectPage";
 import PolicyPage from "@/views/PolicyPage";
-
+import PopulationPage from "@/views/PopulationPage";
 Vue.use(VueRouter)
 
 const routes = [{
@@ -34,7 +34,10 @@ const routes = [{
   },{
     path: '/policy',
     component: PolicyPage
-  }
+  },{
+    path: '/population',
+    component: PopulationPage
+  },
 
 
 ]

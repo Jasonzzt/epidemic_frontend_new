@@ -25,7 +25,7 @@
           <!-- 人口流动页面 -->
           <!-- PopulationPage-->
           <a
-            href="https://voice.baidu.com/act/newpneumonia/newpneumonia"
+             @click="pushto2"
             :class="{ active: isActive == 5 }"
             data-index="5"
             >人口流动</a
@@ -711,10 +711,13 @@ export default {
         }, 1000)
       }
     },
+
+    pushto2(){
+      router.push('/population')
+    },
     pushto3(){
       router.push('/policy')
     },
-
     pushto4(){
       router.push('/coviddetect')
     },
