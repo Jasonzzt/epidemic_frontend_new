@@ -46,7 +46,7 @@
                 width="350">
             </el-table-column>
             <el-table-column
-                prop="address"
+                prop="location"
                 label="地址">
             </el-table-column>
           </el-table>
@@ -165,6 +165,7 @@ export default {
       this.currentPage=val
     },
     search(){
+      this.currentPage=1
       let config = {
         headers: {
           'Content-Type': 'application/json'
@@ -173,6 +174,7 @@ export default {
       this.$axios.post('http://114.115.211.47/getDetectionPoint', {"cityId":this.value[1]},config).then(res => {
         let msg = res.data.msg;
         this.tableData=msg
+        this.totalCount=msg.length
       })
     },
   }

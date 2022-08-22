@@ -27,7 +27,7 @@
                 style="margin-left: 20px"
             >
             </el-date-picker>
-            <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px" >   搜索</el-button>
+            <el-button type="primary"  icon="el-icon-search" style="margin-left: 50px" @click="search">   搜索</el-button>
             <!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
             <!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
             <!--      </ul>-->
@@ -42,22 +42,22 @@
                 :row-style="{backgroundColor:'#016f97',color:'#041215'}"
             >
               <el-table-column
-                  prop="date"
+                  prop="time"
                   label="日期"
                   width="150">
               </el-table-column>
               <el-table-column
-                  prop="province"
+                  prop="fromProvince"
                   label="省份"
                   width="200">
               </el-table-column>
               <el-table-column
-                  prop="city"
+                  prop="fromCity"
                   label="城市"
                   width="200">
               </el-table-column>
               <el-table-column
-                  prop="prop"
+                  prop="populationIn"
                   label="比例">
               </el-table-column>
             </el-table></div></el-col>
@@ -68,22 +68,22 @@
                 :row-style="{backgroundColor:'#016f97',color:'#041215'}"
             >
               <el-table-column
-                  prop="date"
+                  prop="time"
                   label="日期"
                   width="150">
               </el-table-column>
               <el-table-column
-                  prop="province"
+                  prop="toProvince"
                   label="省份"
                   width="200">
               </el-table-column>
               <el-table-column
-                  prop="city"
+                  prop="toCity"
                   label="城市"
                   width="200">
               </el-table-column>
               <el-table-column
-                  prop="prop"
+                  prop="populationOut"
                   label="比例">
               </el-table-column>
             </el-table></div></el-col>
@@ -182,7 +182,6 @@ export default {
         },
       },
       value1: '',
-      value2: '',
       tableData1: [
         {
           date:'2022-8-22',
@@ -205,6 +204,21 @@ export default {
     };
   },
   methods: {
+    search(){
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      this.$axios.post('http://114.115.211.47/getPopulationInByCityId', {"cityId":this.value[1]},config).then(res => {
+        let msg = res.data.msg;
+        this.tableData1=msg
+      })
+      this.$axios.post('http://114.115.211.47/getPopulationOutByCityId', {"cityId":this.value[1]},config).then(res => {
+        let msg = res.data.msg;
+        this.tableData2=msg
+      })
+    },
     handleChange(value) {
       console.log(value);
     },
