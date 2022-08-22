@@ -25,21 +25,14 @@
       </div>
 
       <el-divider></el-divider>
-      <el-row :gutter="40">
-        <el-col :span="12"><div>出发地</div><div class="grid-content bg-purple" >{{this.$data.in}}</div></el-col>
-        <el-col :span="12"><div>目的地</div><div class="grid-content bg-purple">{{this.$data.out}}</div></el-col>
+      <el-row :gutter="20">
+        <el-col :span="10" style="font-size: 18px;margin-left: 50px"><div>出发地</div><div class="grid-content bg-purple" >{{this.$data.in}}</div></el-col>
+        <el-col :span="10" style="font-size: 18px;margin-left: 50px" ><div>目的地</div><div class="grid-content bg-purple">{{this.$data.out}}
+<!--          <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
+<!--            <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
+<!--          </ul>-->
+        </div></el-col>
       </el-row>
-
-<!--      <div class="demo-split">
-        <Split v-model="split1">
-          <div slot="left" class="demo-split-pane">
-            Left Pane
-          </div>
-          <div slot="right" class="demo-split-pane">
-            Right Pane
-          </div>
-        </Split>
-      </div>-->
 
     </el-main>
 
@@ -106,7 +99,7 @@ export default {
 .com-page2 {
 
   width: 100%;
-  height: 100%;
+  height: 350%;
   background-size: 100% 100%;
   background: #00065b url(../../public/static/img/bg1.jpg) no-repeat 0 0;
 }

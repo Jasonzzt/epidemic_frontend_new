@@ -9,7 +9,7 @@
         <i class="el-icon-user-solid"></i> </el-header>
 <!--      <hr>-->
       <el-container>
-        <el-main style="font-size: 22px; font-family: PingFang SC">请选择想要查询核酸检测点所在的城市 : <br>
+        <el-main style="font-size: 22px; font-family: PingFang SC">请选择想要查询核酸检测点所在的城市 :
           <br>
           <div class="block">
             <span class="demonstration">省份  （城市）</span>
