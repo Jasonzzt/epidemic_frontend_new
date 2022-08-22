@@ -8,7 +8,7 @@
     <el-container>
       <el-header style="font-size: 35px;font-family:Microsoft YaHei">疫情预测数据
         <i class="el-icon-s-data"></i> </el-header>
-      <!--      <el-divider></el-divider>-->
+            <el-divider></el-divider>
       <el-container>
 
         <el-main style="font-size: 22px"> : <br>

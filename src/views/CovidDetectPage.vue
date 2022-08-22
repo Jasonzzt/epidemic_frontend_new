@@ -31,7 +31,10 @@
         <div style="display: flex;justify-content: space-around;">
           <el-table
               :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-              style="width: 100%;font-size: 20px">
+              style="width: 100%;font-size: 20px;"
+              :header-cell-style="{ background:'#00065b url(../../public/static/img/amiddboxttop.png) no-repeat 0 0' , color:'#ffffff' }"
+              :row-style="{backgroundColor:'#016f97',color:'#041215'}"
+          >
             <el-table-column
                 prop="city"
                 label="城市"
