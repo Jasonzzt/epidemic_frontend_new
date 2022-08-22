@@ -16,9 +16,9 @@ Vue.use(ElementUI)
 import './assets/css/global.less'
 
 import store from './store'
-
 // 将axios挂载在Vue的原型上
 // axios.defaults.baseURL = ''
+Vue.prototype.$axios = axios
 Vue.prototype.$http = axios
 
 // 将全局Echarts挂载到Vue的原型上
@@ -29,6 +29,7 @@ Vue.config.productionTip = false
 // Vue.use(iView);
 
 new Vue({
+  axios,
   router,
   store,
   render: h => h(App)
