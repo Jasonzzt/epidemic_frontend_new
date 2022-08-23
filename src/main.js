@@ -17,8 +17,7 @@ Vue.use(ElementUI)
 import 'vuescroll/dist/vuescroll.css';
 Vue.use(vuescroll);
 
-import dataV from '@jiaminghi/data-view'
-Vue.use(dataV)
+
 // 引入全局css
 import './assets/css/global.less'
 
@@ -35,6 +34,9 @@ Vue.config.productionTip = false
 // import 'iview/dist/styles/iview.css'  //iview的样式文件，必须引入
 // Vue.use(iView);
 import VWave from 'v-wave'
+import dataV from '@jiaminghi/data-view'
+
+Vue.use(dataV)
 // 引入echarts
 import echarts from 'echarts'
 import 'echarts/map/js/china'
