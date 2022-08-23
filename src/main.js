@@ -28,7 +28,11 @@ Vue.config.productionTip = false
 // import 'iview/dist/styles/iview.css'  //iview的样式文件，必须引入
 // Vue.use(iView);
 import VWave from 'v-wave'
-
+// 引入echarts
+import echarts from 'echarts'
+import 'echarts/map/js/china'
+// import 'echarts/map/js/world'
+import 'echarts/extension/bmap/bmap'
 Vue.use(VWave)
 new Vue({
   axios,

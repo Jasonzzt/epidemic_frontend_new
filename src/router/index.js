@@ -9,6 +9,7 @@ import PolicyPage from "@/views/PolicyPage";
 import PopulationPage from "@/views/PopulationPage";
 import PredictionPage from "@/views/PredictionPage";
 import FrontPage from "@/views/frontPage";
+import population from "../views/population";
 Vue.use(VueRouter)
 
 const routes = [
@@ -17,6 +18,11 @@ const routes = [
     component: FrontPage,
       meta:{index:0}
   },
+  {
+    path: "/population1",
+    component: population,
+  },
+
   {
     path: '/mappage',
     component: MapPage,
