@@ -8,39 +8,50 @@ import CovidDetectPage from "../views/CovidDetectPage";
 import PolicyPage from "@/views/PolicyPage";
 import PopulationPage from "@/views/PopulationPage";
 import PredictionPage from "@/views/PredictionPage";
+import FrontPage from "@/views/frontPage";
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+    {
     path: '/',
-    component: ScreenPage
+    component: FrontPage,
+      meta:{index:0}
   },
   {
     path: '/mappage',
-    component: MapPage
+    component: MapPage,
+    meta:{index:1}
   },
   {
     path: '/screenpage',
-    component: ScreenPage
+    component: ScreenPage,
+    meta:{index:0}
   },
   {
     path: '/monthpage',
-    component: MonthPage
+    component: MonthPage,
+
   },
   {
     path: '/countrytop',
-    component: CountryTopPage
+    component: CountryTopPage,
+
   },{
     path: '/coviddetect',
-    component: CovidDetectPage
+    component: CovidDetectPage,
+    meta:{index:1}
   },{
     path: '/policy',
-    component: PolicyPage
+    component: PolicyPage,
+    meta:{index:1}
   },{
     path: '/population',
-    component: PopulationPage
+    component: PopulationPage,
+    meta:{index:1}
   },{
     path: '/prediction',
-    component: PredictionPage
+    component: PredictionPage,
+    meta:{index:1}
   },
 
 

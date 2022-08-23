@@ -27,7 +27,9 @@ Vue.config.productionTip = false
 // import iView from 'iview';
 // import 'iview/dist/styles/iview.css'  //iview的样式文件，必须引入
 // Vue.use(iView);
+import VWave from 'v-wave'
 
+Vue.use(VWave)
 new Vue({
   axios,
   router,
