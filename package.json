@@ -10,8 +10,10 @@
     "@jiaminghi/data-view": "^2.10.0",
     "axios": "^0.27.2",
     "core-js": "^2.6.5",
+    "echarts": "^5.3.3",
     "element-ui": "^2.15.9",
     "iview": "^3.5.4",
+    "jquery": "^3.6.0",
     "jsonp": "^0.2.1",
     "v-distpicker": "^2.0.8",
     "v-wave": "^1.5.0",
@@ -28,6 +30,8 @@
     "@vue/cli-service": "^3.8.0",
     "less": "^3.13.1",
     "less-loader": "^5.0.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^7.3.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
