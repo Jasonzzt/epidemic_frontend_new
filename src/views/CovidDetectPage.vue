@@ -2,39 +2,33 @@
 <!--  <div :style="background" class="bgBackground">-->
 <!--  </div>-->
   <div class="com-page1">
-    <el-page-header @back="goBack" content=" ">
-    </el-page-header>
+    <el-page-header @back="goBack" content=" "></el-page-header>
 
     <el-container>
-      <el-header style="font-size: 35px;font-family:Microsoft YaHei">核酸检测点查询
-        <i class="el-icon-coordinate"></i> </el-header>
-<!--      <el-divider></el-divider>-->
+      <el-header style="font-size: 35px;font-family:新宋体"> <dv-decoration-7 style="width:350px;height:20px;">核酸检测点查询
+        <i class="el-icon-coordinate"></i></dv-decoration-7> </el-header>
+      <dv-decoration-2 style="width:1200px;height:5px;margin-left: 50px;position: relative" />
       <el-container>
-<!--        <el-aside width="500px">-
-        <img src="../../public/static/img/covid-19detect.png" width="500px">
-
-        </el-aside>-->
-      <el-main style="font-size: 22px">请选择想要查询核酸检测点所在的城市 : <br>
+      <el-main style="font-size: 22px;font-family:新宋体">请选择想要查询核酸检测点所在的城市 :
 
     <div class="block">
       <span class="demonstration">省份  （城市）</span>
-      <el-cascader
+      <el-cascader style="width: 150px "
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
       <el-button @click="search" type="primary"  icon="el-icon-search" style="margin-left: 50px">搜索</el-button>
-<!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
-<!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
-<!--      </ul>-->
-      <el-divider></el-divider>
+
+      <dv-border-box-1>
       <template >
-        <div style="display: flex;justify-content: space-around;">
+        <div style="display: flex;font-family:新宋体;width: 90%;margin-left: 70px">
           <el-table
               :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-              style="width: 100%;font-size: 20px;"
-              :header-cell-style="{ background:'#00065b url(../../public/static/img/amiddboxttop.png) no-repeat 0 0' , color:'#ffffff' }"
-              :row-style="{backgroundColor:'#016f97',color:'#041215'}"
-          >
+              style=";font-size: 20px;"
+              :header-cell-style="{ backgroundColor:'#3d488c',textAlign: 'center' ,color:'#ffffff' }"
+              :cell-style="{ textAlign: 'center' ,color:'#170606'}"
+              :row-class-name="tableRowClassName">
+          ><!--              :row-style="{backgroundColor:'#939fbb',textAlign: 'center',color:'#041215'}"-->
             <el-table-column
                 prop="city"
                 label="城市"
@@ -63,7 +57,7 @@
 
 
       </template>
-
+</dv-border-box-1>
     </div>
 
 
@@ -102,7 +96,7 @@
   width: 100%;
   height: 100%;
   background-size: 100% 100%;
-  background: #00065b url(../../public/static/img/bg1.jpg) no-repeat 0 0;
+  background: #b1bcff url(../../public/static/img/bg1.jpg) no-repeat 0 0;
 }
 
 .el-header {
@@ -111,11 +105,17 @@
   line-height: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
-
 .el-main {
 
   text-align: center;
   line-height: 40px;
+}
+.el-table .warning-row {
+  background: #3f498d;//这里可以修改颜色
+}
+
+.el-table .success-row {
+  background: #b1bcff;//这里可以修改颜色
 }
 
 </style>
@@ -164,6 +164,15 @@ export default {
       // 改变默认的页数
       this.currentPage=val
     },
+    tableRowClassName({row, rowIndex}) {
+      if (rowIndex%2 === 1)  //=>这里可以改成 rowIndex%2=== 1，后面直接else即可达到隔行变色效果。
+      {
+        return 'warning-row';
+      } else  {
+        return 'success-row ';
+      }
+    },
+
     search(){
       this.currentPage=1
       let config = {

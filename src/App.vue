@@ -67,17 +67,23 @@ export default {
   }
 }
 </script>
-<style>
+<style >
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: electronicFont;
-  src: url(assets/font/DS-DIGIT.TTF);
+body {
+
 }
+/*@font-face {*/
+/*  font-family: electronicFont;*/
+/*  src: url(assets/font/DS-DIGIT.TTF);*/
+/*  font-family: chunlian;*/
+/*  src: url(assets/font/chunlian.ttf);*/
+/*}*/
 
 li {
   list-style: none;

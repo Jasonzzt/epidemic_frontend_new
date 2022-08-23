@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
-
+import vuescroll from 'vuescroll';
 import {
   VueJsonp
 } from 'vue-jsonp'
@@ -12,6 +12,13 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
+
+
+import 'vuescroll/dist/vuescroll.css';
+Vue.use(vuescroll);
+
+import dataV from '@jiaminghi/data-view'
+Vue.use(dataV)
 // 引入全局css
 import './assets/css/global.less'
 
