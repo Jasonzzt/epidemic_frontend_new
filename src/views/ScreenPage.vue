@@ -59,7 +59,9 @@
             <p>地区：中国</p>
             <p>{{ data }}</p>
           </div>
-          <zhuzhuangtu class="bar"></zhuzhuangtu>
+
+          <bar class="bar"></bar>
+          <column></column>
 <!--          <div class="show_box total_box">
             &lt;!&ndash; 累计确诊数据 chinaTotal.confirm&ndash;&gt;
             <div v-if=show1 class="flex-column total_item">
@@ -578,12 +580,13 @@ aside {
 <script>
 import myMap from '../components/Map'
 import router from "@/router";
-import zhuzhuangtu from "../components/bar";
-
+import bar from "../components/bar";
+import column from "../components/column";
 export default {
   components: {
     myMap,
-    zhuzhuangtu,
+    bar,
+    column,
   },
   data() {
     return {

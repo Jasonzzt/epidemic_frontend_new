@@ -5,7 +5,7 @@
 <script>
 
 export default {
-  name:'zhuzhuangtu',
+  name:'bar',
   data() {
     return {
 
