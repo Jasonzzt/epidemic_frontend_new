@@ -382,7 +382,6 @@ aside {
   cursor: pointer;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 }
-
 .hot-item {
   position: relative;
   padding: 8px 15px 8px 25px;

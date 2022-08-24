@@ -2,67 +2,98 @@
 <!--  <div :style="background" class="bgBackground">-->
 <!--  </div>-->
   <div class="com-page1">
-    <el-page-header @back="goBack" content=" ">
-    </el-page-header>
+    <el-page-header @back="goBack" content=" "></el-page-header>
 
     <el-container>
-      <el-header style="font-size: 35px;font-family:Microsoft YaHei">核酸检测点查询
-        <i class="el-icon-coordinate"></i> </el-header>
-<!--      <el-divider></el-divider>-->
+      <el-header style="font-size: 35px;font-family:新宋体"> <dv-decoration-7 style="width:350px;height:20px;">核酸检测点查询
+        <i class="el-icon-coordinate"></i></dv-decoration-7> </el-header>
+      <dv-decoration-2 style="width:1200px;height:5px;margin-left: 50px;position: relative" />
       <el-container>
-<!--        <el-aside width="500px">-
-        <img src="../../public/static/img/covid-19detect.png" width="500px">
-
-        </el-aside>-->
-      <el-main style="font-size: 22px">请选择想要查询核酸检测点所在的城市 : <br>
-
-    <div class="block">
-      <span class="demonstration">省份  （城市）</span>
-      <el-cascader
+      <el-main style="font-size: 22px;font-family:新宋体">请选择想要查询核酸检测点所在的城市 :
+       <div class="block">
+      <span class="demonstration">省份 （城市）</span>
+      <el-cascader style="width: 170px;margin-left: 20px "
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
       <el-button @click="search" type="primary"  icon="el-icon-search" style="margin-left: 50px">搜索</el-button>
-<!--      <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">-->
-<!--        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>-->
-<!--      </ul>-->
-      <el-divider></el-divider>
-      <template >
-        <div style="display: flex;justify-content: space-around;">
-          <el-table
-              :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-              style="width: 100%;font-size: 20px;"
-              :header-cell-style="{ background:'#00065b url(../../public/static/img/amiddboxttop.png) no-repeat 0 0' , color:'#ffffff' }"
-              :row-style="{backgroundColor:'#016f97',color:'#041215'}"
-          >
-            <el-table-column
-                prop="city"
-                label="城市"
-                width="280">
-            </el-table-column>
-            <el-table-column
-                prop="name"
-                label="检测点"
-                width="350">
-            </el-table-column>
-            <el-table-column
-                prop="location"
-                label="地址">
-            </el-table-column>
-          </el-table>
-        </div>
+      <el-row :gutter="22">
+        <el-col :span="10" style="font-size: 19px;margin-left: 0px">
+          <template>
+            <baidu-map class="map"
+                       :center="center"
+                       :zoom="zoom"
+                       @click="pointSetClick"
+                       :scroll-wheel-zoom="true"
+                       @ready="handler">
 
-        <div class="tabListPage">
-          <el-pagination @size-change="handleSizeChange"
-                         @current-change="handleCurrentChange"
-                         :current-page="currentPage"
-                         :page-size="PageSize" layout="total, prev, pager, next, jumper"
-                         :total="totalCount">
-          </el-pagination>
-        </div>
+              <bm-scale anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-scale>
+              <bm-local-search :keyword="keyword"
+                               zoom="12.8"
+                               v-bind:auto-viewport="true"></bm-local-search>
+              <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
+
+              <bm-marker v-for="(item,index) in mapObj"
+                         :key="index"
+                         :position="item"
+                         :animation="draggingList[index]?'BMAP_ANIMATION_BOUNCE':''"
+                         @click="showItem(index)">
+                <bm-label :content="item.title"
+                          :labelStyle="{color: 'red', fontSize : '20px'}"
+                          :offset="{width: -35, height: 30}" />
+              </bm-marker>
+              <bm-info-window :position="position"
+                              :show="show"
+                              @close="infoWindowClose"
+                              @open="infoWindowOpen">
+                <div>地点： {{position.title}}</div>
+              </bm-info-window>
+            </baidu-map>
+          </template>
+        </el-col>
+
+        <el-col :span="12" style="font-size: 19px;margin-left: 00px" >
+
+            <template ><dv-border-box-1>
+              <div style="display: flex;font-family:新宋体;width: 100%;margin-left: 00px">
+                <el-table
+                    :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
+                    style=";font-size: 20px;margin-top: 10px"
+                    :header-cell-style="{ backgroundColor:'#3d488c',textAlign: 'center' ,color:'#ffffff' }"
+                    :cell-style="{ textAlign: 'center' ,color:'#2d1818'}"
+                    :row-class-name="tableRowClassName">
+                  ><!--              :row-style="{backgroundColor:'#939fbb',textAlign: 'center',color:'#041215'}"-->
+                  <el-table-column
+                      prop="city"
+                      label="城市"
+                      width="120">
+                  </el-table-column>
+                  <el-table-column
+                      prop="name"
+                      label="检测点"
+                      width="280">
+                  </el-table-column>
+                  <el-table-column
+                      prop="location"
+                      label="地址"
+                      width="360">
+                  </el-table-column>
+                </el-table>
+              </div>
+
+              <div class="tabListPage">
+                <el-pagination @size-change="handleSizeChange"
+                               @current-change="handleCurrentChange"
+                               :current-page="currentPage"
+                               :page-size="PageSize" layout="total, prev, pager, next, jumper"
+                               :total="totalCount">
+                </el-pagination>
+              </div>
 
 
-      </template>
+          </dv-border-box-1></template>
+        </el-col>
+      </el-row>
 
     </div>
 
@@ -100,9 +131,9 @@
 
 .com-page1 {
   width: 100%;
-  height: 100%;
+  height: 140%;
   background-size: 100% 100%;
-  background: #00065b url(../../public/static/img/bg1.jpg) no-repeat 0 0;
+  background: #b1bcff url(../../public/static/img/bg1.jpg) no-repeat 0 0;
 }
 
 .el-header {
@@ -111,11 +142,35 @@
   line-height: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
-
 .el-main {
 
   text-align: center;
   line-height: 40px;
+}
+.el-table .warning-row {
+  background: #8d98d9;//这里可以修改颜色
+}
+
+.el-table .success-row {
+  background: #8d98d9;//这里可以修改颜色
+}
+
+.map {
+  width: 600px;
+  height: 500px;
+}
+
+// 移除左下角百度地图版权
+div.BMap_cpyCtrl.BMap_noprint.anchorBL {
+  display: none;
+}
+// 移除左下角百度地图logo
+ div.anchorBL {
+  display: none;
+}
+// 悬浮地图时不展示小手
+ .BMap_mask {
+  cursor: default;
 }
 
 </style>
@@ -123,9 +178,32 @@
 <script>
 import router from "@/router";
 
+  // 百度地图API功能
+
+
 export default {
+
+  name: 'pointSetMap',
+  props: {
+    mapObj: Array,//结构[{ lng: '', lat: '',title:''}]
+    showMap: Boolean,
+  },
+  watch: {
+    showMap() {
+      this.center = ''
+      this.initMaker()
+    },
+  },
+
   data() {
     return {
+      draggingList: [],
+      position: { lng: '', lat: '',title:'' },
+      center: { lng: '', lat: '' },
+      zoom: 16,
+      show: true,
+      geoc: {},
+      map: {},
       // 默认显示第几页
       currentPage:1,
       // 总条数，根据接口获取数据长度(注意：这里不能为空)
@@ -134,6 +212,12 @@ export default {
       pageSizes:[1,2,3,4],
       // 默认每页显示的条数（可修改）
       PageSize:6,
+      location: {
+        lng: 118.796877,
+        lat: 32.060255,
+
+      }, // 指定地点的经纬度
+
       tableData: [
       ],
       value: [],
@@ -141,6 +225,7 @@ export default {
       // count: 0,
     };
   },
+  mounted() {},
   methods: {
     handleChange(value) {
       console.log(value);
@@ -164,6 +249,15 @@ export default {
       // 改变默认的页数
       this.currentPage=val
     },
+    tableRowClassName({row, rowIndex}) {
+      if (rowIndex%2 === 1)  //=>这里可以改成 rowIndex%2=== 1，后面直接else即可达到隔行变色效果。
+      {
+        return 'warning-row';
+      } else  {
+        return 'success-row ';
+      }
+    },
+
     search(){
       this.currentPage=1
       let config = {
@@ -177,6 +271,64 @@ export default {
         this.totalCount=msg.length
       })
     },
-  }
+    search1(){
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      this.$axios.post('https://api.map.baidu.com/place/v2/suggestion?' +
+          'query=核酸&region=北京&city_limit=true&output=json&ak=Uokbjn3fC5Fxl990slXs5UkUAo5GvNzo',
+          {"address":this.value[1]},config).then(res => {
+        let msg = res.data.msg;
+        this.tableData=msg
+        this.totalCount=msg.length
+      })
+    },
+    showItem(item) {
+      this.draggingList = []
+      this.draggingList[item] = true
+      this.position = this.mapObj[item]
+      this.show = true
+    },
+    infoWindowClose() {
+      this.show = false
+    },
+    infoWindowOpen() {
+      this.show = true
+    },
+    handler({ BMap, map }) {
+      var geoc = new BMap.Geocoder()
+      this.geoc = geoc
+      map = new BMap.Map('dituContent')
+      this.map = map
+    },
+    //初始化，每次定位到第一个点的位置
+    initMaker() {
+      if (this.mapObj.length) {
+        this.draggingList[0] = true
+        this.center = this.mapObj[0]
+      }
+      this.zoom = 16
+    },
+    pointSetClick(e) {
+      this.geoc.getLocation(e.point, function (rs) {
+        var addComp = rs.addressComponents
+        console.log(rs)
+        console.log(
+            addComp.province +
+            '-' +
+            addComp.city +
+            '-' +
+            addComp.district +
+            '-' +
+            addComp.street +
+            '-' +
+            addComp.streetNumber
+        )
+      })
+    },
+  },
 };
+
 </script>
