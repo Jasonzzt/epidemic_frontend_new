@@ -2,13 +2,13 @@
 
   <div class="com-page2">
 
-  <el-container>
-    <el-page-header @back="goBack" content=" "></el-page-header><br>
-<!--    <dv-border-box-11 title="防疫政策查询">-->
+    <el-page-header @back="goBack" content=" "></el-page-header>
+    <el-container>
     <el-header style="font-size: 35px;font-family:新宋体">
-      <dv-decoration-7 style="width:350px;height:20px;">防疫政策查询<i class="el-icon-s-order"></i></dv-decoration-7> </el-header>
-    <dv-decoration-2 style="width:1200px;height:5px;margin-left: 50px;position: relative;color: #b1bcff " />
-    <el-main style="font-size: 20px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
+      <dv-decoration-7 style="width:350px;height:20px;">防疫政策查询<i class="el-icon-s-order"></i></dv-decoration-7>
+      </el-header>
+    <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />
+    <el-main style="font-size: 22px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
       <div class="block">
         <span class="demonstration">出发地（城市）</span>
         <el-cascader style="width: 150px "
@@ -25,23 +25,23 @@
 <!--      <el-divider></el-divider>-->
 
       <el-row :gutter="20">
-        <el-col :span="10" style="font-size: 17px;margin-left: 50px">
+        <el-col :span="10" style="font-size: 19px;margin-left: 90px">
           <dv-border-box-1><div class="contentin bgc-size flex" >出发地
-            <vue-scroll :ops="ops" style="width:500px;height:250px">
+            <vue-scroll :ops="ops" style="width:550px;height:250px">
               <div>{{this.$data.in}}</div></vue-scroll></div></dv-border-box-1>
           </el-col>
 
-        <el-col :span="10" style="font-size: 17px;margin-left: 50px" >
+        <el-col :span="10" style="font-size: 19px;margin-left: 50px" >
           <dv-border-box-1><div class="contentout bgc-size flex">目的地
-          <vue-scroll :ops="ops" style="width:500px;height:250px">
+          <vue-scroll :ops="ops" style="width:550px;height:250px">
           <div>{{this.$data.out}}</div></vue-scroll></div></dv-border-box-1>
         </el-col>
       </el-row>
-        <dv-decoration-2 style="width:1000px;height:5px;margin-left: 140px;position: relative" />
-      <div class="advice bgc-size flex" style="margin-left: 80px;width: 1100px;font-size: 18px" >
+        <dv-decoration-2 style="width:1100px;height:5px;margin-left: 200px;position: relative" />
+      <div class="advice bgc-size flex" style="margin-left: 150px;width: 1200px;font-size: 20px" >
       <dv-border-box-1>出行建议
-        <vue-scroll :ops="ops" style="width:950px;height:200px">
-          <div style="font-size: 16px">【湖区8.23全员核酸检测志愿者招募】
+        <vue-scroll :ops="ops" style="width:1050px;height:200px">
+          <div style="font-size: 19px">（示例）【湖区8.23全员核酸检测志愿者招募】
             现进行湖区8.23全员核酸检测志愿者库招募工作，以备核酸检测工作需要。
             具体服务时间为8月23日8：00～11：30、11：20～13：30（请务必提前十分钟到指定地点集合），地点体育馆、纪忠楼，具体分班情况待定
             欢迎同学们积极参与报名，先行填写问卷、加入qq群，等待后续录用排班
@@ -124,7 +124,7 @@ export default {
 
 .com-page2 {
   width: 100%;
-  height: 140%;
+  height: 120%;
   background-size: 100% 100%;
   background: #00065b url(../../public/static/img/bg1.jpg) no-repeat 0 0;
 }

@@ -4,11 +4,12 @@
   <div class="com-page1">
     <el-page-header @back="goBack" content=" ">
     </el-page-header>
-
+    <el-header style="font-size: 35px;font-family:新宋体">
+      <dv-decoration-7 style="width:350px;height:20px;">疫情预测数据<i class="el-icon-s-data"></i></dv-decoration-7>
+    </el-header>
+    <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />
     <el-container>
-      <el-header style="font-size: 35px;font-family:Microsoft YaHei">疫情预测数据
-        <i class="el-icon-s-data"></i> </el-header>
-            <el-divider></el-divider>
+
       <el-container>
 
         <el-main style="font-size: 22px"> : <br>
