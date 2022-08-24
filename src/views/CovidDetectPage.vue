@@ -5,7 +5,7 @@
     <el-page-header @back="goBack" content=" "></el-page-header>
 
     <el-container>
-      <el-header style="font-size: 35px;font-family:新宋体"> <dv-decoration-7 style="width:350px;height:20px;">核酸检测点查询
+      <el-header style="font-size: 35px;height:40px;font-family:新宋体"> <dv-decoration-7 style="width:350px;height:20px;">核酸检测点查询
         <i class="el-icon-coordinate"></i></dv-decoration-7> </el-header>
       <dv-decoration-2 style="width:1200px;height:5px;margin-left: 50px;position: relative" />
       <el-container>
@@ -20,17 +20,21 @@
       <el-row :gutter="22">
         <el-col :span="10" style="font-size: 19px;margin-left: 0px">
           <template>
+            <dv-border-box-1 style="margin-left: 30px" >
             <baidu-map class="map"
                        :center="center"
                        :zoom="zoom"
                        @click="pointSetClick"
                        :scroll-wheel-zoom="true"
-                       @ready="handler">
+                       @ready="handler"
+                       :map-style="style"
+                       style="padding: 20px;mwidth: 700px"
+                       >
 
               <bm-scale anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-scale>
               <bm-local-search :keyword="keyword"
-                               zoom="12.8"
-                               v-bind:auto-viewport="true"></bm-local-search>
+                               :zoom="20"
+                               v-bind:auto-viewport="true"  :pageCapacity="1" v-show="false"></bm-local-search>
               <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
 
               <bm-marker v-for="(item,index) in mapObj"
@@ -49,19 +53,21 @@
                 <div>地点： {{position.title}}</div>
               </bm-info-window>
             </baidu-map>
+            </dv-border-box-1>
           </template>
         </el-col>
 
         <el-col :span="12" style="font-size: 19px;margin-left: 00px" >
 
-            <template ><dv-border-box-1>
-              <div style="display: flex;font-family:新宋体;width: 100%;margin-left: 00px">
+            <template ><dv-border-box-1  style="margin-left: 50px" >
+              <div style="display: flex;font-family:新宋体;width: 100%;padding: 7px;padding-left: 10px">
                 <el-table
                     :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
                     style=";font-size: 20px;margin-top: 10px"
                     :header-cell-style="{ backgroundColor:'#3d488c',textAlign: 'center' ,color:'#ffffff' }"
                     :cell-style="{ textAlign: 'center' ,color:'#2d1818'}"
-                    :row-class-name="tableRowClassName">
+                    :row-class-name="tableRowClassName"
+                    @row-click="openDetails">
                   ><!--              :row-style="{backgroundColor:'#939fbb',textAlign: 'center',color:'#041215'}"-->
                   <el-table-column
                       prop="city"
@@ -197,9 +203,16 @@ export default {
 
   data() {
     return {
+      keyword: "故宫",
+      style:{
+        styleJson: [
+
+
+        ],
+      },
       draggingList: [],
       position: { lng: '', lat: '',title:'' },
-      center: { lng: '', lat: '' },
+      center: { lng: '116.404', lat: '39.915' },
       zoom: 16,
       show: true,
       geoc: {},
@@ -225,8 +238,16 @@ export default {
       // count: 0,
     };
   },
-  mounted() {},
+  mounted() {
+
+ this.value=[110000,110000]
+    this.search()
+  },
   methods: {
+    openDetails(row)
+    {
+     this.keyword=row.name
+    },
     handleChange(value) {
       console.log(value);
     },
