@@ -1,8 +1,8 @@
 <template>
   <div class="com-container">
     <!-- 返回中国地图 -->
-    <div class="button" v-show="isReturnChina" @click="returnChinaFn" style="float:top">返回中国地图</div>
-    <div class="com-chart" ref="map_ref" style="float:top"></div>
+    <div class="button" v-show="isReturnChina" @click="returnChinaFn" style="float:top;margin-top: 0px">返回中国地图</div>
+    <div class="com-chart" ref="map_ref" style="float:top;margin-top: -5px"></div>
   </div>
 </template>
 
