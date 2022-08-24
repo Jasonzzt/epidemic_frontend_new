@@ -79,7 +79,9 @@ export default {
         澳门: 'aomen'
       },
       isReturnChina: false, //是否显示返回中国地图
-      options: null,   //echarts 存数据
+      options:{
+
+      }
     }
   },
   methods: {
@@ -147,7 +149,7 @@ export default {
           // textStyle: {
           //   color: '#fff',
           // },
-          animation: false
+          animation: true
         },
         geo: {
           map: name ? name : "china", // 核心
@@ -179,15 +181,6 @@ export default {
                 }],
               },
             },
-            emphasis: { // 移入背景颜色
-              // areaColor: '#ff00ff',
-              areaColor: '#F9D92E',
-              show: true,
-              textStyle: {
-                color: '#000',
-                fontSize: "12px"
-              }
-            },
           },
         },
         series: [
@@ -204,19 +197,19 @@ export default {
                 }
               },
               zoom: 1.5,  //地图缩放比例,默认为1
-              emphasis: {//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
-                label: {show: true}
-              }
+              // emphasis: {//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+              //   label: {show: true}
+              // }
             },
             label: {
               normal: {
                 show: true, //显示省份标签
                 textStyle: {color: "#696969"},//省份标签字体颜色
               },
-              emphasis: {
-                show: true,
-                textStyle: {}
-              }
+              // emphasis: {
+              //   show: true,
+              //   textStyle: {}
+              // }
             },
             data: [ // 地图数据
             ],
@@ -260,16 +253,32 @@ export default {
       }
       chinaMap.setOption(this.options)
       this.chinaMapHidden(chinaMap)
+      // {
+      //   let count = null;
+      //   let zoom = function (per) {
+      //     if (!count) count = per;
+      //     count = count + per;
+      //     // console.log(per,count);
+      //     chinaMap.setOption({
+      //       geo: {
+      //         zoom: count
+      //       }
+      //     });
+      //     if (count < 0.8) window.requestAnimationFrame(function () {
+      //       zoom(0.1);
+      //     });
+      //   };
+      //
+      //   window.requestAnimationFrame(function () {
+      //     zoom(0.1);
+      //   });
+      // }
     },
     returnChinaFn() {
       this.chinaMaprsult('china');
     },
   },
 
-  created() {
-    // this.getData()
-    // console.log(this.allDataList)
-  },
   mounted() {
     this.$nextTick(_ => {
       this.chinaMaprsult('china')
