@@ -3,19 +3,19 @@
 
     <header>
       <!-- 全国疫情地图页面的数据显示标题栏 -->
-      <div ref="a" class="header-box">
+<!--      <div ref="a" class="header-box">
         <ul @click="handClick" class="left-ul">
           <li :class="{ active: isActive === 0 }" data-index="0">现存确诊</li>
           <li :class="{ active: isActive === 1 }" data-index="1">累计确诊</li>
           <li :class="{ active: isActive === 2 }" data-index="2">今日新增</li>
           <li :class="{ active: isActive === 3 }" data-index="3">累计死亡</li>
         </ul>
-      </div>
+      </div>-->
       <h1 class="title">新冠疫情数据可视化</h1>
       <!--切换四个页面的标题栏-->
-      <div ref="a" class="header-box">
+<!--      <div ref="a" class="header-box">
         <ul @click="clickIndex" class="right-ul">
-          <!-- 疫情地图页面-->
+          &lt;!&ndash; 疫情地图页面&ndash;&gt;
           <a
               @click="pushto1"
               :class="{ active: isActive === 4 }"
@@ -23,23 +23,23 @@
           >
             疫情预测
           </a>
-          <!-- 人口流动页面 -->
-          <!-- PopulationPage-->
+          &lt;!&ndash; 人口流动页面 &ndash;&gt;
+          &lt;!&ndash; PopulationPage&ndash;&gt;
           <a
               @click="pushto2"
               :class="{ active: isActive === 5 }"
               data-index="5"
           >人口流动</a
           >
-          <!-- 防疫政策页面 -->
-          <!-- PolicyPage-->
+          &lt;!&ndash; 防疫政策页面 &ndash;&gt;
+          &lt;!&ndash; PolicyPage&ndash;&gt;
           <a
               @click="pushto3"
               :class="{ active: isActive === 6 }"
               data-index="6"
           >防疫政策</a>
-          <!-- 核酸检测页面 -->
-          <!-- CovidDetectionPage -->
+          &lt;!&ndash; 核酸检测页面 &ndash;&gt;
+          &lt;!&ndash; CovidDetectionPage &ndash;&gt;
           <a
               @click="pushto4"
               :class="{ active: isActive === 7 }"
@@ -47,7 +47,7 @@
           >核酸检测</a>
 
         </ul>
-      </div>
+      </div>-->
     </header>
 
 
@@ -59,12 +59,13 @@
             <p>地区：中国</p>
             <p>{{ data }}</p>
           </div>
-          <div class="show_box total_box">
-            <!-- 累计确诊数据 chinaTotal.confirm-->
+          <zhuzhuangtu></zhuzhuangtu>
+<!--          <div class="show_box total_box">
+            &lt;!&ndash; 累计确诊数据 chinaTotal.confirm&ndash;&gt;
             <div v-if=show1 class="flex-column total_item">
               <p>累计确诊</p>
               <h3>{{ this.chinaTotal.confirm }}</h3>
-              <!-- 与昨日相比情况（无变化/新增/减少） -->
+              &lt;!&ndash; 与昨日相比情况（无变化/新增/减少） &ndash;&gt;
               <h4>较昨日</h4>
               <p class="total_bottom">
                 <img
@@ -81,7 +82,7 @@
                 <span>{{ this.chinaAdd.confirm }}</span>
               </p>
             </div>
-            <!-- 现存确诊数据 chinaTotal.nowConfirm-->
+            &lt;!&ndash; 现存确诊数据 chinaTotal.nowConfirm&ndash;&gt;
             <div v-if="show1" class="flex-column total_item">
               <p>现存确诊</p>
               <h3>{{ this.chinaTotal.nowConfirm }}</h3>
@@ -101,7 +102,7 @@
                 <span>{{ this.chinaAdd.nowConfirm }}</span>
               </p>
             </div>
-            <!-- 现存确诊数据 chinaTotal.nowConfirm-->
+            &lt;!&ndash; 现存确诊数据 chinaTotal.nowConfirm&ndash;&gt;
             <div v-if="show1" class="flex-column total_item">
               <p>境外输入</p>
               <h3>{{ this.chinaTotal.importedCase }}</h3>
@@ -136,7 +137,7 @@
                 <span>{{ this.chinaAdd.dead }}</span>
               </p>
             </div>
-          </div>
+          </div>-->
         </div>
 
       </aside>
@@ -145,16 +146,16 @@
         <!-- 地图 -->
         <div class="map bgc-size flex">
           <p class="p p_tip">地图可视化</p>
-          <div
+<!--          <div
               :class="[
               fullScreenStatus.map ? 'show_box h fullscreen' : 'show_box h',
             ]"
-          >
+          >-->
             <myMap ref="map" v-if="show3"></myMap>
-            <div
+<!--            <div
                 @click="changeSize('map')"
                 :class="[fullScreenStatus.map ? 'compress' : 'expand']"
-            ></div>
+            ></div>-->
           </div>
         </div>
       </div>
@@ -163,21 +164,21 @@
 
         <!-- 疫情趋势变化 -->
         <div class="trend bgc-size">
-          <p class="p_tip">各省市确诊情况</p>
-
-          <div
+          <p class="p_tip1">各省市确诊情况</p>
+        </div>
+<!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']"
-          >
+          >-->
             <countrytop ref="top" v-if="show1"></countrytop>
-            <div
+<!--            <div
                 @click="changeSize('top')"
                 :class="[fullScreenStatus.top ? 'compress' : 'expand']"
-            ></div>
-          </div>
-        </div>
+            ></div>-->
+
+
       </div>
     </div>
-  </div>
+
 </template>
 
 <style lang="less">
@@ -194,8 +195,18 @@
 }
 
 .p_tip {
-  margin-bottom: 5px;
-  font-size: 14px;
+  margin-bottom: -15px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.p_tip1 {
+  position: relative;
+  margin-top: 23px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
   text-overflow: ellipsis;
@@ -341,6 +352,7 @@ aside {
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 
   .total_tip {
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -465,7 +477,7 @@ aside {
 }
 
 .p {
-  margin-top: 2px;
+  margin-top:15px;
 }
 
 .h {
@@ -473,8 +485,13 @@ aside {
 }
 
 .right-asside {
+  position: relative;
+  height:640px;
   width: 25%;
   // flex: 1;
+  float: right;
+  top:-635px;
+  left: -23px;
 }
 
 .broadcast {
@@ -557,15 +574,13 @@ aside {
 
 <script>
 import myMap from '../components/Map'
-import month from '../components/Month'
-import countrytop from '../components/CountryTop'
 import router from "@/router";
+import zhuzhuangtu from "../components/zhuzhuangtu";
 
 export default {
   components: {
     myMap,
-    month,
-    countrytop,
+    zhuzhuangtu,
   },
   data() {
     return {

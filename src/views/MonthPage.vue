@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import Month from '@/components/Month'
 export default {
   components: {
-    'single-month': Month,
   },
 }
 </script>

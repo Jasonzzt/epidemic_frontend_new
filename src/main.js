@@ -17,6 +17,14 @@ Vue.use(ElementUI)
 import 'vuescroll/dist/vuescroll.css';
 Vue.use(vuescroll);
 
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+  // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
+  ak: 'Uokbjn3fC5Fxl990slXs5UkUAo5GvNzo'
+})
+
+// map.setMapStyle("midnight");
 
 // 引入全局css
 import './assets/css/global.less'
