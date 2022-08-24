@@ -1,6 +1,13 @@
 
 <template>
+
+
   <div class="box">
+    <el-page-header @back="goBack" content=" "></el-page-header>
+    <el-header style="font-size: 35px;font-family:新宋体">
+      <dv-decoration-7 style="width:350px;height:20px;">人口迁徙数据<i class="el-icon-user-solid"></i></dv-decoration-7>
+    </el-header>
+    <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />
   <div class="box" ref="echartsMap">
   </div>
     <div style="margin-top: -220px" >
@@ -9,7 +16,7 @@
         :options="options"
         @change="drawPopOut"
         popper-append-to-body=false
-       style="margin-left:1030px ;color: #0A41C8;background: #0A41C8;border-color: #0A41C8;width: 150px;"></el-cascader>
+       style="margin-left:1050px ;color: #0A41C8;background: #0A41C8;border-color: #0A41C8;width: 150px;"></el-cascader>
     <el-cascader
         v-model="value2"
         :options="options"
@@ -18,11 +25,16 @@
 
       </div>
     <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -360px" />
-    <dv-border-box-11 :color="['blue', 'green']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
+    <dv-border-box-11 :color="['blue', '#308691']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
     </dv-border-box-11>
+
   </div>
+
+
 </template>
 <script>
+import router from "../router";
+
 const echarts = require("echarts");
 //   import '../../node_modules/echarts/map/js/world.js'
 import "../../node_modules/echarts/map/js/china.js"; // 引入中国地图数据
@@ -117,6 +129,9 @@ export default {
         this.title=city+"人口流入top10"
         this.listConfig=newconfig
       })
+    },
+    goBack() {
+      router.push('/')
     },
     chinaConfigure() {
       var mapName = "china";
@@ -535,6 +550,7 @@ export default {
       };
 
 
+
       /*获取地图数据*/
 
        this.myChart = echarts.init(this.$refs.echartsMap);
@@ -569,7 +585,7 @@ export default {
             normal: {
               borderColor: "#44B2EA",
               borderWidth: 2,
-              areaColor: "#04122d",
+              areaColor: "#15294f",
               shadowColor: "#0A41C8",
               shadowOffsetX: 2,
               shadowOffsetY: 4,
@@ -629,7 +645,7 @@ export default {
                     '<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 4px">' +
                     "</i>" +
                     "当前确诊人数：" +
-                    '<span style="color:#11ee7d;margin:0 6px;">' +
+                    '<span style="color:#44b5be;margin:0 6px;">' +
                     params.data.stuNum +
                     "</span>" +
                     "人" +
@@ -658,15 +674,15 @@ export default {
                   colorStops: [
                     {
                       offset: 0,
-                      color: "rgba(229,237,16,0.3)" // 0% 处的颜色
+                      color: "rgb(76,199,216)" // 0% 处的颜色
                     },
                     {
                       offset: 0.5,
-                      color: "rgba(229,237,16,1)" // 100% 处的颜色
+                      color: "rgb(17,238,205)" // 100% 处的颜色
                     },
                     {
                       offset: 1,
-                      color: "rgba(229,237,16,0.3)" // 0% 处的颜色
+                      color: "rgb(76,199,216)" // 0% 处的颜色
                     }
                   ],
                   global: false // 缺省为 false
