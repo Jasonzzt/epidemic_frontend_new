@@ -60,8 +60,11 @@
             <p>{{ data }}</p>
           </div>
 
-          <bar class="bar"></bar>
+          <ring class="bar">123</ring>
+
           <column></column>
+<!--          <panel class="panel"></panel>-->
+
 <!--          <div class="show_box total_box">
             &lt;!&ndash; 累计确诊数据 chinaTotal.confirm&ndash;&gt;
             <div v-if=show1 class="flex-column total_item">
@@ -141,6 +144,7 @@
             </div>
           </div>-->
         </div>
+
 
       </aside>
       <!-- 中间栏 -->
@@ -575,6 +579,9 @@ aside {
 .bar{
   margin-left: -20px;
 }
+//.panel{
+//  margin-left: -20px;
+//}
 </style>
 
 <script>
@@ -582,11 +589,13 @@ import myMap from '../components/Map'
 import router from "@/router";
 import bar from "../components/bar";
 import column from "../components/column";
+import ring from "../components/ring"
 export default {
   components: {
     myMap,
     bar,
     column,
+    ring,
   },
   data() {
     return {
