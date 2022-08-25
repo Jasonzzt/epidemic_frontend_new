@@ -1,8 +1,10 @@
 <template>
   <div class="com-container">
     <!-- 返回中国地图 -->
-    <div class="button" v-show="isReturnChina" @click="returnChinaFn" style="float:top;margin-top: 0px">返回中国地图</div>
-    <div class="com-chart" ref="map_ref" style="float:top;margin-top: -5px"></div>
+    <div class="button" v-show="isReturnChina" @click="returnChinaFn" style="float:top;margin-top: 70px;">返回中国地图</div>
+    <div class="com-chart" ref="map_ref" style="float:top;margin-top: -10px;"></div>
+
+
   </div>
 </template>
 
@@ -152,6 +154,7 @@ export default {
           animation: true
         },
         geo: {
+          zoom: this.isReturnChina?0.85:1,
           map: name ? name : "china", // 核心
           roam: false,
           label: { // 页面初始化加载的文字
@@ -315,6 +318,7 @@ export default {
 
 .com-container {
   position: relative;
+  z-index: 1;
 }
 
 .button {

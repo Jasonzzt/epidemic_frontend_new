@@ -63,8 +63,6 @@
           <ring class="bar">123</ring>
 
           <column></column>
-<!--          <panel class="panel"></panel>-->
-
 <!--          <div class="show_box total_box">
             &lt;!&ndash; 累计确诊数据 chinaTotal.confirm&ndash;&gt;
             <div v-if=show1 class="flex-column total_item">
@@ -173,7 +171,8 @@
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
-          <p class="p p_tip">地图可视化</p>
+<!--          <p class="p p_tip">地图可视化</p>-->
+          <CenterTop class="centerTop"></CenterTop>
 <!--          <div
               :class="[
               fullScreenStatus.map ? 'show_box h fullscreen' : 'show_box h',
@@ -197,7 +196,6 @@
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']"
           >-->
-            <countrytop ref="top" v-if="show1"></countrytop>
 <!--            <div
                 @click="changeSize('top')"
                 :class="[fullScreenStatus.top ? 'compress' : 'expand']"
@@ -210,6 +208,11 @@
 </template>
 
 <style lang="less">
+
+.centerTop{
+  margin-top: -27px;
+}
+
 .flex {
   flex: 1;
 }
@@ -380,7 +383,7 @@ aside {
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 
   .total_tip {
-    margin-top: 20px;
+    margin-top: 4px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -612,12 +615,14 @@ import router from "@/router";
 import bar from "../components/bar";
 import column from "../components/column";
 import ring from "../components/ring"
+import CenterTop from "../components/CenterTop";
 export default {
   components: {
     myMap,
     bar,
     column,
     ring,
+    CenterTop,
   },
   data() {
     return {
