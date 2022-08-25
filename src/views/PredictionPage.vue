@@ -8,15 +8,18 @@
       <dv-decoration-7 style="width:350px;height:20px;">疫情预测数据<i class="el-icon-s-data"></i></dv-decoration-7>
     </el-header>
     <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />
-    <el-container>
+<!--    <el-container>-->
 
-      <el-container>
+<!--      <el-container>-->
 
-        <el-main style="font-size: 22px"> : <br>
+<!--        <el-main style="font-size: 22px"> : <br>-->
+<!--    <div style="height: 600px; width: 50%">-->
+<!--      <my-map ></my-map>-->
+<!--    </div>-->
 
-        </el-main>
-      </el-container>
-    </el-container>
+<!--        </el-main>-->
+<!--      </el-container>-->
+<!--    </el-container>-->
 
   </div>
 
@@ -69,8 +72,11 @@
 
 <script>
 import router from "@/router";
-
+import myMap from "../components/Map"
 export default {
+  components:{
+    myMap,
+  },
   data() {
     return {
 

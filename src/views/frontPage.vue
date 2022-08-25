@@ -52,7 +52,7 @@
     </div>
 
 
-    <dv-decoration-7 class="title" style="width:1500px;height:300px;font-size: 50px">疫情大数据分析平台</dv-decoration-7>
+    <dv-decoration-7 class="title" style="width:1500px;height:300px;font-size: 50px;position: relative;margin-left: 25px;">疫情大数据分析平台</dv-decoration-7>
     <dv-decoration-8 class="decr1" style="width:300px;height:50px;" />
     <dv-decoration-8 class="decr2" :reverse="true" style="width:300px;height:50px;" />
 
@@ -123,8 +123,8 @@ li {
   flex: 3
 }
 .bg1{
-  height: 518px;
-  width: 518px;
+  height: 480px;
+  width: 480px;
   background: url(../assets/image/map.png);
   position: absolute;
   top: 50%;
@@ -135,8 +135,8 @@ li {
 }
 
 .bg2{
-  height: 643px ;
-  width: 643px ;
+  height: 510px ;
+  width: 510px ;
   background: url(../assets/image/lbx.png);
   position: absolute;
   top: 50%;
@@ -147,8 +147,8 @@ li {
   animation: rotate1 15s linear infinite;
 }
 .bg3{
-  height: 566px;
-  width: 566px;
+  height: 510px;
+  width: 510px;
   background: url(../assets/image/jt.png);
   position: absolute;
   top: 50%;
