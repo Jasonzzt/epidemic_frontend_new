@@ -181,6 +181,26 @@ export default {
                 }],
               },
             },
+            emphasis: {
+              borderWidth: .5, //区域边框宽度
+              borderColor: 'rgb(241,158,63)',
+              areaColor: {
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 1,
+                colorStops: [{
+                  offset: 0,
+                  color: '#707bbb' // 0% 处的颜色
+                }, {
+                  offset: 1,
+                  color: '#707bbb' // 100% 处的颜色
+                }],
+              },
+
+              //   show: true,
+              //   textStyle: {}
+              }
           },
         },
         series: [
@@ -196,6 +216,7 @@ export default {
                   }
                 }
               },
+
               zoom: 1.5,  //地图缩放比例,默认为1
               // emphasis: {//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
               //   label: {show: true}
@@ -204,7 +225,7 @@ export default {
             label: {
               normal: {
                 show: true, //显示省份标签
-                textStyle: {color: "#696969"},//省份标签字体颜色
+                textStyle: {color: "#4b4646"},//省份标签字体颜色
               },
               // emphasis: {
               //   show: true,

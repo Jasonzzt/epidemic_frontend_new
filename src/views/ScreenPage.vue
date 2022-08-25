@@ -141,6 +141,28 @@
             </div>
           </div>-->
         </div>
+        <div class="broadcast bgc-size">
+          <p class="p_tip">实时播报</p>
+          <div class="data">
+            <p>状态：已更新</p>
+            <p>{{ data }} - {{ time }}</p>
+          </div>
+          <div class="show_box h">
+            <ul :class="[{ roll: show2 }, 'update-item-box']">
+              <li class="update-item" v-for="(item, key) in news" :key="key">
+                <a :href="item.eventUrl">
+                  <p class="update-content">
+                    <b class="t">{{ item.siteName }}</b>
+                    <span class="c">{{ item.eventDescription }}</span>
+                  </p>
+                  <p class="last">
+                    {{ getNewsTime(item.eventTime) }}分钟前更新
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
       </aside>
       <!-- 中间栏 -->
@@ -497,7 +519,7 @@ aside {
 }
 
 .broadcast {
-  flex: 2;
+  flex: 1;
   background-image: url(../../public/static/img/arightboxtop.png);
   cursor: pointer;
 
