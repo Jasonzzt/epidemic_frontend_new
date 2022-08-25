@@ -1,5 +1,5 @@
 <template>
-  <dv-active-ring-chart :config="BtObj" style="float:left; width: 400px; height: 400px" />
+  <dv-active-ring-chart :config="BtObj" style="float:left; width: 400px; height: 300px" />
 </template>
 
 <script>
