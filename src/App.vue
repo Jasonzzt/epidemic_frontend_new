@@ -26,7 +26,7 @@
 </template>
 
 <script>
-// import VmHeader from 'components/VmHeader.vue'
+ //  import VmHeader from 'components/VmHeaderd.vue'
 // import VmLeft from 'components/VmLeft.vue'
 // import VmCenter from 'components/VmCenter.vue'
 // import VmRight from 'components/VmRight.vue'
