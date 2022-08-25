@@ -13,7 +13,7 @@
     </div>
 -->
 
-    <div>
+    <div style="z-index:999">
       <div class="pos1" @click="push1">
         <dv-border-box-8 style="width: 130px">
           <i class="el-icon-d-arrow-left" style="font-size: 25px"></i>
@@ -52,7 +52,7 @@
     </div>
 
 
-    <dv-decoration-7 class="title" style="width:1500px;height:300px;font-size: 50px;position: relative;margin-left: 25px;">疫情大数据分析平台</dv-decoration-7>
+    <dv-decoration-7 class="" style="width:1500px;height:300px;font-size: 50px;position: relative;margin-left: 500px;width:540px;margin-top: 50px">疫情大数据分析平台</dv-decoration-7>
     <dv-decoration-8 class="decr1" style="width:300px;height:50px;" />
     <dv-decoration-8 class="decr2" :reverse="true" style="width:300px;height:50px;" />
 
