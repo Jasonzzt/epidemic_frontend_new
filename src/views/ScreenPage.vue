@@ -153,7 +153,7 @@
           <div class="show_box h">
             <ul :class="[{ roll: show2 }, 'update-item-box']">
               <li class="update-item" v-for="(item, key) in news" :key="key">
-                <a :href="item.eventUrl">
+                <a :href="item.eventUrl" target="_blank">
                   <p class="update-content">
                     <b class="t">{{ item.siteName }}</b>
                     <span class="c">{{ item.eventDescription }}</span>
