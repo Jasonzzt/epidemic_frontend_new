@@ -1,146 +1,17 @@
 <template>
   <div class="screen-page">
 
-    <header>
-      <!-- 全国疫情地图页面的数据显示标题栏 -->
-<!--      <div ref="a" class="header-box">
-        <ul @click="handClick" class="left-ul">
-          <li :class="{ active: isActive === 0 }" data-index="0">现存确诊</li>
-          <li :class="{ active: isActive === 1 }" data-index="1">累计确诊</li>
-          <li :class="{ active: isActive === 2 }" data-index="2">今日新增</li>
-          <li :class="{ active: isActive === 3 }" data-index="3">累计死亡</li>
-        </ul>
-      </div>-->
-      <h1 class="title">新冠疫情数据可视化</h1>
-      <!--切换四个页面的标题栏-->
-<!--      <div ref="a" class="header-box">
-        <ul @click="clickIndex" class="right-ul">
-          &lt;!&ndash; 疫情地图页面&ndash;&gt;
-          <a
-              @click="pushto1"
-              :class="{ active: isActive === 4 }"
-              data-index="4"
-          >
-            疫情预测
-          </a>
-          &lt;!&ndash; 人口流动页面 &ndash;&gt;
-          &lt;!&ndash; PopulationPage&ndash;&gt;
-          <a
-              @click="pushto2"
-              :class="{ active: isActive === 5 }"
-              data-index="5"
-          >人口流动</a
-          >
-          &lt;!&ndash; 防疫政策页面 &ndash;&gt;
-          &lt;!&ndash; PolicyPage&ndash;&gt;
-          <a
-              @click="pushto3"
-              :class="{ active: isActive === 6 }"
-              data-index="6"
-          >防疫政策</a>
-          &lt;!&ndash; 核酸检测页面 &ndash;&gt;
-          &lt;!&ndash; CovidDetectionPage &ndash;&gt;
-          <a
-              @click="pushto4"
-              :class="{ active: isActive === 7 }"
-              data-index="7"
-          >核酸检测</a>
-
-        </ul>
-      </div>-->
-    </header>
-
+    <header><h1 class="title">新冠疫情数据可视化</h1></header>
 
     <div class="content">
       <aside class="flex-column">
         <!-- 确诊人数 -->
         <div class="total bgc-size flex">
-          <div class="total_tip p_tip">
-            <p>地区：中国</p>
-            <p>{{ data }}</p>
-          </div>
-
+          <div class="total_tip p_tip"><p>地区：中国</p><p>{{ data }}</p></div>
           <ring class="bar">123</ring>
 
-          <column></column>
-<!--          <div class="show_box total_box">
-            &lt;!&ndash; 累计确诊数据 chinaTotal.confirm&ndash;&gt;
-            <div v-if=show1 class="flex-column total_item">
-              <p>累计确诊</p>
-              <h3>{{ this.chinaTotal.confirm }}</h3>
-              &lt;!&ndash; 与昨日相比情况（无变化/新增/减少） &ndash;&gt;
-              <h4>较昨日</h4>
-              <p class="total_bottom">
-                <img
-                    v-if="parseInt(this.chinaAdd.confirm) === 0"
-                    src=""
-                    alt=""
-                />
-                <img
-                    v-else-if="parseInt(this.chinaAdd.confirm) > 0"
-                    src="../../public/static/img/iconup.png"
-                    alt=""
-                />
-                <img v-else src="../../public/static/img/icondown.png" alt="" />
-                <span>{{ this.chinaAdd.confirm }}</span>
-              </p>
-            </div>
-            &lt;!&ndash; 现存确诊数据 chinaTotal.nowConfirm&ndash;&gt;
-            <div v-if="show1" class="flex-column total_item">
-              <p>现存确诊</p>
-              <h3>{{ this.chinaTotal.nowConfirm }}</h3>
-              <h4>较昨日</h4>
-              <p class="total_bottom">
-                <img
-                    v-if="parseInt(this.chinaAdd.nowConfirm) === 0"
-                    src=""
-                    alt=""
-                />
-                <img
-                    v-else-if="parseInt(this.chinaAdd.nowConfirm) > 0"
-                    src="../../public/static/img/iconup.png"
-                    alt=""
-                />
-                <img v-else src="../../public/static/img/icondown.png" alt="" />
-                <span>{{ this.chinaAdd.nowConfirm }}</span>
-              </p>
-            </div>
-            &lt;!&ndash; 现存确诊数据 chinaTotal.nowConfirm&ndash;&gt;
-            <div v-if="show1" class="flex-column total_item">
-              <p>境外输入</p>
-              <h3>{{ this.chinaTotal.importedCase }}</h3>
-              <h4>较昨日</h4>
-              <p class="total_bottom">
-                <img
-                    v-if="parseInt(this.chinaAdd.importedCase) === 0"
-                    src=""
-                    alt=""
-                />
-                <img
-                    v-else-if="parseInt(this.chinaAdd.importedCase) > 0"
-                    src="../../public/static/img/iconup.png"
-                    alt=""
-                />
-                <img v-else src="../../public/static/img/icondown.png" alt="" />
-                <span>{{ this.chinaAdd.importedCase }}</span>
-              </p>
-            </div>
-            <div v-if="show1" class="flex-column total_item">
-              <p>累计死亡</p>
-              <h3>{{ this.chinaTotal.dead }}</h3>
-              <h4>较昨日</h4>
-              <p class="total_bottom">
-                <img v-if="parseInt(this.chinaAdd.dead) === 0" src="" alt="" />
-                <img
-                    v-else-if="parseInt(this.chinaAdd.dead) > 0"
-                    src="../../public/static/img/iconup.png"
-                    alt=""
-                />
-                <img v-else src="../../public/static/img/icondown.png" alt="" />
-                <span>{{ this.chinaAdd.dead }}</span>
-              </p>
-            </div>
-          </div>-->
+<!--          <panel class="panel"></panel>-->
+<!--          <div class="show_box total_box">-->
         </div>
         <div class="broadcast bgc-size">
           <p class="p_tip">实时播报</p>
@@ -165,12 +36,12 @@
           </div>
         </div>
 
-
       </aside>
       <!-- 中间栏 -->
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
+          <p class="p p_tip">地图可视化</p>
 <!--          <p class="p p_tip">地图可视化</p>-->
           <CenterTop class="centerTop"></CenterTop>
 <!--          <div
@@ -188,20 +59,18 @@
       </div>
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
-
         <!-- 疫情趋势变化 -->
-        <div class="trend bgc-size">
-          <p class="p_tip1">各省市确诊情况</p>
-        </div>
+        <div class="trend bgc-size"><p class="p_tip1">各省市确诊情况</p>
+
 <!--          <div
-              :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']"
-          >-->
+              :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
+          <provincebar class="bar" style="margin-left: 3px">123</provincebar>
+
 <!--            <div
                 @click="changeSize('top')"
                 :class="[fullScreenStatus.top ? 'compress' : 'expand']"
             ></div>-->
-
-
+      </div>
       </div>
     </div>
 
@@ -613,14 +482,14 @@ aside {
 import myMap from '../components/Map'
 import router from "@/router";
 import bar from "../components/bar";
-import column from "../components/column";
 import ring from "../components/ring"
 import CenterTop from "../components/CenterTop";
+import Provincebar from "../components/provincebar";
 export default {
   components: {
+    Provincebar,
     myMap,
     bar,
-    column,
     ring,
     CenterTop,
   },
@@ -631,6 +500,7 @@ export default {
         month: false,
         top: false,
       },
+
       isActive: 0,
       show1: false,
       show2: false,
