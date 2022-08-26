@@ -1,48 +1,29 @@
 <template>
-  <div class="echart" id="mychart" :style="myChartStyle"></div>
+  <div class="echart" id="mychart" ></div>
 </template>
 
 <script>
 import 'echarts' // 核心文件
-const echarts = require("echarts");
+// const echarts = require("echarts");
+import { loopShowTooltip } from "../tooltip-auto-show-vue.js";
 export default {
   name: "provincebar",
-  // data() {
-  //    return {
-  // //
+  data() {
+     return {
+       tootipTimer:"",
+       updateData:5,
   // //     xData: ["湖北省", "上海市", "广东省", "吉林省", "北京市"], //横坐标
   // //     yData: [53000, 24000,13000, 12000, 5000], //数据
   // //     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
-  //      curPage: 1,
-  //      totalPage: 1,
-  //      itemNumPerPage: 10,//每页显示条数，自己调整
-  //    };
-  //  },
+     };
+   },
   mounted() {
-   // this.myEcharts();
-    // let that=this;
-    // const timer = setInterval(() => {
-    //   let curPage=that.curPage==that.totalPage?1:that.curPage+1;
-    //   that.curPage=curPage;
-    //   that.myEcharts();
-    // }, 5000)//设置时间
-    // //销毁定时器
-    // this.$once('hook:beforeDestroy', () => {
-    //   clearInterval(timer)
-    // });
-
    this.initEcharts();
   },
   methods: {
     initEcharts() {
-      // 基本柱状图
-      // this.totalPage = Math.ceil(this.dataList / this.itemNumPerPage)
-      // this.totalPage = this.totalPage < 1 ? 1 : this.totalPage;
-      // let chartDom = document.getElementById("main");
-      // let myChart = echarts.init(chartDom);
-      // let option;
+      const option = {
 
-     const option = {
         grid: {
           left: '5%',
           right: '5%',
@@ -58,7 +39,7 @@ export default {
           formatter: function(params) {
             return params[0].name + '<br/>' +
                 "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万元<br/>'
+                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万人<br/>'
           }
         },
         // backgroundColor: 'rgb(20,28,52)',
@@ -140,38 +121,22 @@ export default {
           },
         ]
       };
-      //dataZoom的自动播放
 
-      // const option = {
-      //   xAxis: {
-      //     data: this.xData
-      //   },
-      //   yAxis: {
-      //
-      //   },
-      //   grid: [{
-      //     left: '20%',//因旋转导致名字太长的类目造成遮蔽，可以配合这两个属性
-      //     bottom:'10%'// 分别表示：距离左边距和底部的距离，具体数值按实际情况调整
-      //   }],
-      //
-      //   series: [
-      //     {
-      //       type: "bar", //形状为柱状图
-      //       data: this.yData,
-      //       itemStyle:{
-      //         color:'#188cef',
-      //         shadowColor: '#5470c6',
-      //
-      //       }
-      //     }
-      //   ]
-      // };
       const myChart = echarts.init(document.getElementById("mychart"));
       myChart.setOption(option);
       myChart.resize({
         width: 370,
-        height:600
+        height:700
       });
+      // this.tootipTimer && this.tootipTimer.clearLoop(); // this.tootipTimer 在data里定义
+      // this.tootipTimer = 0;
+      // // 调用轮播的方法
+      // this.tootipTimer = loopShowTooltip(myChart, option, {
+      //   interval: 1000, // 轮播间隔时间
+      //   loopSeries: true, // 是否开启轮播循环
+        // loopSeries: boolean类型，默认为false。true表示循环所有series的tooltip；false则显示指定seriesIndex的tooltip。
+        // seriesIndex: 默认为0，指定某个系列（option中的series索引）循环显示tooltip，当loopSeries为true时，从seriesIndex系列开始执行。
+      // });
       //随着屏幕大小调节图表
       /*      window.addEventListener("resize", () => {
               myChart.resize();
@@ -186,10 +151,7 @@ export default {
     //     }
     //   })
     // },
-
-
   }
-
 }
 </script>
 

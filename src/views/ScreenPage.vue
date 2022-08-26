@@ -1,7 +1,7 @@
 <template>
   <div class="screen-page">
-
-    <header><h1 class="title">新冠疫情数据可视化</h1></header>
+    <el-page-header @back="goBack" content=" "></el-page-header>
+    <header><h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1></header>
 
     <div class="content">
       <aside class="flex-column">
@@ -64,7 +64,9 @@
 
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
-          <provincebar class="bar" style="margin-left: 3px">123</provincebar>
+          <vue-scroll :ops="ops" style="width:550px;height:550px">
+<!--            <div>{{this.$data.in}}</div>-->
+          <provincebar class="bar" style="margin-left: 3px">123</provincebar></vue-scroll></div>
 
 <!--            <div
                 @click="changeSize('top')"
@@ -72,7 +74,7 @@
             ></div>-->
       </div>
       </div>
-    </div>
+
 
 </template>
 
@@ -515,6 +517,26 @@ export default {
       allTodayCreadList: null,
       chinaTotal: null,
       chinaAdd: null,
+      ops: {
+        vuescroll: {},
+        scrollPanel: {},
+        rail: {
+          background: '#b1bcff',
+          opacity: 0,
+          size: '10px',
+          specifyBorderRadius: false,
+          gutterOfEnds: null,    //轨道距 x 和 y 轴两端的距离
+          gutterOfSide: '0',   //距离容器的距离
+          keepShow: false,   //是否即使 bar 不存在的情况下也保持显示
+          border:'none' ,  //边框
+          padding: true
+        },
+        bar: {
+          hoverStyle: true,
+          onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
+          background: '#b1bcff',   //颜色
+        }
+      },
     }
   },
   methods: {
@@ -654,6 +676,9 @@ export default {
       }
       this.$store.commit('initData', val)
       this.show1 = true
+    },
+    goBack() {
+      router.push('/')
     },
     async getChinaNews() {
       const url = 'https://opendata.baidu.com/data/inner'
