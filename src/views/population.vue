@@ -27,6 +27,11 @@
     <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -360px" />
     <dv-border-box-11 :color="['blue', '#308691']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
     </dv-border-box-11>
+    <dv-border-box-11 :color="['blue', '#308691']" :title="title_analysis" :titleWidth="titleWidth"  style="width: 500px;height: 120px;margin-left: 980px ;margin-top: -460px">
+
+      <div style="padding-top:55px;padding-left: 20px">{{this.analysis}}
+      </div>
+    </dv-border-box-11>
 
   </div>
 
@@ -42,6 +47,22 @@ export default {
   name: "echartsMap",
   data() {
         return {
+          title_analysis:"人口流入分析",
+          ops: {
+            vuescroll: {},
+            scrollPanel: {},
+            rail: {
+              background: '#b1bcff',
+              opacity: 0,
+              size: '10px',
+              specifyBorderRadius: false, //轨道距 x 和 y 轴两端的距离
+              gutterOfSide: '0',   //距离容器的距离
+              keepShow: false,   //是否即使 bar 不存在的情况下也保持显示
+              border: 'none',  //边框
+              padding: true
+            }
+          },
+          analysis:"",
           title:"北京市人口流出top10",
           titleWidth:300,
           myChart:{},
@@ -101,11 +122,14 @@ export default {
           newconfig.data.push(b)
           this.bjData.push(a)
         }
+
+
         this.chinaConfigure()
         this.title=city+"人口流出top10"
         this.listConfig=newconfig
         this.value2=[]
       })
+
     },drawPopIn(){
       var newconfig={data:[]}
       this.bjData=[]
@@ -129,6 +153,12 @@ export default {
         this.title=city+"人口流入top10"
         this.listConfig=newconfig
       })
+      this.$axios.post('http://114.115.211.47/getPopulationAnalysis', {"cityId":this.value2[1]},config).then(res => {
+        let resu = res.data.msg
+            this.analysis = resu
+          }
+      )
+
     },
     goBack() {
       router.push('/')
