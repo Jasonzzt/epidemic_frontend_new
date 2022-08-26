@@ -7,7 +7,7 @@
     <el-header style="font-size: 35px;font-family:新宋体">
       <dv-decoration-7 style="width:350px;height:20px;">防疫政策查询<i class="el-icon-s-order"></i></dv-decoration-7>
       </el-header>
-      <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" />
+      <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
 <!--  <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />*/-->
     <el-main style="font-size: 22px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
       <div class="block">

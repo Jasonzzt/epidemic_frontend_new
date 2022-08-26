@@ -1,7 +1,7 @@
 <template>
   <div class="screen-page">
-
-    <header><h1 class="title">新冠疫情数据可视化</h1></header>
+    <el-page-header @back="goBack" content=" "></el-page-header>
+    <header><h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1></header>
 
     <div class="content">
       <aside class="flex-column">
@@ -676,6 +676,9 @@ export default {
       }
       this.$store.commit('initData', val)
       this.show1 = true
+    },
+    goBack() {
+      router.push('/')
     },
     async getChinaNews() {
       const url = 'https://opendata.baidu.com/data/inner'
