@@ -37,7 +37,7 @@
       </div>
       <div class="pos4" @click="push4">
         <dv-border-box-8 :reverse="true">
-          <button class="demo" style="font-size: 20px;color: #f5f6f6;padding: 5px 10px;border-color: #02093f" v-wave="{ color: 'white', }">疫情政策</button>
+          <button class="demo" style="font-size: 20px;color: #f5f6f6;padding: 5px 10px;border-color: #02093f" v-wave="{ color: 'white', }">防疫政策</button>
           <i class="el-icon-d-arrow-right" style="font-size: 25px"></i>
         </dv-border-box-8>
 

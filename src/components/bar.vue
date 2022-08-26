@@ -8,7 +8,6 @@ export default {
   name:'bar',
   data() {
     return {
-
       xData: ["湖北省", "上海市", "广东省", "吉林省", "北京市"], //横坐标
       yData: [53000, 24000,13000, 12000, 5000], //数据
       myChartStyle: { float: "left", width: "100%", height: "400px" } //图表样式

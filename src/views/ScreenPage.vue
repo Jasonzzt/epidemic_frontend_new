@@ -1,14 +1,26 @@
 <template>
   <div class="screen-page">
+
+
     <el-page-header @back="goBack" content=" "></el-page-header>
-    <header><h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1></header>
+    <header>
+      <h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1>
+      <div ref="a" class="header-box" style="width: 500px;position: relative;margin-right: -530px">
+        <ul @click="handClick" class="left-ul">
+          <li :class="{ active: isActive == 0 }" data-index="0">现存确诊</li>
+          <li :class="{ active: isActive == 1 }" data-index="1">累计确诊</li>
+          <li :class="{ active: isActive == 2 }" data-index="2">今日新增</li>
+          <li :class="{ active: isActive == 3 }" data-index="3">累计死亡</li>
+        </ul>
+      </div>
+    </header>
 
     <div class="content">
       <aside class="flex-column">
         <!-- 确诊人数 -->
         <div class="total bgc-size flex">
           <div class="total_tip p_tip"><p>地区：中国</p><p>{{ data }}</p></div>
-          <ring class="bar">123</ring>
+          <ring class="bar" ref="ring">123</ring>
 
 <!--          <panel class="panel"></panel>-->
 <!--          <div class="show_box total_box">-->
@@ -41,8 +53,6 @@
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
-          <p class="p p_tip">地图可视化</p>
-<!--          <p class="p p_tip">地图可视化</p>-->
           <CenterTop class="centerTop"></CenterTop>
 <!--          <div
               :class="[
@@ -59,14 +69,15 @@
       </div>
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
-        <!-- 疫情趋势变化 -->
         <div class="trend bgc-size"><p class="p_tip1">各省市确诊情况</p>
-
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
+          <provincebar class="bar" style="margin-left: 3px">123</provincebar>
+<!--      <predictline class="line" style="margin-left: 3px">123</predictline>-->
+          </vue-scroll>
+          </div>
 <!--            <div>{{this.$data.in}}</div>-->
-          <provincebar class="bar" style="margin-left: 3px">123</provincebar></vue-scroll></div>
 
 <!--            <div
                 @click="changeSize('top')"
@@ -138,8 +149,8 @@
 }
 
 .screen-page {
-  width: 100%;
-  height: 100%;
+  width: 99.9%;
+  height: 99.9%;
   background-image: url(../../public/static/img/bg.jpg);
   background-size: 100% 100%;
 }
@@ -219,6 +230,8 @@ header {
 
   .left-ul {
     padding-left: 10%;
+    position: relative;
+    margin-top: -30px;
   }
 
   .right-ul {
@@ -232,7 +245,6 @@ header {
 }
 
 // End 标题栏
-
 // Start 内容框
 .content {
   display: flex;
@@ -487,6 +499,7 @@ import bar from "../components/bar";
 import ring from "../components/ring"
 import CenterTop from "../components/CenterTop";
 import Provincebar from "../components/provincebar";
+
 export default {
   components: {
     Provincebar,
@@ -494,6 +507,7 @@ export default {
     bar,
     ring,
     CenterTop,
+
   },
   data() {
     return {
@@ -574,6 +588,7 @@ export default {
       }
       const style = document.styleSheets[0]
       for (let [key, val] of Object.entries(styleObj)) {
+        // console.log(style.cssRules)
         let n = style.cssRules.length
         try {
           const childNode = document.getElementsByClassName(key)[0],
@@ -603,6 +618,17 @@ export default {
         }, 1000)
       }
     },
+    setData(url, index, data){
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      this.$axios.post(url, data, config).then(res => {
+        let msg = res.data.msg;
+        console.log(msg)
+      })
+    },
 
     pushto1() {
       router.push('/prediction')
@@ -617,7 +643,7 @@ export default {
       router.push('/coviddetect')
     },
 
-    async getCountryData() {
+    /*async getCountryData() {
       const url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
           params = {name: 'disease_h5'}
       // const res = await this.$jsonp(url, params)
@@ -662,9 +688,10 @@ export default {
         dead:
             obj.chinaAdd.dead > 0 ? '+' + obj.chinaAdd.dead : obj.chinaAdd.dead,
       }
+      console.log(this.chinaAdd)
       // this.updateChart('现有确诊', this.allNowDataList)
       this.pushData()
-    },
+    },*/
     pushData() {
       const val = {
         allDataList: this.allDataList,
@@ -715,15 +742,26 @@ export default {
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
-        this.$refs.map.updateChart(e.target.innerText, this.allNowDataList)
+        this.allNowDataList = this.$refs.map.updateChart(e.target.innerText)
+        // console.log(this.allNowDataList)
+        this.$refs.ring.setData(this.allNowDataList)
+        this.$refs.bar.updateChart(this.allNowDataList)
       } else if (this.isActive === 1) {
-        this.$refs.map.updateChart(e.target.innerText, this.allDataList)
+        this.allDataList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allDataList)
+        this.$refs.bar.updateChart(this.allDataList)
       } else if (this.isActive === 2) {
-        this.$refs.map.updateChart(e.target.innerText, this.allTodayCreadList)
+        this.allTodayCreadList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allTodayCreadList)
+        this.$refs.bar.updateChart(this.allTodayCreadList)
       } else {
-        this.$refs.map.updateChart(e.target.innerText, this.allDeadList)
+        this.allDeadList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allDeadList)
+        this.$refs.bar.updateChart(this.allDeadList)
       }
     },
+
+
     changeSize(type) {
       this.fullScreenStatus[type] = !this.fullScreenStatus[type]
       this.$nextTick(() => {
@@ -747,9 +785,13 @@ export default {
   },
   created() {
     this.getChinaNews()
-    this.getCountryData()
+    // this.getCountryData()
     this.getDate()
     this.getNowTime()
+    // this.allNowDataList = this.$refs.map.updateChart("现存确诊")
+    // console.log(this.allNowDataList)
+    // this.$refs.ring.setData(this.allNowDataList)
+    // this.$refs.bar.updateChart(this.allNowDataList)
   },
 
   mounted() {

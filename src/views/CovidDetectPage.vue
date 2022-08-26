@@ -7,7 +7,7 @@
     <el-container>
       <el-header style="font-size: 35px;height:40px;font-family:新宋体"> <dv-decoration-7 style="width:350px;height:20px;">核酸检测点查询
         <i class="el-icon-coordinate"></i></dv-decoration-7> </el-header>
-      <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
+      <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur=4 />
       <el-container>
       <el-main style="font-size: 22px;font-family:新宋体">请选择想要查询核酸检测点所在的城市 :
        <div class="block">

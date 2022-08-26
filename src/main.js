@@ -13,6 +13,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
 
+// import 'echarts-gl'
+import jquery from 'jquery'
+
+Vue.prototype.$ = jquery
+// vue全局注入Echarts
+Vue.prototype.$echarts = echarts
 
 import 'vuescroll/dist/vuescroll.css';
 Vue.use(vuescroll);
