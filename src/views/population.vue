@@ -62,7 +62,7 @@ export default {
               padding: true
             }
           },
-          analysis:"",
+          analysis:"暂无信息",
           title:"北京市人口流出top10",
           titleWidth:300,
           myChart:{},
@@ -76,8 +76,10 @@ export default {
     };
   },
   mounted() {
-    this.$axios.post('http://114.115.211.47/getAllProvinceEpidemicData',"").then(res => {
+    this.$axios.post('http://114.115.211.47/getChinaEpidemicDataByDate', {date: this.getDay(-1)}).then(res => {
       let msg = res.data.msg;
+
+
       for (let i = 0; i < msg.length; i++) {
         let word = msg[i].provinceName.replace("省", "")
         word = word.replace("市", "")
@@ -87,11 +89,9 @@ export default {
         this.dataProvince.push(a)
       }
       this.drawPopOut()
-          this.chinaConfigure();
+      this.chinaConfigure();
     }
     )
-
-
 
 
   },
@@ -103,6 +103,25 @@ export default {
     this.chart = null;
   },
   methods: {
+    doHandleMonth(month) {
+      var m = month;
+      if (month.toString().length == 1) {
+        m = "0" + month;
+      }
+      return m;
+    },
+    getDay(day) {
+      var today = new Date();
+      var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+      today.setTime(targetday_milliseconds); //注意，这行是关键代码
+
+      var tYear = today.getFullYear();
+      var tMonth = today.getMonth();
+      var tDate = today.getDate();
+      tMonth = this.doHandleMonth(tMonth + 1);
+      tDate = this.doHandleMonth(tDate);
+      return tYear + "-" + tMonth + "-" + tDate;
+    },
     drawPopOut(){
       var newconfig={data:[]}
 
@@ -128,6 +147,7 @@ export default {
         this.title=city+"人口流出top10"
         this.listConfig=newconfig
         this.value2=[]
+        this.analysis="暂无信息"
       })
 
     },drawPopIn(){
