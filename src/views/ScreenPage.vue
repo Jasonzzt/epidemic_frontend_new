@@ -64,7 +64,9 @@
 
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
-          <provincebar class="bar" style="margin-left: 3px">123</provincebar>
+          <vue-scroll :ops="ops" style="width:550px;height:550px">
+<!--            <div>{{this.$data.in}}</div>-->
+          <provincebar class="bar" style="margin-left: 3px">123</provincebar></vue-scroll></div>
 
 <!--            <div
                 @click="changeSize('top')"
