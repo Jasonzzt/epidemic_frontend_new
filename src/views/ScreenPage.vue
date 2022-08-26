@@ -1,7 +1,19 @@
 <template>
   <div class="screen-page">
+
+
     <el-page-header @back="goBack" content=" "></el-page-header>
-    <header><h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1></header>
+    <header>
+      <h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1>
+      <div ref="a" class="header-box" style="width: 500px;position: relative;margin-right: -530px">
+        <ul @click="handClick" class="left-ul">
+          <li :class="{ active: isActive == 0 }" data-index="0">现存确诊</li>
+          <li :class="{ active: isActive == 1 }" data-index="1">累计确诊</li>
+          <li :class="{ active: isActive == 2 }" data-index="2">今日新增</li>
+          <li :class="{ active: isActive == 3 }" data-index="3">累计死亡</li>
+        </ul>
+      </div>
+    </header>
 
     <div class="content">
       <aside class="flex-column">
@@ -41,7 +53,7 @@
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
-          <p class="p p_tip">地图可视化</p>
+<!--          <p class="p p_tip">地图可视化</p>-->
 <!--          <p class="p p_tip">地图可视化</p>-->
           <CenterTop class="centerTop"></CenterTop>
 <!--          <div
@@ -138,8 +150,8 @@
 }
 
 .screen-page {
-  width: 100%;
-  height: 100%;
+  width: 99.9%;
+  height: 99.9%;
   background-image: url(../../public/static/img/bg.jpg);
   background-size: 100% 100%;
 }
@@ -219,6 +231,8 @@ header {
 
   .left-ul {
     padding-left: 10%;
+    position: relative;
+    margin-top: -30px;
   }
 
   .right-ul {
@@ -617,7 +631,7 @@ export default {
       router.push('/coviddetect')
     },
 
-    async getCountryData() {
+    /*async getCountryData() {
       const url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
           params = {name: 'disease_h5'}
       // const res = await this.$jsonp(url, params)
@@ -664,7 +678,7 @@ export default {
       }
       // this.updateChart('现有确诊', this.allNowDataList)
       this.pushData()
-    },
+    },*/
     pushData() {
       const val = {
         allDataList: this.allDataList,

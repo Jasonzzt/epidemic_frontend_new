@@ -154,7 +154,7 @@ export default {
           animation: true
         },
         geo: {
-          zoom: this.isReturnChina?0.85:1,
+          zoom: this.isReturnChina?0.80:1,
           map: name ? name : "china", // 核心
           roam: false,
           label: { // 页面初始化加载的文字
