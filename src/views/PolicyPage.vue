@@ -165,7 +165,7 @@ export default {
 .pc-sel-area-cascader {
   // 选择面板样式
   .el-cascader-panel {
-    width: 543px;
+    width: 360px;
   }
   .el-cascader-menu__wrap {
     // 设置选择器省市区分块面板高度
