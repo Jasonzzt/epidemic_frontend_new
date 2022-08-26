@@ -20,7 +20,7 @@
         <!-- 确诊人数 -->
         <div class="total bgc-size flex">
           <div class="total_tip p_tip"><p>地区：中国</p><p>{{ data }}</p></div>
-          <ring class="bar">123</ring>
+          <ring class="bar" ref="ring">123</ring>
 
 <!--          <panel class="panel"></panel>-->
 <!--          <div class="show_box total_box">-->
@@ -78,7 +78,7 @@
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
 <!--            <div>{{this.$data.in}}</div>-->
-          <provincebar class="bar" style="margin-left: 3px">123</provincebar></vue-scroll></div>
+          <provincebar class="bar" style="margin-left: 3px" ref="bar">123</provincebar></vue-scroll></div>
 
 <!--            <div
                 @click="changeSize('top')"
@@ -588,6 +588,7 @@ export default {
       }
       const style = document.styleSheets[0]
       for (let [key, val] of Object.entries(styleObj)) {
+        // console.log(style.cssRules)
         let n = style.cssRules.length
         try {
           const childNode = document.getElementsByClassName(key)[0],
@@ -616,6 +617,17 @@ export default {
           this.changeKeyframe()
         }, 1000)
       }
+    },
+    setData(url, index, data){
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      this.$axios.post(url, data, config).then(res => {
+        let msg = res.data.msg;
+        console.log(msg)
+      })
     },
 
     pushto1() {
@@ -676,6 +688,7 @@ export default {
         dead:
             obj.chinaAdd.dead > 0 ? '+' + obj.chinaAdd.dead : obj.chinaAdd.dead,
       }
+      console.log(this.chinaAdd)
       // this.updateChart('现有确诊', this.allNowDataList)
       this.pushData()
     },*/
@@ -729,15 +742,26 @@ export default {
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
-        this.$refs.map.updateChart(e.target.innerText, this.allNowDataList)
+        this.allNowDataList = this.$refs.map.updateChart(e.target.innerText)
+        // console.log(this.allNowDataList)
+        this.$refs.ring.setData(this.allNowDataList)
+        this.$refs.bar.updateChart(this.allNowDataList)
       } else if (this.isActive === 1) {
-        this.$refs.map.updateChart(e.target.innerText, this.allDataList)
+        this.allDataList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allDataList)
+        this.$refs.bar.updateChart(this.allDataList)
       } else if (this.isActive === 2) {
-        this.$refs.map.updateChart(e.target.innerText, this.allTodayCreadList)
+        this.allTodayCreadList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allTodayCreadList)
+        this.$refs.bar.updateChart(this.allTodayCreadList)
       } else {
-        this.$refs.map.updateChart(e.target.innerText, this.allDeadList)
+        this.allDeadList = this.$refs.map.updateChart(e.target.innerText)
+        this.$refs.ring.setData(this.allDeadList)
+        this.$refs.bar.updateChart(this.allDeadList)
       }
     },
+
+
     changeSize(type) {
       this.fullScreenStatus[type] = !this.fullScreenStatus[type]
       this.$nextTick(() => {
@@ -761,9 +785,13 @@ export default {
   },
   created() {
     this.getChinaNews()
-    this.getCountryData()
+    // this.getCountryData()
     this.getDate()
     this.getNowTime()
+    // this.allNowDataList = this.$refs.map.updateChart("现存确诊")
+    // console.log(this.allNowDataList)
+    // this.$refs.ring.setData(this.allNowDataList)
+    // this.$refs.bar.updateChart(this.allNowDataList)
   },
 
   mounted() {

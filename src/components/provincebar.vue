@@ -15,14 +15,32 @@ export default {
   // //     xData: ["湖北省", "上海市", "广东省", "吉林省", "北京市"], //横坐标
   // //     yData: [53000, 24000,13000, 12000, 5000], //数据
   // //     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
+       options:{},
+       myChart :null
      };
    },
   mounted() {
-   this.initEcharts();
+    this.myChart = echarts.init(document.getElementById("mychart"));
+    this.updateChart([])
   },
   methods: {
-    initEcharts() {
-      const option = {
+    updateChart(dataList) {
+      let xdata=[]
+      let ydata=[]
+      let zdata=[]
+      let m =0 ;
+      for(let item of dataList){
+        if(item["name"]!="台湾省"&&item["name"]!="香港特别行政区") {
+          xdata.push(item["name"])
+          ydata.push(item["value"])
+          m = Math.max(m,item["value"])
+        }
+      }
+      for(let i = 0;i<ydata.length;++i){
+        zdata.push(m)
+      }
+
+      this.options = {
 
         grid: {
           left: '5%',
@@ -65,7 +83,7 @@ export default {
           axisLine: {
             show: false
           },
-          data: ['xx', 'xx', 'xx', 'xx', 'xx','xx', 'xx', 'xx', 'xx', 'xx','xx', 'xx', 'xx', 'xx', 'xx',]
+          data: xdata
         }, {
           type: 'category',
           inverse: true,
@@ -85,7 +103,7 @@ export default {
               }
             },
           },
-          data: [50000000, 22000000, 10000000, 5000000, 1,50000000, 22000000, 10000000, 5000000, 1,50000000, 22000000, 10000000, 5000000, 1,]
+          data: ydata
         }],
         series: [{
           name: '确诊',
@@ -104,14 +122,14 @@ export default {
             },
           },
           barWidth: 20,
-          data: [50000000, 22000000, 10000000, 5000000, 1,50000000, 22000000, 10000000, 5000000, 1,50000000, 22000000, 10000000, 5000000, 1,]
+          data: ydata
         },
           {
             name: '背景',
             type: 'bar',
             barWidth: 20,
             barGap: '-100%',
-            data: [50000000, 50000000, 50000000, 50000000, 50000000,50000000, 50000000, 50000000, 50000000, 50000000,50000000, 50000000, 50000000, 50000000, 50000000,],
+            data: zdata,
             itemStyle: {
               normal: {
                 // color: 'rgba(24,31,68,1)',
@@ -121,36 +139,12 @@ export default {
           },
         ]
       };
-
-      const myChart = echarts.init(document.getElementById("mychart"));
-      myChart.setOption(option);
-      myChart.resize({
+      this.myChart.setOption(this.options)
+      this.myChart.resize({
         width: 370,
-        height:700
+        height:xdata.length*30
       });
-      // this.tootipTimer && this.tootipTimer.clearLoop(); // this.tootipTimer 在data里定义
-      // this.tootipTimer = 0;
-      // // 调用轮播的方法
-      // this.tootipTimer = loopShowTooltip(myChart, option, {
-      //   interval: 1000, // 轮播间隔时间
-      //   loopSeries: true, // 是否开启轮播循环
-        // loopSeries: boolean类型，默认为false。true表示循环所有series的tooltip；false则显示指定seriesIndex的tooltip。
-        // seriesIndex: 默认为0，指定某个系列（option中的series索引）循环显示tooltip，当loopSeries为true时，从seriesIndex系列开始执行。
-      // });
-      //随着屏幕大小调节图表
-      /*      window.addEventListener("resize", () => {
-              myChart.resize();
-            });*/
     },
-    // getCurPageContent: function (numberArr, curPage, itemNumPerPage) {
-    //   return numberArr.filter(function (element, index) {
-    //     if (index >= (curPage - 1) * itemNumPerPage && index < curPage * itemNumPerPage) {
-    //       return true
-    //     } else {
-    //       return false
-    //     }
-    //   })
-    // },
   }
 }
 </script>

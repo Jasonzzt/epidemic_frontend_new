@@ -18,30 +18,13 @@ export default {
       isActive: 0,
       chartInstance: null,
 
-      allDataList: null,
-      allDeadList: null,
-      allNowDataList: null,
-      allTodayCreadList: null,
+      allDataList: [],
+      allDeadList: [],
+      allNowDataList: [],
+      allTodayCreadList: [],
 
       chinaTotal: null,
       chinaAdd: null,
-      mapData: [ //自己做的模拟数据 后续根据业务展示
-        {name: '湖北', value: 88},
-        {name: '广东', value: 24},
-        {name: '上海', value: 5},
-        {name: '山东', value: 15},
-        {name: '湖南', value: 14},
-        {name: '重庆', value: 0},
-        {name: '四川', value: 65},
-        {name: '新疆', value: 36},
-        {name: '黑龙江', value: 12},
-        {name: '西藏', value: 68},
-        {name: '青海', value: 31},
-        {name: '内蒙古', value: 28},
-        {name: '陕西', value: 12},
-        {name: '辽宁', value: 88},
-        {name: '云南', value: 23},
-      ],
 
       provinces: {   //数据
         china: 'china',
@@ -80,10 +63,48 @@ export default {
         香港: 'xianggang',
         澳门: 'aomen'
       },
+      provinces2: {   //数据
+        台湾:"台湾省",
+        河北:"河北省",
+        山西:"山西省",
+        辽宁:"辽宁省",
+        吉林:"吉林省",
+        黑龙江:"黑龙省",
+        江苏:"江苏省",
+        浙江:"浙江省",
+        安徽:"安徽省",
+        福建:"福建省",
+        江西:"江西省",
+        山东:"山东省",
+        河南:"河南省",
+        湖北:"湖北省",
+        湖南:"湖南省",
+        广东:"广东省",
+        海南:"海南省",
+        四川:"四川省",
+        贵州:"贵州省",
+        云南:"云南省",
+        陕西:"陕西省",
+        甘肃:"甘肃省",
+        青海:"青海省",
+        新疆:"新疆自治区",
+        广西:"广西自治区",
+        内蒙古:"内蒙古自治区",
+        宁夏:"宁夏自治区",
+        西藏:"西藏自治区",
+        北京:"北京市",
+        天津:"天津市",
+        上海:"上海市",
+        重庆:"重庆市",
+        香港:"香港特别行政区",
+        澳门:"澳门特别行政区",
+      },
       isReturnChina: false, //是否显示返回中国地图
       options:{
 
-      }
+      },
+      nowProvince:"",
+      title:"",
     }
   },
   methods: {
@@ -103,8 +124,9 @@ export default {
 
     async chinaMaprsult(name) {
       let _this = this;
+      this.nowProvince = name
       this.isReturnChina = name !== 'china';
-      console.log(name)
+      // console.log(name)
       let chinaMap = this.$echarts.init(this.$refs.map_ref)
       const ret = await this.$http.get('../static/lib/' + this.provinces[name] + '.json')
 
@@ -123,6 +145,7 @@ export default {
           trigger: 'item',  //数据项图形触发
           // triggerOn: 'click',
           formatter: function (params) {
+            // console.log(params)
             let tipHtml =
                 '<div style="width:180px;height:100px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7);padding:0 0 0 0">' +
                 '<div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 10px">' +
@@ -301,6 +324,72 @@ export default {
     returnChinaFn() {
       this.chinaMaprsult('china');
     },
+    updateChart(name) {
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      console.log(this.nowProvince)
+      if(this.nowProvince==='china'){
+        this.$axios.post('http://114.115.211.47/getChinaEpidemicDataByDate',{"date":"2022-08-19"},config).then(res => {
+          let msg = res.data.msg;
+          for(let item of msg){
+            this.allDeadList.push({
+              name:item["provinceName"],
+              value:item["death"]
+            })
+            this.allTodayCreadList.push({
+              name:item["provinceName"],
+              value:item["confirmIncrease"]
+            })
+            this.allNowDataList.push({
+              name:item["provinceName"],
+              value:item["nowConfirm"]
+            })
+            this.allDataList.push({
+              name:item["provinceName"],
+              value:item["confirm"]
+            })
+          }
+        })
+      }
+      else {
+        this.$axios.post('http://114.115.211.47/getProvinceEpidemicDataByNameAndDate',{"provinceName":this.nowProvince,"date":"2022-08-19"},config).then(res => {
+          this.allDataList = res.data.msg;
+          // console.log(this.allDataList)
+          for(let item of this.allDataList){
+            this.allDeadList.push({
+              name:item["cityName"],
+              value:item["death"]
+            })
+            this.allTodayCreadList.push({
+              name:item["cityName"],
+              value:item["confirmIncrease"]
+            })
+            this.allNowDataList.push({
+              name:item["cityName"],
+              value:item["nowConfirm"]
+            })
+            this.allDataList.push({
+              name:item["cityName"],
+              value:item["confirm"]
+            })
+          }
+          // console.log(this.allDataList)
+        })
+      }
+      if(name==="现存确诊"){
+        return this.allNowDataList
+      }else if(name==="累计确诊"){
+        return this.allDataList
+      }else if(name==="今日新增"){
+        return this.allTodayCreadList
+      }else if(name==="累计死亡"){
+        return this.allDeadList
+      }
+      // console.log(dataList)
+    }
   },
 
   mounted() {
