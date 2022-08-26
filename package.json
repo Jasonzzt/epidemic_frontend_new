@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "core-js": "^2.6.5",
     "echarts": "^5.3.3",
+    "echarts-gl": "^1.1.0",
     "element-ui": "^2.15.9",
     "iview": "^3.5.4",
     "jquery": "^3.6.0",

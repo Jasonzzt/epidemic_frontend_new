@@ -53,8 +53,6 @@
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
-<!--          <p class="p p_tip">地图可视化</p>-->
-<!--          <p class="p p_tip">地图可视化</p>-->
           <CenterTop class="centerTop"></CenterTop>
 <!--          <div
               :class="[
@@ -71,14 +69,15 @@
       </div>
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
-        <!-- 疫情趋势变化 -->
         <div class="trend bgc-size"><p class="p_tip1">各省市确诊情况</p>
-
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
+          <provincebar class="bar" style="margin-left: 3px">123</provincebar>
+<!--      <predictline class="line" style="margin-left: 3px">123</predictline>-->
+          </vue-scroll>
+          </div>
 <!--            <div>{{this.$data.in}}</div>-->
-          <provincebar class="bar" style="margin-left: 3px" ref="bar">123</provincebar></vue-scroll></div>
 
 <!--            <div
                 @click="changeSize('top')"
@@ -246,7 +245,6 @@ header {
 }
 
 // End 标题栏
-
 // Start 内容框
 .content {
   display: flex;
@@ -501,6 +499,7 @@ import bar from "../components/bar";
 import ring from "../components/ring"
 import CenterTop from "../components/CenterTop";
 import Provincebar from "../components/provincebar";
+
 export default {
   components: {
     Provincebar,
@@ -508,6 +507,7 @@ export default {
     bar,
     ring,
     CenterTop,
+
   },
   data() {
     return {
