@@ -74,7 +74,7 @@
             ></div>-->
       </div>
       </div>
-    </div>
+
 
 </template>
 
@@ -517,6 +517,26 @@ export default {
       allTodayCreadList: null,
       chinaTotal: null,
       chinaAdd: null,
+      ops: {
+        vuescroll: {},
+        scrollPanel: {},
+        rail: {
+          background: '#b1bcff',
+          opacity: 0,
+          size: '10px',
+          specifyBorderRadius: false,
+          gutterOfEnds: null,    //轨道距 x 和 y 轴两端的距离
+          gutterOfSide: '0',   //距离容器的距离
+          keepShow: false,   //是否即使 bar 不存在的情况下也保持显示
+          border:'none' ,  //边框
+          padding: true
+        },
+        bar: {
+          hoverStyle: true,
+          onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
+          background: '#b1bcff',   //颜色
+        }
+      },
     }
   },
   methods: {
