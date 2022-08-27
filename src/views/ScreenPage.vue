@@ -74,7 +74,7 @@
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
           <provincebar class="bar" style="margin-left: 3px">123</provincebar>
-<!--      <predictline class="line" style="margin-left: 3px">123</predictline>-->
+
           </vue-scroll>
           </div>
 <!--            <div>{{this.$data.in}}</div>-->
