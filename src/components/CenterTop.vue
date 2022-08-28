@@ -2,30 +2,46 @@
   <div id="vmcentertop">
 	  <div class="tophd">
 		  <ul>
-		  	<li>150000</li>
-		  	<li>500</li>
-		  	<li>150000</li>
-		  	<li>500</li>
+        <li>{{confirmIncrease}}</li>
+		  	<li>{{confirm}}</li>
+		  	<li>{{cure}}</li>
+		  	<li>{{death}}</li>
 		  </ul>
 	  </div>
 	  <div class="topbd">
 		  <ul>
+        <li>新增确诊</li>
 		  	<li>累计确诊</li>
-		  	<li>现存确诊</li>
 		  	<li>累计治愈</li>
 		  	<li>累计死亡</li>
 		  </ul>
 	  </div>
-	  
+
   </div>
 </template>
 
 <script>
 	export default {
 		name:'vmcentertop',
-		props:{
-			centerTop:{}
-		}
+    data() {
+      return {
+        confirm: 0,
+        confirmIncrease:0,
+        cure:0,
+        death:0,
+      }
+    },
+    methods:{
+      setData(confirm,
+              confirmIncrease,
+              cure,
+              death){
+        this.confirm = confirm
+        this.confirmIncrease = confirmIncrease
+        this.cure = cure
+        this.death = death
+      }
+    },
 	}
 </script>
 <style scoped>
@@ -65,7 +81,7 @@
 		border-right: 2px solid #02a6b5;
 		border-bottom: 2px solid #02a6b5;
 	}
-	
+
 	.tophd ul{
 		display: flex;
 	}
@@ -87,10 +103,10 @@
 		height: 50%;
 		width: 1px;
 		background-color: rgba(255, 255, 255, 0.2);
-		
+
 	}
-	
-	
+
+
 	.topbd ul{
 		display: flex;
 	}
@@ -102,5 +118,5 @@
 		text-align: center;
 		color: rgba(255, 255, 255, 0.7);
 	}
-	
+
 </style>

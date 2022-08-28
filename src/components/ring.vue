@@ -21,9 +21,8 @@ export default {
   },
 
   methods: {
-    setData(msg) {
-      msg.shift()
-      msg.shift()
+    setData(dataList) {
+
       this.BtObj = {
         radious: 80,
         activeRadius: 88,
@@ -31,12 +30,12 @@ export default {
         animationCurve: "easeInBack",
         animationFrame: 200,
         activeTimeGap: 2000,
-        data: msg,
+        data: dataList,
         // color: ["#C23531", "#0F8A61"]//表示自定义颜色值,和上面的数据是一一对应的关系
         digitalFlopToFixed:3
       }
 
-      console.log(this.BtObj.data)
+      console.log(this.BtObj.data,123)
     }
   },
   mounted() {

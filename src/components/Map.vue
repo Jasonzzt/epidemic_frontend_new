@@ -18,10 +18,10 @@ export default {
       isActive: 0,
       chartInstance: null,
 
-      allDataList: [],
-      allDeadList: [],
-      allNowDataList: [],
-      allTodayCreadList: [],
+      confirmList: [],
+      deadList: [],
+      confirmIncreaseList: [],
+      cureList: [],
 
       chinaTotal: null,
       chinaAdd: null,
@@ -389,7 +389,20 @@ export default {
         return this.allDeadList
       }
       // console.log(dataList)
+    },
+
+    setData(style, dataList){
+      if(style===0){
+        this.confirmIncreaseList = dataList
+      }else if(style===1){
+        this.confirmList = dataList
+      }else if(style===2){
+        this.cureList = dataList
+      }else{
+        this.deadList = dataList
+      }
     }
+
   },
 
   mounted() {

@@ -21,25 +21,30 @@ export default {
    },
   mounted() {
     this.myChart = echarts.init(document.getElementById("mychart"));
-    this.updateChart([])
+
   },
   methods: {
-    updateChart(dataList) {
+    setData(dataList){
       let xdata=[]
       let ydata=[]
       let zdata=[]
       let m =0 ;
-      for(let item of dataList){
-        if(item["name"]!="台湾省"&&item["name"]!="香港特别行政区") {
-          xdata.push(item["name"])
-          ydata.push(item["value"])
-          m = Math.max(m,item["value"])
+
+      console.log(dataList,123256)
+      for(let i = 0;i<dataList.length;++i) {
+        console.log(dataList[i])
+        if (dataList[i].name !== "台湾省" && dataList[i].name !== "香港特别行政区") {
+          xdata.push(dataList[i]["name"])
+          ydata.push(dataList[i]["value"])
+          m = Math.max(m, dataList[i]["value"])
         }
       }
+
+
       for(let i = 0;i<ydata.length;++i){
         zdata.push(m)
       }
-
+      console.log(xdata,ydata,zdata,123)
       this.options = {
 
         grid: {
@@ -144,7 +149,7 @@ export default {
         width: 370,
         height:xdata.length*30
       });
-    },
+    }
   }
 }
 </script>
