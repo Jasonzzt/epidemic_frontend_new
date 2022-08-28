@@ -7,7 +7,7 @@
     <el-header style="font-size: 35px;font-family:新宋体">
       <dv-decoration-7 style="width:350px;height:20px;">疫情预测数据<i class="el-icon-s-data"></i></dv-decoration-7>
     </el-header>
-    <dv-decoration-5  :dur="myDur" style="width:1000px;margin-left: 300px;height:30px;"  />
+    <dv-decoration-5  :dur="dur" style="width:1000px;margin-left: 300px;height:30px;"  />
     <!--    <el-container>-->
 
     <!--      <el-container>-->
@@ -42,6 +42,222 @@
 
 </template>
 
+
+
+<script>
+import router from "@/router";
+import earth from "../components/myEarth";
+export default {
+  components:{
+    earth
+  },
+  data() {
+    return {
+      dur: 4,
+      // zzData: {}, // 著作数据
+      TimeArr: [], // 年份数组（横坐标）
+      ConfirmArr: [], // 确诊数组（纵坐标）
+      country: '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
+      options: {},
+    }
+  },
+  mounted(){
+    // this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', "").then(res => {
+    //   let msg = res.data.msg;
+    //   for (let i = 0; i < msg.length; i++) {
+    //     let word = msg[i].country.replace("省", "")
+    //     word = word.replace("市", "")
+    //     word = word.replace("特别行政区", "")
+    //     word = word.replace("自治区", "")
+    //     let a = {name: word, stuNum: msg[i].nowConfirm}
+    //     this.dataProvince.push(a)
+    //   }
+
+    this.drawLine();
+  },
+  methods:{
+    async drawLine(){
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.$echarts.init(document.getElementById('myChart'));
+      // 绘制图表
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      let timeArr = []
+      let confirmArr = []
+      await this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"美国"}, config).then(res => {
+
+        let zzData = res.data.msg
+        //alert(zzData[0].time)
+        for(let i=0;i<zzData.length; i++) {
+          timeArr.push(zzData[i].time)
+          confirmArr.push(zzData[i].confirmIncrease)
+        }
+        console.log(timeArr)
+        console.log(confirmArr)
+        this.TimeArr=timeArr
+        this.ConfirmArr=confirmArr
+
+      })
+      this.options ={
+        title: {
+          text: this.country+'疫情确诊数据',
+          textStyle:{
+            color: "#bdc4fc",
+            fontFamily:"新宋体",
+            fontSize:"25px"
+          }
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+            textStyle: {
+              color: "#fff"
+            }
+          },
+        },
+        color:"#11eecd",
+        legend: {
+          data:['新增', '确诊', '治愈','死亡'],
+          textStyle: {
+            color: "rgba(255, 255, 255, 0.7)",
+            fontFamily: "新宋体",
+            fontSize: "18px"
+          },
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            dataZoom: {
+              yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            magicType: {type: ['line', 'bar']},
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        xAxis:  {
+          type: 'category',
+          boundaryGap: false,
+          data:this.TimeArr
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value}'
+          }
+        },
+        dataZoom: [{
+          show: true,
+          height: 30,
+          xAxisIndex: [
+            0
+          ],
+          bottom: 10,
+          start: 10,
+          end: 80,
+          handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+          handleSize: '110%',
+          handleStyle: {
+            color: "rgba(177,188,255,0.83)",
+          },
+          textStyle: {
+            color: "#fff"
+          },
+          borderColor: "#90979c"
+        }, {
+          type: "inside",
+          show: true,
+          height: 15,
+          start: 1,
+          end: 35
+        }],
+        series: [
+          // {
+          //   name:'新增',
+          //   type:'line',
+          //   data:[11, 11, 15, 13, 12, 11, 11, 15, 13, 12, ],
+          //   // markPoint: {
+          //   //   data: [
+          //   //     {type: 'max', name: '最大值'},
+          //   //     {type: 'min', name: '最小值'}
+          //   //   ]
+          //   // },
+          //   // markLine: {
+          //   //   data: [
+          //   //     {type: 'average', name: '平均值'}
+          //   //   ]
+          //   // }
+          // },
+          {
+            name:'确诊',
+            type:'line',
+            lineStyle:{
+              color:"#11eecd"
+            },
+            data: this.ConfirmArr,
+            // markPoint: {
+            //   data: [
+            //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
+            //   ]
+            // },
+            // markLine: {
+            //   data: [
+            //     {type: 'average', name: '平均值'},
+            //     [{
+            //       symbol: 'none',
+            //       x: '90%',
+            //       yAxis: 'max'
+            //     }, {
+            //       symbol: 'circle',
+            //       label: {
+            //         normal: {
+            //           position: 'start',
+            //           formatter: '最大值'
+            //         }
+            //       },
+            //       type: 'max',
+            //       name: '最高点'
+            //     }]
+            //   ]
+            // }
+          },
+          // {
+          //   name:'治愈',
+          //   type:'line',
+          //   data:[2, 2, 2, 4, 4, 2, 2, 2, 4, 4, ],
+          //   // markPoint: {
+          //   //   data: [
+          //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
+          //   //   ]
+          //   // },
+          // },  {
+          //   name:'死亡',
+          //   type:'line',
+          //   data:[0, 1, 1, 1, 2, 2, 1, 1, 1, 1, ],
+          //   // markPoint: {
+          //   //   data: [
+          //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
+          //   //   ]
+          //   // },
+          // }
+        ]
+      }
+      myChart.setOption(this.options);
+    },
+    goBack() {
+      router.push('/')
+    },
+  },
+
+
+};
+
+</script>
 <style lang="less">
 .flex {
   flex: 1;
@@ -85,221 +301,3 @@
 }
 
 </style>
-
-<script>
-import router from "@/router";
-import earth from "../components/myEarth";
-export default {
-  components:{
-    earth
-  },
-  data() {
-    return {
-      dur: 4,
-      // zzData: {}, // 著作数据
-      TimeArr: [], // 年份数组（横坐标）
-      ConfirmArr: [], // 确诊数组（纵坐标）
-      country: '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
-      options: {},
-    }
-  },
-  mounted(){
-    // this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', "").then(res => {
-    //   let msg = res.data.msg;
-    //   for (let i = 0; i < msg.length; i++) {
-    //     let word = msg[i].country.replace("省", "")
-    //     word = word.replace("市", "")
-    //     word = word.replace("特别行政区", "")
-    //     word = word.replace("自治区", "")
-    //     let a = {name: word, stuNum: msg[i].nowConfirm}
-    //     this.dataProvince.push(a)
-    //   }
-
-    this.drawLine();
-  },
-  methods:{
-    drawLine(){
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('myChart'));
-      // 绘制图表
-      let config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      var timeArr = []
-      var confirmArr = []
-      this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"美国"}, config).then(res => {
-
-        let zzData = res.data.msg
-        //alert(zzData[0].time)
-        for(let i=0;i<zzData.length; i++) {
-          timeArr.push(zzData[i].time)
-          confirmArr.push(zzData[i].confirmIncrease)
-        }
-        console.log(timeArr)
-        console.log(confirmArr)
-        this.TimeArr=timeArr
-        this.ConfirmArr=confirmArr
-
-      })
-      setTimeout(()=>{
-        this.options ={
-          title: {
-            text: this.country+'疫情确诊数据',
-            textStyle:{
-              color: "#bdc4fc",
-              fontFamily:"新宋体",
-              fontSize:"25px"
-            }
-          },
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'shadow',
-              textStyle: {
-                color: "#fff"
-              }
-            },
-          },
-          color:"#11eecd",
-          legend: {
-            data:['新增', '确诊', '治愈','死亡'],
-            textStyle: {
-              color: "rgba(255, 255, 255, 0.7)",
-              fontFamily: "新宋体",
-              fontSize: "18px"
-            },
-          },
-          toolbox: {
-            show: true,
-            feature: {
-              dataZoom: {
-                yAxisIndex: 'none'
-              },
-              dataView: {readOnly: false},
-              magicType: {type: ['line', 'bar']},
-              restore: {},
-              saveAsImage: {}
-            }
-          },
-          xAxis:  {
-            type: 'category',
-            boundaryGap: false,
-            data:this.TimeArr
-          },
-          yAxis: {
-            type: 'value',
-            axisLabel: {
-              formatter: '{value}'
-            }
-          },
-          dataZoom: [{
-            show: true,
-            height: 30,
-            xAxisIndex: [
-              0
-            ],
-            bottom: 10,
-            start: 10,
-            end: 80,
-            handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-            handleSize: '110%',
-            handleStyle: {
-              color: "rgba(177,188,255,0.83)",
-            },
-            textStyle: {
-              color: "#fff"
-            },
-            borderColor: "#90979c"
-          }, {
-            type: "inside",
-            show: true,
-            height: 15,
-            start: 1,
-            end: 35
-          }],
-          series: [
-            // {
-            //   name:'新增',
-            //   type:'line',
-            //   data:[11, 11, 15, 13, 12, 11, 11, 15, 13, 12, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {type: 'max', name: '最大值'},
-            //   //     {type: 'min', name: '最小值'}
-            //   //   ]
-            //   // },
-            //   // markLine: {
-            //   //   data: [
-            //   //     {type: 'average', name: '平均值'}
-            //   //   ]
-            //   // }
-            // },
-            {
-              name:'确诊',
-              type:'line',
-              lineStyle:{
-                color:"#11eecd"
-              },
-              data: this.ConfirmArr,
-              // markPoint: {
-              //   data: [
-              //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-              //   ]
-              // },
-              // markLine: {
-              //   data: [
-              //     {type: 'average', name: '平均值'},
-              //     [{
-              //       symbol: 'none',
-              //       x: '90%',
-              //       yAxis: 'max'
-              //     }, {
-              //       symbol: 'circle',
-              //       label: {
-              //         normal: {
-              //           position: 'start',
-              //           formatter: '最大值'
-              //         }
-              //       },
-              //       type: 'max',
-              //       name: '最高点'
-              //     }]
-              //   ]
-              // }
-            },
-            // {
-            //   name:'治愈',
-            //   type:'line',
-            //   data:[2, 2, 2, 4, 4, 2, 2, 2, 4, 4, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-            //   //   ]
-            //   // },
-            // },  {
-            //   name:'死亡',
-            //   type:'line',
-            //   data:[0, 1, 1, 1, 2, 2, 1, 1, 1, 1, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-            //   //   ]
-            //   // },
-            // }
-          ]
-        }
-        myChart.setOption(this.options);
-      },200)
-
-    },
-    goBack() {
-      router.push('/')
-    },
-  },
-
-
-};
-
-</script>
