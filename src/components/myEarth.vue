@@ -2,27 +2,27 @@
   <div>
     <div id="globeViz"></div>
 
-    <div class="bottom-info-container">
-      <div style="display: flex; justify-content: center;">
-        <div class="timeline-container">
-          <button disabled style="margin-right: 10px;" class="play-button">
-            Play
-          </button>
-          <input
-              class="slider"
-              disabled
-              type="range"
-              min="0"
-              max="1"
-              step="1"
-          />
-          <span
-              style="font-size: 14px; color: #ccd6f6;"
-              class="slider-date"
-          ></span>
-        </div>
-      </div>
-    </div>
+<!--    <div class="bottom-info-container">-->
+<!--      <div style="display: flex; justify-content: center;">-->
+<!--        <div class="timeline-container">-->
+<!--&lt;!&ndash;          <button disabled style="margin-right: 10px;" class="play-button">&ndash;&gt;-->
+<!--&lt;!&ndash;            Play&ndash;&gt;-->
+<!--&lt;!&ndash;          </button>&ndash;&gt;-->
+<!--          <input-->
+<!--              class="slider"-->
+<!--              disabled-->
+<!--              type="range"-->
+<!--              min="0"-->
+<!--              max="1"-->
+<!--              step="1"-->
+<!--          />-->
+<!--          <span-->
+<!--              style="font-size: 14px; color: #ccd6f6;"-->
+<!--              class="slider-date"-->
+<!--          ></span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
   </div>
 </template>
@@ -400,11 +400,11 @@ export default {
       world:null,
       countries:[],
       featureCollection:[],
-      playButton:null,
-      slider:null,
-      sliderDate:null,
+      // playButton:null,
+      // slider:null,
+      // sliderDate:null,
       colorScale:null,
-      dates:[],
+      // dates:[],
       CN_COUNTRIES:{},
 
     }
@@ -446,93 +446,87 @@ export default {
                 )
           })
           .polygonsTransitionDuration(200);
-      this.playButton = document.querySelector('.play-button');
+      // this.playButton = document.querySelector('.play-button');
       // Slider
-      this.slider = document.querySelector('.slider');
+      // this.slider = document.querySelector('.slider');
 // Slider date
-      this.sliderDate = document.querySelector('.slider-date');
-      let interval;
-      this.playButton.addEventListener('click', () => {
-        console.log(this.playButton)
-        if (this.playButton.innerText === 'Play') {
-          this.playButton.innerText = 'Pause';
-        } else {
-          this.playButton.innerText = 'Play';
-          clearInterval(interval);
-          return;
-        }
-        // Check if slider position is max
-        if (+this.slider.value === this.dates.length - 1) {
-          this.slider.value = 0;
-        }
-
-        this.sliderDate.innerHTML = this.dates[this.slider.value];
-
-        let interval = setInterval(() => {
-          this.slider.value++;
-          this.sliderDate.innerHTML = this.dates[this.slider.value];
-          this.updatePolygonsData();
-          if (+this.slider.value === this.dates.length - 1) {
-            this.playButton.innerHTML = 'Play';
-            clearInterval(interval);
-          }
-        }, 200);
-      });
-      if ('oninput' in this.slider) {
-        this.slider.addEventListener(
-            'input',
-            () =>{
-              this.updatePolygonsData();
-            },
-            false
-        );
-      }
+//       this.sliderDate = document.querySelector('.slider-date');
+//       let interval;
+      // this.playButton.addEventListener('click', () => {
+      //   console.log(this.playButton)
+      //   if (this.playButton.innerText === 'Play') {
+      //     this.playButton.innerText = 'Pause';
+      //   } else {
+      //     this.playButton.innerText = 'Play';
+      //     clearInterval(interval);
+      //     return;
+      //   }
+      //   // Check if slider position is max
+      //   if (+this.slider.value === this.dates.length - 1) {
+      //     this.slider.value = 0;
+      //   }
+      //
+      //   this.sliderDate.innerHTML = this.dates[this.slider.value];
+      //
+      //   let interval = setInterval(() => {
+      //     this.slider.value++;
+      //     this.sliderDate.innerHTML = this.dates[this.slider.value];
+      //     this.updatePolygonsData();
+      //     if (+this.slider.value === this.dates.length - 1) {
+      //       this.playButton.innerHTML = 'Play';
+      //       clearInterval(interval);
+      //     }
+      //   }, 200);
+      // });
+      // if ('oninput' in this.slider) {
+      //   this.slider.addEventListener(
+      //       'input',
+      //       () =>{
+      //         this.updatePolygonsData();
+      //       },
+      //       false
+      //   );
+      // }
       WORLD_COUNTRIES.forEach(element => {
         this.CN_COUNTRIES[element.name.toUpperCase()]=element.translation;
       });
     },
     async getCases() {
-      let config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      this.$axios.post('http://localhost/getAllEpidemicPrData', "",config).then(res => {
+      await this.$axios.post('http://localhost/getTodayEpidemicPrData', "").then(res => {
         this.countries = res.data.msg
         // for(let i = 0;i<100;++i){
         //   _this.dates.push(_this.countries[i].time)
         // }
 
         // Set slider values
-        let start = this.countries[0].time
-        let end = this.countries[99].time
-        let st = start.split('-');
-        let et = end.split('-');
-        let startTime = new Date(st[0], st[1] - 1, st[2]).getTime();
-        let endTime = new Date(et[0], et[1] - 1, et[2]).getTime();
-        for (let i = startTime; i <= endTime;) {
-          this.dates.push(this.formatTime(i, ''));
-          i += 24 * 60 * 60 * 1000;
-        }
-        this.slider.max = 99;
-        this.slider.value = 99;
-
-        this.slider.disabled = false;
-        this.playButton.disabled = false;
+        // let start = this.countries[0].time
+        // let end = this.countries[99].time
+        // let st = start.split('-');
+        // let et = end.split('-');
+        // let startTime = new Date(st[0], st[1] - 1, st[2]).getTime();
+        // let endTime = new Date(et[0], et[1] - 1, et[2]).getTime();
+        // for (let i = startTime; i <= endTime;) {
+        //   this.dates.push(this.formatTime(i, '-'));
+        //   i += 24 * 60 * 60 * 1000;
+        // }
+        // this.slider.max = 99;
+        // this.slider.value = 99;
+        //
+        // this.slider.disabled = false;
+        // this.playButton.disabled = false;
       })
 
       this.featureCollection = await this.$http.get('../static/lib/global.json').then(res=>{
         return res.data.features
       })
       // console.log(this.featureCollection)
-      this.updatePolygonsData();
-      await this.updatePointOfView();
       this.featureCollection.forEach(element => {
         element.properties.CNNAME=this.toChina(element.properties.NAME);
       });
+      this.updatePolygonsData();
+      await this.updatePointOfView();
 
     },
-
     toChina(name) {
       let uname=name.toUpperCase();
       if(this.CN_COUNTRIES.hasOwnProperty(uname)) {
@@ -588,23 +582,17 @@ export default {
       }
     },
     updatePolygonsData() {
-      let _this = this
-      this.$axios.post('http://localhost/getAllEpidemicPrData', "").then(res => {
-        _this.countries = res.data.msg
-
-      })
-      console.log(this.countries)
       for (let x = 0; x < this.featureCollection.length; x++) {
         const country = this.featureCollection[x].properties.CNNAME;
-        // console.log(_this.countries)
-        // console.log(this.countries[0], this.slider.value)
-        // let data = this.countries.filter((item)=>item.country===country && item.time===this.slider.value)
-        // console.log(data)
-        if (country==null) {
+        let i = 0
+        let data = this.countries.filter((element)=>{
+          // index = this.slider.value + i *100
+          // i = i + 1
+          return element.country===country
+        })
+        if (data.length===1) {
           this.featureCollection[x].covidData = {
-            // confirmed: this.countries[country][dates[slider.value]].confirmed,
-            // confirmed: data[0].confirmIncrease
-            confirmed: 0
+            confirmed: data[0].confirmIncrease
           };
         } else {
           this.featureCollection[x].covidData = {
