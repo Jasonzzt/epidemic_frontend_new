@@ -10,19 +10,21 @@
     <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
   <div class="box" ref="echartsMap">
   </div>
-    <div style="margin-top: -220px" >
-    <el-cascader
+    <div style="margin-top: -100px" >
+    <el-cascader popper-class="pc-sel-area-cascader"
         v-model="value1"
+        :level="2"
         :options="options"
         @change="drawPopOut"
         popper-append-to-body=false
        style="margin-left:1050px ;color: #0A41C8;background: #0A41C8;border-color: #0A41C8;width: 150px;"></el-cascader>
-    <el-cascader
+    <el-cascader popper-class="pc-sel-area-cascader"
         v-model="value2"
         :options="options"
+        :level="2"
         @change="drawPopIn"
-        style="padding-top:100px;margin-left: 20px;border-color: #0A41C8;width: 150px"></el-cascader>
-
+        popper-append-to-body=false
+        style="padding-top:0px;margin-left: 20px;border-color: #0A41C8;width: 150px"></el-cascader>
       </div>
     <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -360px" />
     <dv-border-box-11 :color="['blue', '#308691']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
@@ -767,5 +769,77 @@ export default {
   width: 90%;
   height: 90%;
 }
+.pc-sel-area-cascader {
+  // 选择面板样式
+  .el-calendar__body{
+    color: rgba(66, 46, 46, 0.29);
+  }
+  .el-cascader-menu{
+    color: #0A41C8;
+  }
+  .el-cascader-panel {
+    width: 320px;
+    background-color: rgb(177, 188, 255);
+  }
+  .el-cascader-menu__wrap {
+    // 设置选择器省市区分块面板高度
+    height: 305px;
+  }
+  .el-cascader-menu {
+    // 省市区分块右边框
+    border: none;
+  }
+  .el-scrollbar__thumb {
+    // 上下滚动条
+    display: none;
+  }
+  .el-cascader-node {
+    height: 40px;
+  }
+  .el-cascader-node:hover {
+    // 设置鼠标滑过时文字颜色
+    color: #3f498d;
+  }
+  .el-cascader-node__label {
+    // 设置文字样式
+    padding: 0 7px;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
 
+    //color-adjust: exact;
+  }
+  // 文字选中样式及span背景颜色
+  .el-cascader-node.in-active-path,
+  .el-cascader-node.is-active,
+  .el-cascader-node.is-selectable.in-checked-path {
+    color: #2d1818;
+  }
+  .el-icon-check {
+    // 去掉选中小对勾
+    display:grid;
+  }
+  .el-icon-arrow-right {
+    // 选项去掉右侧小图标
+    display: grid;
+  }
+  // 选择器面板边框及圆角设置
+  border-radius: 12px !important;
+  border: 3px solid #5e768d !important;
+  box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
+  background-color: #0A41C8;
+
+
+}
+.pc-sel-area-cascader[x-placement^='bottom'] {
+  // 选择器面板与输入框的距离
+  margin-top: 5px !important;
+}
+.pc-sel-area-cascader[x-placement^='bottom'] .popper__arrow {
+  // 输入框下面小三角形
+  display: flex;
+}
+.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
+  background-color: #0A41C8;
+}
 </style>

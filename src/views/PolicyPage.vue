@@ -12,14 +12,17 @@
     <el-main style="font-size: 22px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
       <div class="block">
         <span class="demonstration">出发地（城市）</span>
-        <el-cascader popper-class="pc-sel-area-cascader" style="width: 150px "
+        <el-cascader class="test"  popper-class="pc-sel-area-cascader" style="width: 150px;"
+            :popper-append-to-body='false'
             v-model="value"
+            :level="2"
             :options="options"
             @change="handleChange"></el-cascader>
         <span class="demonstration" style="margin-left: 50px;">目的地（城市）</span>
-        <el-cascader style="width: 150px"
+        <el-cascader popper-class="pc-sel-area-cascader" style="width: 150px"
             v-model="value1"
             :options="options"
+            :level="2"
             @change="handleChange"></el-cascader>
     <el-button @click="search" type="primary"  icon="el-icon-search"  style="margin-left: 50px">   搜索</el-button>
       </div>
@@ -161,11 +164,20 @@ export default {
   cursor: pointer;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 }
-
+.test{
+  background-color: #0A41C8;
+}
 .pc-sel-area-cascader {
   // 选择面板样式
+  .el-calendar__body{
+    color: #0A41C8;
+  }
+  .el-cascader-menu{
+    color: #0A41C8;
+  }
   .el-cascader-panel {
     width: 360px;
+    background-color: rgba(177, 188, 255, 0.57);
   }
   .el-cascader-menu__wrap {
     // 设置选择器省市区分块面板高度
@@ -182,9 +194,10 @@ export default {
   .el-cascader-node {
     height: 40px;
   }
+
   .el-cascader-node:hover {
     // 设置鼠标滑过时文字颜色
-    color: #4a58a9;
+    color: #3f498d;
   }
   .el-cascader-node__label {
     // 设置文字样式
@@ -192,12 +205,14 @@ export default {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
+
+    //color-adjust: exact;
   }
   // 文字选中样式及span背景颜色
   .el-cascader-node.in-active-path,
   .el-cascader-node.is-active,
   .el-cascader-node.is-selectable.in-checked-path {
-    color: #4a58a9;
+    color: #2d1818;
   }
   .el-icon-check {
     // 去掉选中小对勾
@@ -205,21 +220,62 @@ export default {
   }
   .el-icon-arrow-right {
     // 选项去掉右侧小图标
-    display: none;
+    display: grid;
   }
   // 选择器面板边框及圆角设置
   border-radius: 12px !important;
-  border: 1px solid #f6f7f8 !important;
-  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.07) !important;
+  border: 3px solid #5e768d !important;
+  box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
+  background-color: #0A41C8;
+   /deep/ .el-input__inner {
+    height: 44px;
+    border: none;
+    margin-top: 24.5px;
+    font-size: 18px;
+    font-family: Source Han Sans CN;
+    font-weight: bold;
+    color: #2e5afb;
+  }
+  //对小标的设置和样式自定义
+   /deep/ .el-input__suffix {
+    top: 11px;
+    .el-select__caret {
+      font-size: 24px;
+      color: #333333;
+    }
+  }
+
 }
 .pc-sel-area-cascader[x-placement^='bottom'] {
   // 选择器面板与输入框的距离
-  margin-top: 1px !important;
+  margin-top: 5px !important;
 }
 .pc-sel-area-cascader[x-placement^='bottom'] .popper__arrow {
   // 输入框下面小三角形
   display: flex;
 }
+.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
+  background-color: #0A41C8;
+}
+//对整个容器进行设置
+.el-select /deep/ .el-input__inner {
+  height: 44px;
+  border: none;
+  margin-top: 24.5px;
+  font-size: 18px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  color: #2e5afb;
+}
+//对小标的设置和样式自定义
+.el-select /deep/ .el-input__suffix {
+  top: 11px;
+  .el-select__caret {
+    font-size: 24px;
+    color: #333333;
+  }
+}
+
 
 </style>
 

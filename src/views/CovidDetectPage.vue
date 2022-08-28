@@ -12,7 +12,7 @@
       <el-main style="font-size: 22px;font-family:新宋体">请选择想要查询核酸检测点所在的城市 :
        <div class="block">
       <span class="demonstration">省份 （城市）</span>
-      <el-cascader style="width: 170px;margin-left: 20px "
+      <el-cascader popper-class="pc-sel-area-cascader" style="width: 150px;margin-left: 20px "
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
@@ -178,15 +178,86 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
  .BMap_mask {
   cursor: default;
 }
+.pc-sel-area-cascader {
+  // 选择面板样式
+  .el-calendar__body{
+    color: #0A41C8;
+  }
+  .el-cascader-menu{
+    color: #0A41C8;
+  }
+  .el-cascader-panel {
+    width: 360px;
+    background-color: rgba(177, 188, 255, 0.57);
+  }
+  .el-cascader-menu__wrap {
+    // 设置选择器省市区分块面板高度
+    height: 305px;
+  }
+  .el-cascader-menu {
+    // 省市区分块右边框
+    border: none;
+  }
+  .el-scrollbar__thumb {
+    // 上下滚动条
+    display: none;
+  }
+  .el-cascader-node {
+    height: 40px;
+  }
 
+  .el-cascader-node:hover {
+    // 设置鼠标滑过时文字颜色
+    color: #3f498d;
+  }
+  .el-cascader-node__label {
+    // 设置文字样式
+    padding: 0 7px;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+
+    //color-adjust: exact;
+  }
+  // 文字选中样式及span背景颜色
+  .el-cascader-node.in-active-path,
+  .el-cascader-node.is-active,
+  .el-cascader-node.is-selectable.in-checked-path {
+    color: #2d1818;
+  }
+  .el-icon-check {
+    // 去掉选中小对勾
+    display:grid;
+  }
+  .el-icon-arrow-right {
+    // 选项去掉右侧小图标
+    display: grid;
+  }
+  // 选择器面板边框及圆角设置
+  border-radius: 12px !important;
+  border: 3px solid #5e768d !important;
+  box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
+  background-color: #0A41C8;
+
+
+}
+.pc-sel-area-cascader[x-placement^='bottom'] {
+  // 选择器面板与输入框的距离
+  margin-top: 5px !important;
+}
+.pc-sel-area-cascader[x-placement^='bottom'] .popper__arrow {
+  // 输入框下面小三角形
+  display: flex;
+}
+.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
+  background-color: #0A41C8;
+}
 </style>
 
 <script>
 import router from "@/router";
 
   // 百度地图API功能
-
-
 export default {
 
   name: 'pointSetMap',
