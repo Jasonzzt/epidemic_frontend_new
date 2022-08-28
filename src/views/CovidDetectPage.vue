@@ -286,7 +286,7 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://114.115.211.47/getDetectionPoint', {"cityId":this.value[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getDetectionPoint', {"cityId":this.value[1]},config).then(res => {
         let msg = res.data.msg;
         this.tableData=msg
         this.totalCount=msg.length

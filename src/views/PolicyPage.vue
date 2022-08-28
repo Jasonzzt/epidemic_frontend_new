@@ -268,11 +268,11 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://114.115.211.47/getPolicy', {"cityId":this.value[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPolicy', {"cityId":this.value[1]},config).then(res => {
         let msg = res.data.msg;
         this.in=msg.policyOut
       })
-      this.$axios.post('http://114.115.211.47/getPolicy', {"cityId":this.value1[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPolicy', {"cityId":this.value1[1]},config).then(res => {
         let msg = res.data.msg;
         this.out=msg.policyIn
       })

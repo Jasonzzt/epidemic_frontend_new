@@ -332,7 +332,7 @@ export default {
       }
       console.log(this.nowProvince)
       if(this.nowProvince==='china'){
-        this.$axios.post('http://114.115.211.47/getChinaEpidemicDataByDate',{"date":"2022-08-19"},config).then(res => {
+        this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate',{"date":"2022-08-19"},config).then(res => {
           let msg = res.data.msg;
           for(let item of msg){
             this.allDeadList.push({
@@ -355,7 +355,7 @@ export default {
         })
       }
       else {
-        this.$axios.post('http://114.115.211.47/getProvinceEpidemicDataByNameAndDate',{"provinceName":this.nowProvince,"date":"2022-08-19"},config).then(res => {
+        this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate',{"provinceName":this.nowProvince,"date":"2022-08-19"},config).then(res => {
           this.allDataList = res.data.msg;
           // console.log(this.allDataList)
           for(let item of this.allDataList){

@@ -90,7 +90,7 @@ export default {
   },
 
   mounted() {
-    // this.$axios.post('http://114.115.211.47/getChinaEpidemicDataByDate', "").then(res => {
+    // this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', "").then(res => {
     //   let msg = res.data.msg;
     //   for (let i = 0; i < msg.length; i++) {
     //     let word = msg[i].country.replace("省", "")
@@ -116,7 +116,7 @@ export default {
       let country=this.country
       let timeArr = []
       let confirmArr = []
-      this.$axios.post('http://114.115.211.47/getEpidemicDataPr',{"country":"英国"}, config).then(res => {
+      this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"英国"}, config).then(res => {
 
           this.zzData = res.data
           for(let i=0;i<this.zzData.length; i++) {

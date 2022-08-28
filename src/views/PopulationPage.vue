@@ -210,11 +210,11 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://114.115.211.47/getPopulationInByCityId', {"cityId":this.value[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPopulationInByCityId', {"cityId":this.value[1]},config).then(res => {
         let msg = res.data.msg;
         this.tableData1=msg
       })
-      this.$axios.post('http://114.115.211.47/getPopulationOutByCityId', {"cityId":this.value[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPopulationOutByCityId', {"cityId":this.value[1]},config).then(res => {
         let msg = res.data.msg;
         this.tableData2=msg
       })

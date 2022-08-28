@@ -76,7 +76,7 @@ export default {
     };
   },
   mounted() {
-    this.$axios.post('http://114.115.211.47/getChinaEpidemicDataByDate', {date: this.getDay(-1)}).then(res => {
+    this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {date: this.getDay(-1)}).then(res => {
       let msg = res.data.msg;
 
 
@@ -131,7 +131,7 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://114.115.211.47/getPopulationOutByCityId', {"cityId":this.value1[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPopulationOutByCityId', {"cityId":this.value1[1]},config).then(res => {
         let msg = res.data.msg;
         let city=""
         for (let i = 0; i < msg.length; i++) {
@@ -158,7 +158,7 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://114.115.211.47/getPopulationInByCityId', {"cityId":this.value2[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPopulationInByCityId', {"cityId":this.value2[1]},config).then(res => {
         let msg = res.data.msg;
         let city=""
         for (let i = 0; i < msg.length; i++) {
@@ -173,7 +173,7 @@ export default {
         this.title=city+"人口流入top10"
         this.listConfig=newconfig
       })
-      this.$axios.post('http://114.115.211.47/getPopulationAnalysis', {"cityId":this.value2[1]},config).then(res => {
+      this.$axios.post('http://116.62.153.183/getPopulationAnalysis', {"cityId":this.value2[1]},config).then(res => {
         let resu = res.data.msg
             this.analysis = resu
           }
