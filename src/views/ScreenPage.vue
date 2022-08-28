@@ -743,7 +743,7 @@ export default {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
         this.allNowDataList = this.$refs.map.updateChart(e.target.innerText)
-        // console.log(this.allNowDataList)
+        console.log(this.allNowDataList)
         this.$refs.ring.setData(this.allNowDataList)
         this.$refs.bar.updateChart(this.allNowDataList)
       } else if (this.isActive === 1) {

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="globeViz"></div>
+  <div class="all">
+    <div id="globeViz" style="margin-left: -300px;margin-top:-70px;position: relative"></div>
 
 <!--    <div class="bottom-info-container">-->
 <!--      <div style="display: flex; justify-content: center;">-->
@@ -419,7 +419,7 @@ export default {
       };
       this.world = Globe()(globeContainer)
           .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
-          // .backgroundImageUrl(BACKGROUND_IMAGE_URL)
+          // .backgroundImageUrl("../public/static/img/bg.jpg")
           .showGraticules(false)
           .polygonAltitude(0.06)
           .polygonCapColor((feat) => this.colorScale(getVal(feat)))
@@ -492,7 +492,7 @@ export default {
       });
     },
     async getCases() {
-      await this.$axios.post('http://localhost/getTodayEpidemicPrData', "").then(res => {
+      await this.$axios.post('http://116.62.153.183/getTodayEpidemicPrData', "").then(res => {
         this.countries = res.data.msg
         // for(let i = 0;i<100;++i){
         //   _this.dates.push(_this.countries[i].time)
