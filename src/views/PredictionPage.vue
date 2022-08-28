@@ -23,6 +23,10 @@
 
         </el-main>
 
+<!--        </el-main>-->
+<!--      </el-container>-->
+<!--    </el-container>-->
+    <earth></earth>
   </div>
 
 </template>
@@ -77,16 +81,19 @@ require('echarts/lib/chart/bar');
 // 引入提示框和title组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
+import earth from "../components/myEarth";
 export default {
+  components: {
+    earth,
+  },
   name: "DataCount",
-  data:{
-    dur:4,
+  data: {
+    dur: 4,
     zzData: {}, // 著作数据
     TimeArr: [], // 年份数组（横坐标）
     ConfirmArr: [], // 确诊数组（纵坐标）
-    country :  '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
-    options:{
-    },
+    country: '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
+    options: {},
   },
 
   mounted() {
@@ -101,10 +108,10 @@ export default {
     //     this.dataProvince.push(a)
     //   }
 
-      this.drawLine();
+    this.drawLine();
   },
-  methods:{
-    drawLine(){
+  methods: {
+    drawLine() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById('myChart'));
       // 绘制图表
@@ -113,28 +120,28 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      let country=this.country
+      let country = this.country
       let timeArr = []
       let confirmArr = []
-      this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"英国"}, config).then(res => {
+      this.$axios.post('http://116.62.153.183/getEpidemicDataPr', {"country": "英国"}, config).then(res => {
 
-          this.zzData = res.data
-          for(let i=0;i<this.zzData.length; i++) {
-            this.TimeArr[i] = this.zzData.time
-            this.ConfirmArr[i] = this.zzData.msg[i].confirmIncrease
-          }
-          timeArr = this.TimeArr
-          confirmArr = this.ConfirmArr
+        this.zzData = res.data
+        for (let i = 0; i < this.zzData.length; i++) {
+          this.TimeArr[i] = this.zzData.time
+          this.ConfirmArr[i] = this.zzData.msg[i].confirmIncrease
+        }
+        timeArr = this.TimeArr
+        confirmArr = this.ConfirmArr
         console.log(this.zzData);
 
       })
-      this.options ={
+      this.options = {
         title: {
-          text: country+'疫情确诊数据',
-          textStyle:{
+          text: country + '疫情确诊数据',
+          textStyle: {
             color: "#bdc4fc",
-            fontFamily:"新宋体",
-            fontSize:"25px"
+            fontFamily: "新宋体",
+            fontSize: "25px"
           }
         },
         tooltip: {
@@ -146,9 +153,9 @@ export default {
             }
           },
         },
-        color:"#11eecd",
+        color: "#11eecd",
         legend: {
-          data:['新增', '确诊', '治愈','死亡'],
+          data: ['新增', '确诊', '治愈', '死亡'],
           textStyle: {
             color: "rgba(255, 255, 255, 0.7)",
             fontFamily: "新宋体",
@@ -167,7 +174,7 @@ export default {
             saveAsImage: {}
           }
         },
-        xAxis:  {
+        xAxis: {
           type: 'category',
           boundaryGap: false,
           data: timeArr
@@ -221,12 +228,12 @@ export default {
           //   // }
           // },
           {
-            name:'确诊',
-            type:'line',
-            lineStyle:{
-              color:"#11eecd"
+            name: '确诊',
+            type: 'line',
+            lineStyle: {
+              color: "#11eecd"
             },
-            data:confirmArr,
+            data: confirmArr,
             // markPoint: {
             //   data: [
             //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
@@ -281,7 +288,7 @@ export default {
     },
   },
 
+}
 
-};
 
 </script>
