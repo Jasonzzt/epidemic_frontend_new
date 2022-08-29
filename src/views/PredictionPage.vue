@@ -102,7 +102,7 @@ export default {
           textStyle:{
             color: "#bdc4fc",
             fontFamily:"新宋体",
-            fontSize:"25px"
+            fontSize:"20px"
           }
         },
         tooltip: {
@@ -114,15 +114,15 @@ export default {
             }
           },
         },
-        //color:"#11eecd",
-        // legend: {
-        //   data:['新增', '确诊', '治愈','死亡'],
-        //   textStyle: {
-        //     color: "rgba(255, 255, 255, 0.7)",
-        //     fontFamily: "新宋体",
-        //     fontSize: "18px"
-        //   },
-        // },
+        color:"#11eecd",
+        legend: {
+          data:['新增', '确诊', '治愈','死亡'],
+          textStyle: {
+            color: "rgba(255, 255, 255, 0.7)",
+            fontFamily: "新宋体",
+            fontSize: "18px"
+          },
+        },
         toolbox: {
           show: true,
           feature: {
@@ -170,7 +170,6 @@ export default {
           start: 1,
           end: 35
         }],
-
         series: [
           // {
           //   name:'新增',
@@ -250,7 +249,7 @@ export default {
             textStyle: {
               color: "#bdc4fc",
               fontFamily: "新宋体",
-              fontSize: "25px"
+              fontSize: "20px"
             }
           },
           tooltip: {
@@ -406,5 +405,10 @@ export default {
   text-align: center;
   line-height: 40px;
 }
-
+::-webkit-scrollbar {
+  width: 0 !important;
+}
+::-webkit-scrollbar {
+  width: 0 !important;height: 0;
+}
 </style>

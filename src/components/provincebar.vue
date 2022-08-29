@@ -62,7 +62,7 @@ export default {
           formatter: function(params) {
             return params[0].name + '<br/>' +
                 "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
-                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4) / 10000).toFixed(2)).toLocaleString() + ' 万人<br/>'
+                params[0].seriesName + ' : ' + Number((params[0].value.toFixed(4))).toLocaleString() + ' 人<br/>'
           }
         },
         // backgroundColor: 'rgb(20,28,52)',
@@ -111,7 +111,7 @@ export default {
           data: ydata
         }],
         series: [{
-          name: '确诊',
+          name: '数量',
           type: 'bar',
           zlevel: 1,
           itemStyle: {

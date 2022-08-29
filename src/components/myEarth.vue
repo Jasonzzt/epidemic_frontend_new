@@ -422,7 +422,8 @@ export default {
       };
       this.world = Globe()(globeContainer)
           .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
-          // .backgroundImageUrl("../public/static/img/bg.jpg")
+          // .backgroundImageUrl("../../public/static/img/bg.jpg")
+          .backgroundColor('rgba(0,35,100,0.05)')
           .showGraticules(false)
           .polygonAltitude(0.06)
           .polygonCapColor((feat) => this.colorScale(getVal(feat)))
@@ -791,5 +792,6 @@ body {
   outline: none;
   width: 5em;
 }
+
 
 </style>
