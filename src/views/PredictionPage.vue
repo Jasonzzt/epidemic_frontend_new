@@ -183,7 +183,13 @@ export default {
             lineStyle:{
               color:"#11eecd"
             },
+            itemStyle: {
+              normal: {
+                color: "#3f498d",
+              }
+            },
             data: this.ConfirmArr,
+            smooth: true
           },
           {
             name:'预测新增确诊',
@@ -191,7 +197,13 @@ export default {
             lineStyle:{
               color:"rgba(255,40,73,0.89)"
             },
+            itemStyle: {
+              normal: {
+                color: "#f5b065",
+              }
+            },
             data:this.PredictArr,
+            smooth: true
           },
 
         ]
@@ -314,7 +326,13 @@ export default {
               lineStyle: {
                 color: "#11eecd"
               },
+              itemStyle: {
+                normal: {
+                  color: "#3f498d",
+                }
+              },
               data: this.ConfirmArr,
+              smooth: true
             },
             {
               name:'预测新增确诊',
@@ -322,8 +340,15 @@ export default {
               lineStyle:{
                 color:"rgba(255,45,77,0.85)"
               },
+              itemStyle: {
+                normal: {
+                  color: "#f5b065",
+                }
+              },
               data:this.PredictArr,
+              smooth: true
             },
+
 
           ]
         }
