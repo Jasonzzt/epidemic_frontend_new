@@ -346,25 +346,21 @@ export default {
       if (this.isActive === 0) {
         this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.title='新增确诊'
-        this.$refs.map.setData(0, this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
         this.$refs.map.setData('累计确诊', this.confirmList)
         this.title='累计确诊'
-        this.$refs.map.setData(0, this.confirmList)
         this.$refs.ring.setData(this.confirmList)
         this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
         this.$refs.map.setData('累计治愈', this.cureList)
         this.title='累计治愈'
-        this.$refs.map.setData(0, this.cureList)
         this.$refs.ring.setData(this.cureList)
         this.$refs.provincebar.setData(this.cureList)
       } else {
         this.$refs.map.setData('累计死亡', this.deadList)
         this.title='累计死亡'
-        this.$refs.map.setData(0, this.deadList)
         this.$refs.ring.setData(this.deadList)
         this.$refs.provincebar.setData(this.deadList)
       }
@@ -392,8 +388,17 @@ export default {
       }
       this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {"date": "2022-08-19"}, config).then(res => {
         let msg = res.data.msg;
-        msg.shift()
-        msg.shift()
+        let deadListNum=0
+        let confirmIncreaseNum=0
+        let cureListNum=0
+        let confirmListNum=0
+        for(let i=0;i<2;i++){
+          confirmIncreaseNum+=msg[i].confirmIncrease
+          confirmListNum+=msg[i].confirm
+          cureListNum+=msg[i].cured
+          deadListNum+=msg[i].death
+        }
+        this.$store.commit('setBasicData',{'increase':confirmIncreaseNum,'confirm':confirmListNum,'cured':cureListNum,'dead':deadListNum})
         for(let item of msg){
           this.deadList.push({
             name:item["provinceName"],
@@ -412,11 +417,48 @@ export default {
             value:item["confirm"]
           })
         }
-        this.$refs.map.setData(0, this.confirmIncreaseList)
+        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
+        this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
       })
     },
+    getProvinceData(provinceName){
+      console.log(provinceName)
+      let config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+      this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {'provinceName':provinceName,"date": "2022-08-19"}, config).then(res => {
+        let msg = res.data.msg;
+
+        for(let item of msg){
+          this.deadList.push({
+            name:item["cityName"],
+            value:item["death"]
+          })
+          this.confirmIncreaseList.push({
+            name:item["cityName"],
+            value:item["confirmIncrease"]
+          })
+          this.cureList.push({
+            name:item["cityName"],
+            value:item["cured"]
+          })
+          this.confirmList.push({
+            name:item["cityName"],
+            value:item["confirm"]
+          })
+        }
+        console.log()
+        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+        this.$refs.ring.setData(this.confirmIncreaseList)
+        this.$refs.provincebar.setData(this.confirmIncreaseList)
+        this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
+      })
+
+    }
   },
   watch: {
     news() {

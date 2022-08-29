@@ -14,13 +14,31 @@ export default new Vuex.Store({
     nowData:[],
     xData:[],
     yData:[],
+    increase:0,
+    dead:0,
+    cured:0,
+    confirm:0,
   },
   mutations: {
+    setBasicData(state,val){
+      state.increase=val.increase
+      state.confirm=val.confirm
+      state.cured=val.cured
+      state.dead=val.dead
+    },
     setAllData(state, val) {
       state.allDataList = val.dataList;
       state.allDeadList = val.dead;
       state.allNowDataList = val.nowdata;
       state.allTodayCreadList = val.cread;
+
+      for(let i=0;i<val.dataList.length;i++){
+        state.increase+=val.nowdata[i].value
+        state.confirm+=val.dataList[i].value
+        state.cured+=val.cread[i].value
+        state.dead+=val.dead[i].value
+      }
+      // alert(state.increase)
     },
     setNowData(state,val){
       if(val.mode===0)state.nowData=state.allNowDataList

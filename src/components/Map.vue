@@ -141,7 +141,7 @@ export default {
   watch:{
       nowProvince(newVal, oldVal) {
         console.log(newVal)
-
+        this.$parent.getProvinceData(this.provinces2[newVal])
       }
   },
 
@@ -541,7 +541,7 @@ export default {
   },
 
   mounted() {
-    console.log(1234)
+
     this.$nextTick(_ => {
       this.chinaMaprsult('china')
     })

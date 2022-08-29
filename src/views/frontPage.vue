@@ -24,7 +24,7 @@
       <div class="pos2" @click="push2">
         <dv-border-box-8 style="width: 130px">
           <i class="el-icon-d-arrow-left" style="font-size: 25px"></i>
-          <button  class="demo" style="font-size: 20px;color: #f5f6f6;padding: 5px 10px;border-color: #02093f" v-wave="{ color: 'white', }">人口迁徙</button>
+          <button  class="demo" style="font-size: 20px;color: #f5f6f6;padding: 5px 10px;border-color: #02093f" v-wave="{ color: 'white', }">人口流动</button>
         </dv-border-box-8>
 
       </div>

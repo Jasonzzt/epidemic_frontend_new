@@ -2,10 +2,10 @@
   <div id="vmcentertop">
 	  <div class="tophd">
 		  <ul>
-        <li>{{confirmIncrease}}</li>
-		  	<li>{{confirm}}</li>
-		  	<li>{{cure}}</li>
-		  	<li>{{death}}</li>
+        <li>{{this.$store.state.increase}}</li>
+		  	<li>{{this.$store.state.confirm}}</li>
+		  	<li>{{this.$store.state.cured}}</li>
+		  	<li>{{this.$store.state.dead}}</li>
 		  </ul>
 	  </div>
 	  <div class="topbd">
