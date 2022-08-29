@@ -34,7 +34,6 @@ export default new Vuex.Store({
       console.log(state.nowData)
 
       let arr1=state.nowData
-      ring.methods.setData(arr1)
     }
   },
   actions: {},
