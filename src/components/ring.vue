@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "ring.vue",
+  name: "ring",
   data() {
     return {
       BtObj: {
@@ -14,15 +14,24 @@ export default {
         animationCurve: "easeInBack",
         animationFrame: 200,
         activeTimeGap: 2000,
-        data: [],
+        data: this.$store.state.nowData.map((item)=>({
+          'name':item.name,
+          'value':item.value
+        })),
+
         color: ["#C23531", "#0F8A61"]//表示自定义颜色值,和上面的数据是一一对应的关系
       },
     }
   },
 
   methods: {
-    setData(dataList) {
+    setData(nowData) {
 
+      let arr=[]
+      for (let i=0;i<nowData.length;i++){
+        arr.push({'name':nowData[i].name,'value':nowData[i].value})
+      }
+      console.log(arr,555)
       this.BtObj = {
         radious: 80,
         activeRadius: 88,
@@ -30,7 +39,7 @@ export default {
         animationCurve: "easeInBack",
         animationFrame: 200,
         activeTimeGap: 2000,
-        data: dataList,
+        data: arr,
         // color: ["#C23531", "#0F8A61"]//表示自定义颜色值,和上面的数据是一一对应的关系
         digitalFlopToFixed:3
       }

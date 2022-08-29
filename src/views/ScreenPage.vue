@@ -977,18 +977,6 @@ export default {
       })
     },
 
-    pushto1() {
-      router.push('/prediction')
-    },
-    pushto2() {
-      router.push('/population')
-    },
-    pushto3() {
-      router.push('/policy')
-    },
-    pushto4() {
-      router.push('/coviddetect')
-    },
 
     /*async getCountryData() {
       const url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
@@ -1088,24 +1076,26 @@ export default {
     },
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
-      if (this.isActive === 0) {
-        this.allNowDataList = this.$refs.map.updateChart(e.target.innerText)
+      console.log(this.isActive)
+      this.$store.commit('setNowData',{'mode':this.isActive})
+     /* if (this.isActive === 0) {
+
         console.log(this.allNowDataList)
-        this.$refs.ring.setData(this.allNowDataList)
-        this.$refs.bar.updateChart(this.allNowDataList)
+        // this.$refs.ring.setData(this.allNowDataList)
+        // this.$refs.bar.updateChart(this.allNowDataList)
       } else if (this.isActive === 1) {
-        this.allDataList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allDataList)
-        this.$refs.bar.updateChart(this.allDataList)
+        this.allDataList = this.$store.state.allDataList
+        // this.$refs.ring.setData(this.allDataList)
+        // this.$refs.bar.updateChart(this.allDataList)
       } else if (this.isActive === 2) {
-        this.allTodayCreadList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allTodayCreadList)
-        this.$refs.bar.updateChart(this.allTodayCreadList)
+        this.allTodayCreadList = this.$store.state.allTodayCreadList
+        // this.$refs.ring.setData(this.allTodayCreadList)
+        // this.$refs.bar.updateChart(this.allTodayCreadList)
       } else {
-        this.allDeadList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allDeadList)
-        this.$refs.bar.updateChart(this.allDeadList)
-      }
+        this.allDeadList = this.$store.state.allDeadList
+        // this.$refs.ring.setData(this.allDeadList)
+        // this.$refs.bar.updateChart(this.allDeadList)
+      }*/
     },
 
 

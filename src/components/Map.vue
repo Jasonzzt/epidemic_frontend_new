@@ -103,7 +103,7 @@ export default {
       options:{
 
       },
-      nowProvince:"",
+      nowProvince:"china",
       title:"",
     }
   },
@@ -331,27 +331,33 @@ export default {
         }
       }
       console.log(this.nowProvince)
+      let allDeadList=[]
+      let allTodayCreadList=[]
+      let allNowDataList=[]
+      let allDataList=[]
       if(this.nowProvince==='china'){
         this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate',{"date":"2022-08-19"},config).then(res => {
           let msg = res.data.msg;
           for(let item of msg){
-            this.allDeadList.push({
+            allDeadList.push({
               name:item["provinceName"],
               value:item["death"]
             })
-            this.allTodayCreadList.push({
+            allTodayCreadList.push({
+              name:item["provinceName"],
+              value:item["cured"]
+            })
+            allNowDataList.push({
               name:item["provinceName"],
               value:item["confirmIncrease"]
             })
-            this.allNowDataList.push({
+            allDataList.push({
               name:item["provinceName"],
               value:item["nowConfirm"]
             })
-            this.allDataList.push({
-              name:item["provinceName"],
-              value:item["confirm"]
-            })
           }
+          // console.log(allTodayCreadList)
+          this.$store.commit('setAllData',{'dead':allDeadList,'cread':allTodayCreadList,'nowdata':allNowDataList,'dataList':allDataList})
         })
       }
       else {
@@ -406,6 +412,7 @@ export default {
   },
 
   mounted() {
+    this.updateChart('现存确诊');
     this.$nextTick(_ => {
       this.chinaMaprsult('china')
     })
