@@ -12,6 +12,8 @@ export default new Vuex.Store({
     chinaTotal: [],
     chinaAdd: [],
     nowData:[],
+    xData:[],
+    yData:[],
   },
   mutations: {
     setAllData(state, val) {
@@ -31,9 +33,15 @@ export default new Vuex.Store({
         arr.push({'name':state.nowData[i].name,'value':state.nowData[i].value})
       }
       state.nowData=arr
-      console.log(state.nowData)
 
-      let arr1=state.nowData
+      let arr1=[]
+      let arr2=[]
+      for(let i=0;i<state.nowData.length;i++){
+        arr1.push(state.nowData[i].name)
+        arr2.push(state.nowData[i].value)
+      }
+      state.xData=arr1;
+      state.yData=arr2;
     }
   },
   actions: {},

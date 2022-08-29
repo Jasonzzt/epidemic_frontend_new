@@ -57,7 +57,7 @@ export default {
       // zzData: {}, // 著作数据
       TimeArr: [], // 年份数组（横坐标）
       ConfirmArr: [], // 确诊数组（纵坐标）
-      country: '美国',//默认中国，实则根据左侧地球点击显示对应国家数据
+      country: '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
       options: {},
       myChart:null,
     }
