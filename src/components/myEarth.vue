@@ -406,7 +406,7 @@ export default {
       colorScale:null,
       // dates:[],
       CN_COUNTRIES:{},
-
+      countryName:'',
     }
   },
 
@@ -433,11 +433,16 @@ export default {
              <div class="card-spacer"></div>
              <hr />
              <div class="card-spacer"></div>
-             <span>Cases: ${c.confirmed}</span>  <br />
+             <span>确诊: ${c.confirmed}</span>  <br />
           </div>
         </div>
       `;
           })
+          .onPolygonClick((polygon) =>{
+            this.countryName = polygon.properties.CNNAME
+            this.$parent.$parent.$parent.setData(this.countryName)
+          })
+
           .onPolygonHover((hoverD) => {
             this.world
                 .polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06))
@@ -446,6 +451,10 @@ export default {
                 )
           })
           .polygonsTransitionDuration(200);
+      // document.getElementById("globeViz").onclick=function(d){
+      //   console.log(d);
+      // }
+
       // this.playButton = document.querySelector('.play-button');
       // Slider
       // this.slider = document.querySelector('.slider');
@@ -490,6 +499,9 @@ export default {
       WORLD_COUNTRIES.forEach(element => {
         this.CN_COUNTRIES[element.name.toUpperCase()]=element.translation;
       });
+      // globeContainer.addEventListener("click",(event)=>{
+      //   console.log(event)
+      // })
     },
     async getCases() {
       await this.$axios.post('http://116.62.153.183/getTodayEpidemicPrData', "").then(res => {
@@ -611,6 +623,7 @@ export default {
   mounted() {
     this.initE()
     this.getCases()
+
   }
 }
 </script>
