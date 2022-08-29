@@ -70,12 +70,11 @@
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
         <div class="trend bgc-size">
-          <p class="p_tip1">各省市情况</p>
+          <p class="p_tip1">各省市{{title}}情况</p>
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
-          <provincebar class="bar" style="margin-left: 3px" ref="provincebar">123</provincebar>
-
+          <provincebar class="bar" style="margin-left: -5px" ref="provincebar">123</provincebar>
           </vue-scroll>
           </div>
 <!--            <div>{{this.$data.in}}</div>-->
@@ -107,9 +106,11 @@ export default {
     bar,
     ring,
     CenterTop,
+
   },
   data() {
     return {
+      title:'新增确诊',
       fullScreenStatus: {
         map: false,
         month: false,
@@ -344,18 +345,26 @@ export default {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
         this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+        this.title='新增确诊'
+        this.$refs.map.setData(0, this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
         this.$refs.map.setData('累计确诊', this.confirmList)
+        this.title='累计确诊'
+        this.$refs.map.setData(0, this.confirmList)
         this.$refs.ring.setData(this.confirmList)
         this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
         this.$refs.map.setData('累计治愈', this.cureList)
+        this.title='累计治愈'
+        this.$refs.map.setData(0, this.cureList)
         this.$refs.ring.setData(this.cureList)
         this.$refs.provincebar.setData(this.cureList)
       } else {
         this.$refs.map.setData('累计死亡', this.deadList)
+        this.title='累计死亡'
+        this.$refs.map.setData(0, this.deadList)
         this.$refs.ring.setData(this.deadList)
         this.$refs.provincebar.setData(this.deadList)
       }
@@ -383,6 +392,8 @@ export default {
       }
       this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {"date": "2022-08-19"}, config).then(res => {
         let msg = res.data.msg;
+        msg.shift()
+        msg.shift()
         for(let item of msg){
           this.deadList.push({
             name:item["provinceName"],
@@ -401,10 +412,7 @@ export default {
             value:item["confirm"]
           })
         }
-        // this.$nextTick(_ => {
-        //   this.$refs.map.setData("新增确诊", this.confirmIncreaseList)
-        // })
-        this.$refs.map.setData("新增确诊", this.confirmIncreaseList)
+        this.$refs.map.setData(0, this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       })
@@ -819,7 +827,7 @@ aside {
 .trend {
   flex: 1;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .fullscreen {
@@ -835,7 +843,5 @@ aside {
 .bar{
   margin-left: -20px;
 }
-//.panel{
-//  margin-left: -20px;
-//}
+
 </style>

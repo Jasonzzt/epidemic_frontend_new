@@ -61,6 +61,7 @@ const WORLD_COUNTRIES = [
   { name: 'Bermuda', abbreviation: 'BM', translation: '百慕大' },
   { name: 'Bhutan', abbreviation: 'BT', translation: '不丹' },
   { name: 'Bolivia', abbreviation: 'BO', translation: '玻利维亚' },
+  { name: 'Libya', abbreviation: 'BO', translation: '利比亚' },
   {
     name: 'Bosnia and Herzegovina',
     abbreviation: 'BA',
@@ -84,7 +85,7 @@ const WORLD_COUNTRIES = [
   { name: 'Cape Verde', abbreviation: 'CV', translation: 'Cape Verde' },
   { name: 'Cayman Islands', abbreviation: 'KY', translation: '开曼群岛' },
   {
-    name: 'Central African Republic',
+    name: 'Central African Rep.',
     abbreviation: 'CF',
     translation: '中非共和国',
   },
@@ -99,7 +100,7 @@ const WORLD_COUNTRIES = [
   },
   { name: 'Colombia', abbreviation: 'CO', translation: '哥伦比亚' },
   { name: 'Comoros', abbreviation: 'KM', translation: '科摩罗' },
-  { name: 'Congo', abbreviation: 'CG', translation: '刚果' },
+  { name: 'Dem. Rep. Congo', abbreviation: 'CG', translation: '刚果布' },
   { name: 'Cook Islands', abbreviation: 'CK', translation: '库克群岛' },
   { name: 'Costa Rica', abbreviation: 'CR', translation: '哥斯达黎加' },
   { name: 'Croatia', abbreviation: 'HR', translation: '克罗地亚' },
@@ -191,6 +192,7 @@ const WORLD_COUNTRIES = [
   { name: 'Lebanon', abbreviation: 'LB', translation: '黎巴嫩' },
   { name: 'Lesotho', abbreviation: 'LS', translation: '莱索托' },
   { name: 'Liberia', abbreviation: 'LR', translation: '利比里亚' },
+  { name: 'Somaliland', abbreviation: 'LR', translation: '索马里兰' },
   {
     name: 'Libyan Arab Jamahiriya',
     abbreviation: 'LY',
@@ -220,7 +222,7 @@ const WORLD_COUNTRIES = [
   },
   { name: 'Moldova', abbreviation: 'MD', translation: '摩尔多瓦' },
   { name: 'Monaco', abbreviation: 'MC', translation: '摩纳哥' },
-  { name: 'Mongolia', abbreviation: 'MN', translation: '蒙古' },
+  { name: 'Mongolia', abbreviation: 'MN', translation: '蒙古国' },
   { name: 'Montenegro', abbreviation: 'ME', translation: '黑山' },
   { name: 'Montserrat', abbreviation: 'MS', translation: '蒙特塞拉特' },
   { name: 'Morocco', abbreviation: 'MA', translation: '摩洛哥' },
@@ -313,7 +315,7 @@ const WORLD_COUNTRIES = [
     translation: '南乔治亚岛和南桑威奇群岛',
   },
   { name: 'South Korea', abbreviation: 'KR', translation: '韩国' },
-  { name: 'South Sudan', abbreviation: 'SS', translation: '南苏丹' },
+  { name: 'S. Sudan', abbreviation: 'SS', translation: '南苏丹' },
   { name: 'Spain', abbreviation: 'ES', translation: '西班牙' },
   { name: 'Sri Lanka', abbreviation: 'LK', translation: '斯里兰卡' },
   { name: 'Sudan', abbreviation: 'SD', translation: '苏丹' },
@@ -333,7 +335,7 @@ const WORLD_COUNTRIES = [
   {
     name: 'The Democratic Republic of Congo',
     abbreviation: 'CD',
-    translation: '刚果民主共和国',
+    translation: '刚果金',
   },
   { name: 'Timor-Leste', abbreviation: 'TL', translation: '东帝汶' },
   { name: 'Togo', abbreviation: 'TG', translation: '多哥' },
@@ -420,7 +422,8 @@ export default {
       };
       this.world = Globe()(globeContainer)
           .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
-          // .backgroundImageUrl("../public/static/img/bg.jpg")
+          // .backgroundImageUrl("../../public/static/img/bg.jpg")
+          .backgroundColor('rgba(0,35,100,0.05)')
           .showGraticules(false)
           .polygonAltitude(0.06)
           .polygonCapColor((feat) => this.colorScale(getVal(feat)))
@@ -744,5 +747,6 @@ body {
   outline: none;
   width: 5em;
 }
+
 
 </style>
