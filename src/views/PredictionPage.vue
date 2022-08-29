@@ -11,11 +11,11 @@
 
     <div style="width: 500px">
       <el-container>
-        <el-aside style="width: 986px;height: 600px">
+        <el-aside style="width: 900px;height: 600px">
           <earth style="height: 100%;width: 100%"></earth>
         </el-aside>
-        <el-aside style="width: 550px">
-        <div id="myChart" :style="{backgroundColor: '#1a2550', width: '550px', height: '600px'}"></div>
+        <el-aside style="width: 650px">
+        <div id="myChart" :style="{backgroundColor: '#1a2550', width: '650px', height: '600px'}"></div>
       </el-aside>
 
       </el-container>
@@ -50,16 +50,6 @@ export default {
     }
   },
   mounted(){
-    // this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', "").then(res => {
-    //   let msg = res.data.msg;
-    //   for (let i = 0; i < msg.length; i++) {
-    //     let word = msg[i].country.replace("省", "")
-    //     word = word.replace("市", "")
-    //     word = word.replace("特别行政区", "")
-    //     word = word.replace("自治区", "")
-    //     let a = {name: word, stuNum: msg[i].nowConfirm}
-    //     this.dataProvince.push(a)
-    //   }
 
     this.drawLine();
   },
@@ -152,8 +142,8 @@ export default {
             0
           ],
           bottom: 10,
-          start: 10,
-          end: 80,
+          start: 50,
+          end: 100,
           handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
           handleSize: '110%',
           handleStyle: {

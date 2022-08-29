@@ -10,6 +10,7 @@ import PopulationPage from "@/views/PopulationPage";
 import PredictionPage from "@/views/PredictionPage";
 import FrontPage from "@/views/frontPage";
 import population from "../views/population";
+import advicePage from "../views/advicePage";
 Vue.use(VueRouter)
 
 const routes = [
@@ -58,7 +59,10 @@ const routes = [
     path: '/prediction',
     component: PredictionPage,
     meta:{index:1}
-  },
+  },{
+    path: '/advicepage',
+    component: advicePage,
+  }
 
 
 ]
