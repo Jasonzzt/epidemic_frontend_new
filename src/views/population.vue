@@ -4,14 +4,17 @@
 
   <div class="box">
     <el-page-header @back="goBack" content=" "></el-page-header>
+
     <el-header style="font-size: 35px;font-family:新宋体">
-      <dv-decoration-7 style="width:350px;height:20px;">人口迁徙数据<i class="el-icon-user-solid"></i></dv-decoration-7>
+      <dv-decoration-7 style="width:350px;height:20px;margin-left: 170px">人口迁徙数据<i class="el-icon-user-solid"></i></dv-decoration-7>
     </el-header>
     <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
   <div class="box" ref="echartsMap">
   </div>
     <div class="select_btn">
     <div style="margin-top: -100px" >
+      <span class="demonstration" style="margin-left: 1050px;font-size: 18px">人口流出（城市）</span>
+      <span class="demonstration" style="margin-left: 30px;font-size: 18px">人口流入（城市）</span>
     <el-cascader popper-class="pc-sel-area-cascader"
         v-model="value1"
         :level="2"
@@ -19,7 +22,8 @@
         @change="drawPopOut"
         popper-append-to-body=false
        style="margin-left:1050px ;color: #0A41C8;background: #0A41C8;border-color: #0A41C8;width: 150px;"></el-cascader>
-    <el-cascader popper-class="pc-sel-area-cascader"
+
+      <el-cascader popper-class="pc-sel-area-cascader"
         v-model="value2"
         :options="options"
         :level="2"
@@ -27,7 +31,7 @@
         popper-append-to-body=false
         style="padding-top:0px;margin-left: 20px;border-color: #0A41C8;width: 150px"></el-cascader>
       </div></div>
-    <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -360px" />
+    <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -380px" />
     <dv-border-box-11 :color="['blue', '#308691']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
     </dv-border-box-11>
     <dv-border-box-11 :color="['blue', '#308691']" :title="title_analysis" :titleWidth="titleWidth"  style="width: 500px;height: 120px;margin-left: 980px ;margin-top: -460px">
@@ -82,7 +86,6 @@ export default {
     this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {date: this.getDay(-1)}).then(res => {
       let msg = res.data.msg;
 
-
       for (let i = 0; i < msg.length; i++) {
         let word = msg[i].provinceName.replace("省", "")
         word = word.replace("市", "")
@@ -95,7 +98,6 @@ export default {
       this.chinaConfigure();
     }
     )
-
 
   },
   beforeDestroy() {
@@ -771,14 +773,14 @@ export default {
 .pc-sel-area-cascader {
   // 选择面板样式
   .el-calendar__body{
-    color: rgba(66, 46, 46, 0.29);
+    color: #ffffff;
   }
   .el-cascader-menu{
-    color: #0A41C8;
+    color: #ffffff;
   }
   .el-cascader-panel {
-    width: 320px;
-    background-color: rgb(177, 188, 255);
+    width: 360px;
+    background-color: rgb(6, 20, 83);
   }
   .el-cascader-menu__wrap {
     // 设置选择器省市区分块面板高度
@@ -795,9 +797,17 @@ export default {
   .el-cascader-node {
     height: 40px;
   }
+
   .el-cascader-node:hover {
     // 设置鼠标滑过时文字颜色
-    color: #3f498d;
+    color: #170606;
+  }
+  // 文字选中样式及span背景颜色
+  .el-cascader-node.in-active-path,
+  .el-cascader-node.is-active,
+  .el-cascader-node.is-selectable.in-checked-path {
+    font-style: unset;
+    color: #4cc7d8;
   }
   .el-cascader-node__label {
     // 设置文字样式
@@ -805,15 +815,10 @@ export default {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
+    //color:white;
+  }
 
-    //color-adjust: exact;
-  }
-  // 文字选中样式及span背景颜色
-  .el-cascader-node.in-active-path,
-  .el-cascader-node.is-active,
-  .el-cascader-node.is-selectable.in-checked-path {
-    color: #2d1818;
-  }
+
   .el-icon-check {
     // 去掉选中小对勾
     display:grid;
@@ -826,7 +831,6 @@ export default {
   border-radius: 12px !important;
   border: 3px solid #5e768d !important;
   box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
-  background-color: #0A41C8;
 
 
 }
