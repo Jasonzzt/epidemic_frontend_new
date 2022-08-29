@@ -8,45 +8,44 @@ import 'echarts' // 核心文件
 import { loopShowTooltip } from "../tooltip-auto-show-vue.js";
 export default {
   name: "provincebar",
-  data() {
-     return {
-       tootipTimer:"",
-       updateData:5,
-  // //     xData: ["湖北省", "上海市", "广东省", "吉林省", "北京市"], //横坐标
-  // //     yData: [53000, 24000,13000, 12000, 5000], //数据
-  // //     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
-       options:{},
-       myChart :null
-     };
-   },
+  // data() {
+  //    return {
+  //      tootipTimer:"",
+  //      updateData:5,
+  // // //     xData: ["湖北省", "上海市", "广东省", "吉林省", "北京市"], //横坐标
+  // // //     yData: [53000, 24000,13000, 12000, 5000], //数据
+  // // //     myChartStyle: { float: "left", width: "100%", height: "400px" }, //图表样式
+  //      options:{},
+  //      myChart :null
+  //    };
+  //  },
   mounted() {
-    this.myChart = echarts.init(document.getElementById("mychart"));
-
+    // this.myChart = echarts.init(document.getElementById("mychart"));
+    this.initEcharts();
   },
   methods: {
-    setData(dataList){
-      let xdata=[]
-      let ydata=[]
-      let zdata=[]
-      let m =0 ;
+    initEcharts() {
+    // setData(dataList){
+      // let xdata=[]
+      // let ydata=[]
+      // let zdata=[]
+      // let m =0 ;
 
-      console.log(dataList,123256)
-      for(let i = 0;i<dataList.length;++i) {
-        console.log(dataList[i])
-        if (dataList[i].name !== "台湾省" && dataList[i].name !== "香港特别行政区") {
-          xdata.push(dataList[i]["name"])
-          ydata.push(dataList[i]["value"])
-          m = Math.max(m, dataList[i]["value"])
-        }
-      }
-
-
-      for(let i = 0;i<ydata.length;++i){
-        zdata.push(m)
-      }
-      console.log(xdata,ydata,zdata,123)
-      this.options = {
-
+      // console.log(dataList,123256)
+      // for(let i = 0;i<dataList.length;++i) {
+      //   console.log(dataList[i])
+      //   if (dataList[i].name !== "台湾省" && dataList[i].name !== "香港特别行政区") {
+      //     xdata.push(dataList[i]["name"])
+      //     ydata.push(dataList[i]["value"])
+      //     m = Math.max(m, dataList[i]["value"])
+      //   }
+      // }
+      //
+      // for(let i = 0;i<ydata.length;++i){
+      //   zdata.push(m)
+      // }
+      // console.log(xdata,ydata,zdata,123)
+      const option = {
         grid: {
           left: '5%',
           right: '5%',
@@ -88,7 +87,7 @@ export default {
           axisLine: {
             show: false
           },
-          data: xdata
+          data:  ['大米', '玉米', '蔬菜', '鸡蛋', '坚果']
         }, {
           type: 'category',
           inverse: true,
@@ -108,7 +107,7 @@ export default {
               }
             },
           },
-          data: ydata
+          data:  [50000000, 22000000, 10000000, 5000000, 1]
         }],
         series: [{
           name: '确诊',
@@ -127,14 +126,14 @@ export default {
             },
           },
           barWidth: 20,
-          data: ydata
+          data:  [50000000, 22000000, 10000000, 5000000, 1]
         },
           {
             name: '背景',
             type: 'bar',
             barWidth: 20,
             barGap: '-100%',
-            data: zdata,
+            data: [50000000, 50000000, 50000000, 50000000, 50000000],
             itemStyle: {
               normal: {
                 // color: 'rgba(24,31,68,1)',
@@ -144,11 +143,17 @@ export default {
           },
         ]
       };
-      this.myChart.setOption(this.options)
-      this.myChart.resize({
+      const myChart = echarts.init(document.getElementById("mychart"));
+      myChart.setOption(option);
+      myChart.resize({
         width: 370,
-        height:xdata.length*30
+        height:500
       });
+      // this.myChart.setOption(this.options)
+      // this.myChart.resize({
+      //   width: 370,
+      //   height:xdata.length*30
+      // });
     }
   }
 }
