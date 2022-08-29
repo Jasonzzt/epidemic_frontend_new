@@ -182,14 +182,14 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
 .pc-sel-area-cascader {
   // 选择面板样式
   .el-calendar__body{
-    color: #0A41C8;
+    color: #ffffff;
   }
   .el-cascader-menu{
-    color: #0A41C8;
+    color: #ffffff;
   }
   .el-cascader-panel {
     width: 360px;
-    background-color: rgba(177, 188, 255, 0.57);
+    background-color: rgb(6, 20, 83);
   }
   .el-cascader-menu__wrap {
     // 设置选择器省市区分块面板高度
@@ -209,7 +209,14 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
 
   .el-cascader-node:hover {
     // 设置鼠标滑过时文字颜色
-    color: #3f498d;
+    color: #170606;
+  }
+  // 文字选中样式及span背景颜色
+  .el-cascader-node.in-active-path,
+  .el-cascader-node.is-active,
+  .el-cascader-node.is-selectable.in-checked-path {
+    font-style: unset;
+    color: #4cc7d8;
   }
   .el-cascader-node__label {
     // 设置文字样式
@@ -217,15 +224,10 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
+    //color:white;
+  }
 
-    //color-adjust: exact;
-  }
-  // 文字选中样式及span背景颜色
-  .el-cascader-node.in-active-path,
-  .el-cascader-node.is-active,
-  .el-cascader-node.is-selectable.in-checked-path {
-    color: #2d1818;
-  }
+
   .el-icon-check {
     // 去掉选中小对勾
     display:grid;
@@ -238,7 +240,6 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
   border-radius: 12px !important;
   border: 3px solid #5e768d !important;
   box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
-  background-color: #0A41C8;
 
 
 }

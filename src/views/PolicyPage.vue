@@ -14,7 +14,7 @@
         <div class="select_btn">
         <span class="demonstration">出发地（城市）</span>
 
-        <el-cascader popper-class="pc-sel-area-cascader"   style="width: 150px;"
+        <el-cascader  popper-class="pc-sel-area-cascader"  style="width: 150px;"
             :popper-append-to-body='false'
             v-model="value"
             :level="2"
@@ -171,14 +171,14 @@ export default {
 .pc-sel-area-cascader {
   // 选择面板样式
   .el-calendar__body{
-    color: #0A41C8;
+    color: #ffffff;
   }
   .el-cascader-menu{
-    color: #0A41C8;
+    color: #ffffff;
   }
   .el-cascader-panel {
     width: 360px;
-    background-color: rgba(177, 188, 255, 0.57);
+    background-color: rgb(6, 20, 83);
   }
   .el-cascader-menu__wrap {
     // 设置选择器省市区分块面板高度
@@ -198,7 +198,14 @@ export default {
 
   .el-cascader-node:hover {
     // 设置鼠标滑过时文字颜色
-    color: #3f498d;
+    color: #170606;
+  }
+  // 文字选中样式及span背景颜色
+  .el-cascader-node.in-active-path,
+  .el-cascader-node.is-active,
+  .el-cascader-node.is-selectable.in-checked-path {
+    font-style: unset;
+    color: #4cc7d8;
   }
   .el-cascader-node__label {
     // 设置文字样式
@@ -206,15 +213,10 @@ export default {
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
+    //color:white;
+  }
 
-    //color-adjust: exact;
-  }
-  // 文字选中样式及span背景颜色
-  .el-cascader-node.in-active-path,
-  .el-cascader-node.is-active,
-  .el-cascader-node.is-selectable.in-checked-path {
-    color: #2d1818;
-  }
+
   .el-icon-check {
     // 去掉选中小对勾
     display:grid;
@@ -227,24 +229,7 @@ export default {
   border-radius: 12px !important;
   border: 3px solid #5e768d !important;
   box-shadow: 0px 10px 40px 0px rgba(66, 46, 46, 0.29) !important;
-  background-color: #0A41C8;
-   /deep/ .el-input__inner {
-    height: 44px;
-    border: none;
-    margin-top: 24.5px;
-    font-size: 18px;
-    font-family: Source Han Sans CN;
-    font-weight: bold;
-    color: #2e5afb;
-  }
-  //对小标的设置和样式自定义
-   /deep/ .el-input__suffix {
-    top: 11px;
-    .el-select__caret {
-      font-size: 24px;
-      color: #333333;
-    }
-  }
+
 
 }
 .pc-sel-area-cascader[x-placement^='bottom'] {
@@ -255,9 +240,7 @@ export default {
   // 输入框下面小三角形
   display: flex;
 }
-.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
-  background-color: #0A41C8;
-}
+
 //对整个容器进行设置
 .select_btn{
  // position: absolute;
@@ -268,9 +251,14 @@ export default {
     border: none;
     background-color: rgba(1, 28, 82, 0.8);
   }
+  .el-cascader-menu{
+    border: none;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+
   //输入框
   .el-input__inner{
-    color:#eee;
+    color: #f5f2f2;
     border-color: #00fff6;
     background-color: rgba(1, 28, 82, 0.8);
   }
@@ -282,9 +270,34 @@ export default {
   }
   //下拉框选中
   .el-select-dropdown__item{
-    color: #eee;
+    color: #170606;
+  }
+  .el-select-dropdown__item:hover {
+    background-color: rgba(0, 225, 219, 0.690196078431373);
   }
   //鼠标经过下拉框
+  .el-cascader-node.hover,
+  .el-cascader-node:hover{
+    color:#00D3E9;
+    background-color: #0F3360;
+  }
+  /deep/ .el-select-dropdown__item.hover{
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.80) !important;
+    z-index: 9999;
+  }
+
+
+  // 下拉框垂直滚动条宽度
+  /deep/ .el-scrollbar__bar.is-vertical {
+    width: 10px;
+    top: 2px;
+  }
+  // 下拉框最大高度
+  /deep/ .el-select-dropdown__wrap {
+    max-height: 200px;
+  }
+
   .el-select-dropdown__item.hover,
   .el-select-dropdown__item:hover{
     color:#00D3E9;
