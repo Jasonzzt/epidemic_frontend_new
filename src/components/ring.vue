@@ -23,7 +23,7 @@ export default {
 
   watch:{
     setData() {
-      this.BtObj = {
+      var BtObj = {
         radious: 80,
         activeRadius: 88,
         lineWidth: 40,
@@ -34,19 +34,18 @@ export default {
         // color: ["#C23531", "#0F8A61"]//表示自定义颜色值,和上面的数据是一一对应的关系
         digitalFlopToFixed:3
       }
+      this.BtObj=BtObj
 
       console.log(this.BtObj.data,123)
     }
   },
   methods: {
     setData(nowData) {
-
       let arr=[]
       for (let i=0;i<nowData.length;i++){
         arr.push({'name':nowData[i].name,'value':nowData[i].value})
       }
-      console.log(arr,555)
-      this.BtObj = {
+      var BtObj = {
         radious: 80,
         activeRadius: 88,
         lineWidth: 40,
@@ -57,6 +56,7 @@ export default {
         // color: ["#C23531", "#0F8A61"]//表示自定义颜色值,和上面的数据是一一对应的关系
         digitalFlopToFixed:3
       }
+      this.BtObj=BtObj
 
       console.log(this.BtObj.data,123)
     }
