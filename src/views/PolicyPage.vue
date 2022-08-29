@@ -11,13 +11,16 @@
 <!--  <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />*/-->
     <el-main style="font-size: 22px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
       <div class="block">
+        <div class="select_btn">
         <span class="demonstration">出发地（城市）</span>
-        <el-cascader class="test"  popper-class="pc-sel-area-cascader" style="width: 150px;"
+
+        <el-cascader popper-class="pc-sel-area-cascader"   style="width: 150px;"
             :popper-append-to-body='false'
             v-model="value"
             :level="2"
             :options="options"
             @change="handleChange"></el-cascader>
+
         <span class="demonstration" style="margin-left: 50px;">目的地（城市）</span>
         <el-cascader popper-class="pc-sel-area-cascader" style="width: 150px"
             v-model="value1"
@@ -25,7 +28,7 @@
             :level="2"
             @change="handleChange"></el-cascader>
     <el-button @click="search" type="primary"  icon="el-icon-search"  style="margin-left: 50px">   搜索</el-button>
-      </div>
+      </div></div>
 <!--      <el-divider></el-divider>-->
 
       <el-row :gutter="20">
@@ -164,9 +167,7 @@ export default {
   cursor: pointer;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 }
-.test{
-  background-color: #0A41C8;
-}
+
 .pc-sel-area-cascader {
   // 选择面板样式
   .el-calendar__body{
@@ -258,23 +259,39 @@ export default {
   background-color: #0A41C8;
 }
 //对整个容器进行设置
-.el-select /deep/ .el-input__inner {
-  height: 44px;
-  border: none;
-  margin-top: 24.5px;
-  font-size: 18px;
-  font-family: Source Han Sans CN;
-  font-weight: bold;
-  color: #2e5afb;
-}
-//对小标的设置和样式自定义
-.el-select /deep/ .el-input__suffix {
-  top: 11px;
-  .el-select__caret {
-    font-size: 24px;
-    color: #333333;
+.select_btn{
+ // position: absolute;
+  top: 5px;
+  right: 60px;
+  //下拉框
+  .el-select-dropdown{
+    border: none;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //输入框
+  .el-input__inner{
+    color:#eee;
+    border-color: #00fff6;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //聚焦时的样式
+  .el-select .el-input.is-focus .el-input__inner{
+    border-color: #0B61AA;
+    background-color: rgba(1, 28, 82, 0.8);
+    color:#00D3E9;
+  }
+  //下拉框选中
+  .el-select-dropdown__item{
+    color: #eee;
+  }
+  //鼠标经过下拉框
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover{
+    color:#00D3E9;
+    background-color: #0F3360;
   }
 }
+
 
 
 </style>

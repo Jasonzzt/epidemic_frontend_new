@@ -10,14 +10,15 @@
       <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur=4 />
       <el-container>
       <el-main style="font-size: 22px;font-family:新宋体">请选择想要查询核酸检测点所在的城市 :
-       <div class="block">
+       <div class="block"><div class="select_btn">
       <span class="demonstration">省份 （城市）</span>
       <el-cascader popper-class="pc-sel-area-cascader" style="width: 150px;margin-left: 20px "
           v-model="value"
           :options="options"
           @change="handleChange"></el-cascader>
       <el-button @click="search" type="primary"  icon="el-icon-search" style="margin-left: 50px">搜索</el-button>
-      <el-row :gutter="22">
+      </div>
+         <el-row :gutter="22">
         <el-col :span="10" style="font-size: 19px;margin-left: 0px">
           <template>
             <dv-border-box-1 style="margin-left: 30px" >
@@ -249,8 +250,37 @@ div.BMap_cpyCtrl.BMap_noprint.anchorBL {
   // 输入框下面小三角形
   display: flex;
 }
-.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
-  background-color: #0A41C8;
+.select_btn{
+  // position: absolute;
+  top: 5px;
+  right: 60px;
+  //下拉框
+  .el-select-dropdown{
+    border: none;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //输入框
+  .el-input__inner{
+    color:#eee;
+    border-color: #00fff6;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //聚焦时的样式
+  .el-select .el-input.is-focus .el-input__inner{
+    border-color: #0B61AA;
+    background-color: rgba(1, 28, 82, 0.8);
+    color:#00D3E9;
+  }
+  //下拉框选中
+  .el-select-dropdown__item{
+    color: #eee;
+  }
+  //鼠标经过下拉框
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover{
+    color:#00D3E9;
+    background-color: #0F3360;
+  }
 }
 </style>
 

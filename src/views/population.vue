@@ -10,6 +10,7 @@
     <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
   <div class="box" ref="echartsMap">
   </div>
+    <div class="select_btn">
     <div style="margin-top: -100px" >
     <el-cascader popper-class="pc-sel-area-cascader"
         v-model="value1"
@@ -25,7 +26,7 @@
         @change="drawPopIn"
         popper-append-to-body=false
         style="padding-top:0px;margin-left: 20px;border-color: #0A41C8;width: 150px"></el-cascader>
-      </div>
+      </div></div>
     <dv-scroll-ranking-board :config="listConfig" style="width:450px;height:300px;margin-left: 1000px;margin-top: -360px" />
     <dv-border-box-11 :color="['blue', '#308691']" :title="title" :titleWidth="titleWidth"  style="width: 500px;height: 350px;margin-left: 980px ;margin-top: -340px">
     </dv-border-box-11>
@@ -601,8 +602,6 @@ export default {
         return res;
       };
 
-
-
       /*获取地图数据*/
 
        this.myChart = echarts.init(this.$refs.echartsMap);
@@ -839,7 +838,36 @@ export default {
   // 输入框下面小三角形
   display: flex;
 }
-.pc-sel-area-cascader[x-placement^='bottom'] .el-input__inner{
-  background-color: #0A41C8;
+.select_btn{
+  // position: absolute;
+  top: 5px;
+  right: 60px;
+  //下拉框
+  .el-select-dropdown{
+    border: none;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //输入框
+  .el-input__inner{
+    color:#eee;
+    border-color: #00fff6;
+    background-color: rgba(1, 28, 82, 0.8);
+  }
+  //聚焦时的样式
+  .el-select .el-input.is-focus .el-input__inner{
+    border-color: #0B61AA;
+    background-color: rgba(1, 28, 82, 0.8);
+    color:#00D3E9;
+  }
+  //下拉框选中
+  .el-select-dropdown__item{
+    color: #eee;
+  }
+  //鼠标经过下拉框
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover{
+    color:#00D3E9;
+    background-color: #0F3360;
+  }
 }
 </style>
