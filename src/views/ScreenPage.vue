@@ -69,7 +69,8 @@
       </div>
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
-        <div class="trend bgc-size"><p class="p_tip1">各省市确诊情况</p>
+        <div class="trend bgc-size">
+          <p class="p_tip1">各省市情况</p>
 <!--          <div
               :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
           <vue-scroll :ops="ops" style="width:550px;height:550px">
@@ -343,22 +344,21 @@ export default {
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
-        this.allNowDataList = this.$refs.map.updateChart(e.target.innerText)
-        // console.log(this.allNowDataList)
-        this.$refs.ring.setData(this.allNowDataList)
-        this.$refs.bar.updateChart(this.allNowDataList)
+        this.$refs.map.setData(0, this.confirmIncreaseList)
+        this.$refs.ring.setData(this.confirmIncreaseList)
+        this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
-        this.allDataList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allDataList)
-        this.$refs.bar.updateChart(this.allDataList)
+        this.$refs.map.setData(0, this.confirmList)
+        this.$refs.ring.setData(this.confirmList)
+        this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
-        this.allTodayCreadList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allTodayCreadList)
-        this.$refs.bar.updateChart(this.allTodayCreadList)
+        this.$refs.map.setData(0, this.cureList)
+        this.$refs.ring.setData(this.cureList)
+        this.$refs.provincebar.setData(this.cureList)
       } else {
-        this.allDeadList = this.$refs.map.updateChart(e.target.innerText)
-        this.$refs.ring.setData(this.allDeadList)
-        this.$refs.bar.updateChart(this.allDeadList)
+        this.$refs.map.setData(0, this.deadList)
+        this.$refs.ring.setData(this.deadList)
+        this.$refs.provincebar.setData(this.deadList)
       }
     },
 
@@ -404,9 +404,9 @@ export default {
             value:item["confirm"]
           })
         }
-        this.$refs.map.setData(0, this.confirmList)
-        this.$refs.ring.setData(this.confirmList)
-        this.$refs.provincebar.setData(this.confirmList)
+        this.$refs.map.setData(0, this.confirmIncreaseList)
+        this.$refs.ring.setData(this.confirmIncreaseList)
+        this.$refs.provincebar.setData(this.confirmIncreaseList)
       })
     },
   },
