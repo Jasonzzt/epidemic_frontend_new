@@ -8,18 +8,7 @@
       <dv-decoration-7 style="width:350px;height:18px;">疫情预测数据<i class="el-icon-s-data"></i></dv-decoration-7>
     </el-header>
     <dv-decoration-5  :dur="dur" style="width:1000px;margin-left: 300px;height:30px;"  />
-    <!--    <el-container>-->
 
-    <!--      <el-container>-->
-
-    <!--        <el-main style="font-size: 22px"> : <br>-->
-    <!--    <div style="height: 600px; width: 50%">-->
-    <!--      <my-map ></my-map>-->
-    <!--    </div>-->
-
-    <!--        </el-main>-->
-    <!--      </el-container>-->
-    <!--    </el-container>-->
     <div style="width: 500px">
       <el-container>
         <el-aside style="width: 986px;height: 600px">
@@ -29,10 +18,7 @@
         <div id="myChart" :style="{backgroundColor: '#1a2550', width: '550px', height: '600px'}"></div>
       </el-aside>
 
-
-
       </el-container>
-
 
     </div>
     <div>
@@ -54,9 +40,10 @@ export default {
   data() {
     return {
       dur: 4,
-      // zzData: {}, // 著作数据
+
       TimeArr: [], // 年份数组（横坐标）
       ConfirmArr: [], // 确诊数组（纵坐标）
+      PredictArr: [],
       country: '中国',//默认中国，实则根据左侧地球点击显示对应国家数据
       options: {},
       myChart:null,
@@ -88,22 +75,30 @@ export default {
       }
       let timeArr = []
       let confirmArr = []
-      await this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"美国"}, config).then(res => {
+      let predictArr = []
+      await this.$axios.post('http://116.62.153.183/getEpidemicDataPr',{"country":"中国"}, config).then(res => {
 
         let zzData = res.data.msg
         //alert(zzData[0].time)
         for(let i=0;i<zzData.length; i++) {
           timeArr.push(zzData[i].time)
-          confirmArr.push(zzData[i].confirmIncrease)
+          if(zzData[i].isPredicted ==0){
+            confirmArr.push(zzData[i].confirmIncrease)
+            predictArr.push("-")
+          }else{
+            confirmArr.push("-")
+            predictArr.push(zzData[i].confirmIncrease)
+          }
+
         }
 
         this.TimeArr=timeArr
         this.ConfirmArr=confirmArr
-
+        this.PredictArr=predictArr
       })
       this.options ={
         title: {
-          text: this.country+'疫情确诊数据',
+          text: this.country+'新增疫情确诊数据',
           textStyle:{
             color: "#bdc4fc",
             fontFamily:"新宋体",
@@ -119,22 +114,21 @@ export default {
             }
           },
         },
-        color:"#11eecd",
-        legend: {
-          data:['新增', '确诊', '治愈','死亡'],
-          textStyle: {
-            color: "rgba(255, 255, 255, 0.7)",
-            fontFamily: "新宋体",
-            fontSize: "18px"
-          },
-        },
+        //color:"#11eecd",
+        // legend: {
+        //   data:['新增', '确诊', '治愈','死亡'],
+        //   textStyle: {
+        //     color: "rgba(255, 255, 255, 0.7)",
+        //     fontFamily: "新宋体",
+        //     fontSize: "18px"
+        //   },
+        // },
         toolbox: {
           show: true,
           feature: {
             dataZoom: {
               yAxisIndex: 'none'
             },
-            dataView: {readOnly: false},
             magicType: {type: ['line', 'bar']},
             restore: {},
             saveAsImage: {}
@@ -176,75 +170,30 @@ export default {
           start: 1,
           end: 35
         }],
+
         series: [
           // {
           //   name:'新增',
           //   type:'line',
           //   data:[11, 11, 15, 13, 12, 11, 11, 15, 13, 12, ],
-          //   // markPoint: {
-          //   //   data: [
-          //   //     {type: 'max', name: '最大值'},
-          //   //     {type: 'min', name: '最小值'}
-          //   //   ]
-          //   // },
-          //   // markLine: {
-          //   //   data: [
-          //   //     {type: 'average', name: '平均值'}
-          //   //   ]
-          //   // }
           // },
           {
-            name:'确诊',
+            name:'新增确诊',
             type:'line',
             lineStyle:{
               color:"#11eecd"
             },
             data: this.ConfirmArr,
-            // markPoint: {
-            //   data: [
-            //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-            //   ]
-            // },
-            // markLine: {
-            //   data: [
-            //     {type: 'average', name: '平均值'},
-            //     [{
-            //       symbol: 'none',
-            //       x: '90%',
-            //       yAxis: 'max'
-            //     }, {
-            //       symbol: 'circle',
-            //       label: {
-            //         normal: {
-            //           position: 'start',
-            //           formatter: '最大值'
-            //         }
-            //       },
-            //       type: 'max',
-            //       name: '最高点'
-            //     }]
-            //   ]
-            // }
           },
-          // {
-          //   name:'治愈',
-          //   type:'line',
-          //   data:[2, 2, 2, 4, 4, 2, 2, 2, 4, 4, ],
-          //   // markPoint: {
-          //   //   data: [
-          //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-          //   //   ]
-          //   // },
-          // },  {
-          //   name:'死亡',
-          //   type:'line',
-          //   data:[0, 1, 1, 1, 2, 2, 1, 1, 1, 1, ],
-          //   // markPoint: {
-          //   //   data: [
-          //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-          //   //   ]
-          //   // },
-          // }
+          {
+            name:'预测新增确诊',
+            type:'line',
+            lineStyle:{
+              color:"rgba(255,40,73,0.89)"
+            },
+            data:this.PredictArr,
+          },
+
         ]
       }
       this.myChart.setOption(this.options);
@@ -260,21 +209,32 @@ export default {
       }
       let timeArr = []
       let confirmArr = []
+      let predictArr = []
       this.$axios.post('http://116.62.153.183/getEpidemicDataPr', {"country": this.country}, config).then(res => {
 
         let zzData = res.data.msg
         //alert(zzData[0].time)
         for (let i = 0; i < zzData.length; i++) {
           timeArr.push(zzData[i].time)
-          confirmArr.push(zzData[i].confirmIncrease)
+          if(zzData[i].isPredicted ==0){
+            confirmArr.push(zzData[i].confirmIncrease)
+            predictArr.push("-")
+          }else{
+            confirmArr.push("-")
+            predictArr.push(zzData[i].confirmIncrease)
+          }
+
+          // timeArr.push(zzData[i].time)
+          // confirmArr.push(zzData[i].confirmIncrease)
         }
         console.log(timeArr)
         console.log(confirmArr)
         this.TimeArr = timeArr
         this.ConfirmArr = confirmArr
+        this.PredictArr = predictArr
         this.options = {
           title: {
-            text: this.country + '疫情确诊数据',
+            text: this.country + '疫情新增确诊数据',
             textStyle: {
               color: "#bdc4fc",
               fontFamily: "新宋体",
@@ -290,22 +250,22 @@ export default {
               }
             },
           },
-          color: "#11eecd",
-          legend: {
-            data: ['新增', '确诊', '治愈', '死亡'],
-            textStyle: {
-              color: "rgba(255, 255, 255, 0.7)",
-              fontFamily: "新宋体",
-              fontSize: "18px"
-            },
-          },
+          //color: "#11eecd",
+          // legend: {
+          //   data: ['新增', '确诊', '治愈', '死亡'],
+          //   textStyle: {
+          //     color: "rgba(255, 255, 255, 0.7)",
+          //     fontFamily: "新宋体",
+          //     fontSize: "18px"
+          //   },
+          // },
           toolbox: {
             show: true,
             feature: {
               dataZoom: {
                 yAxisIndex: 'none'
               },
-              dataView: {readOnly: false},
+              // dataView: {readOnly: false},
               magicType: {type: ['line', 'bar']},
               restore: {},
               saveAsImage: {}
@@ -348,74 +308,23 @@ export default {
             end: 35
           }],
           series: [
-            // {
-            //   name:'新增',
-            //   type:'line',
-            //   data:[11, 11, 15, 13, 12, 11, 11, 15, 13, 12, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {type: 'max', name: '最大值'},
-            //   //     {type: 'min', name: '最小值'}
-            //   //   ]
-            //   // },
-            //   // markLine: {
-            //   //   data: [
-            //   //     {type: 'average', name: '平均值'}
-            //   //   ]
-            //   // }
-            // },
             {
-              name: '确诊',
+              name: '新增确诊',
               type: 'line',
               lineStyle: {
                 color: "#11eecd"
               },
               data: this.ConfirmArr,
-              // markPoint: {
-              //   data: [
-              //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-              //   ]
-              // },
-              // markLine: {
-              //   data: [
-              //     {type: 'average', name: '平均值'},
-              //     [{
-              //       symbol: 'none',
-              //       x: '90%',
-              //       yAxis: 'max'
-              //     }, {
-              //       symbol: 'circle',
-              //       label: {
-              //         normal: {
-              //           position: 'start',
-              //           formatter: '最大值'
-              //         }
-              //       },
-              //       type: 'max',
-              //       name: '最高点'
-              //     }]
-              //   ]
-              // }
             },
-            // {
-            //   name:'治愈',
-            //   type:'line',
-            //   data:[2, 2, 2, 4, 4, 2, 2, 2, 4, 4, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-            //   //   ]
-            //   // },
-            // },  {
-            //   name:'死亡',
-            //   type:'line',
-            //   data:[0, 1, 1, 1, 2, 2, 1, 1, 1, 1, ],
-            //   // markPoint: {
-            //   //   data: [
-            //   //     {name: '周最低', value: 2, xAxis: 1, yAxis: 1.5}
-            //   //   ]
-            //   // },
-            // }
+            {
+              name:'预测新增确诊',
+              type:'line',
+              lineStyle:{
+                color:"rgba(255,45,77,0.85)"
+              },
+              data:this.PredictArr,
+            },
+
           ]
         }
         this.myChart.setOption(this.options);

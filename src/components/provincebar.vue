@@ -48,10 +48,10 @@ export default {
       this.options = {
 
         grid: {
-          left: '5%',
+          left: '3%',
           right: '5%',
-          bottom: '5%',
-          top: '10%',
+          bottom: '3%',
+          top: '3%',
           containLabel: true
         },
         tooltip: {
@@ -147,7 +147,7 @@ export default {
       this.myChart.setOption(this.options)
       this.myChart.resize({
         width: 370,
-        height:xdata.length*30
+        height:xdata.length*40
       });
     }
   }

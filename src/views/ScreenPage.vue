@@ -69,13 +69,9 @@
       </div>
       <!-- 右边栏 -->
       <div class="right-asside flex-column">
-        <div class="trend bgc-size">
-          <p class="p_tip1">各省市情况</p>
-<!--          <div
-              :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
+        <div class="trend bgc-size flex"><p class="p_tip1">各省市确诊情况</p>
           <vue-scroll :ops="ops" style="width:550px;height:550px">
-          <provincebar class="bar" style="margin-left: 3px" ref="provincebar">123</provincebar>
-
+          <provincebar class="bar" style="margin-left: -5px" ref="provincebar">123</provincebar>
           </vue-scroll>
           </div>
 <!--            <div>{{this.$data.in}}</div>-->
@@ -819,7 +815,7 @@ aside {
 .trend {
   flex: 1;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .fullscreen {
@@ -835,7 +831,5 @@ aside {
 .bar{
   margin-left: -20px;
 }
-//.panel{
-//  margin-left: -20px;
-//}
+
 </style>
