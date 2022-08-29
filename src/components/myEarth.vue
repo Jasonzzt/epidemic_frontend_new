@@ -452,51 +452,6 @@ export default {
                 )
           })
           .polygonsTransitionDuration(200);
-      // document.getElementById("globeViz").onclick=function(d){
-      //   console.log(d);
-      // }
-
-      // this.playButton = document.querySelector('.play-button');
-      // Slider
-      // this.slider = document.querySelector('.slider');
-// Slider date
-//       this.sliderDate = document.querySelector('.slider-date');
-//       let interval;
-      // this.playButton.addEventListener('click', () => {
-      //   console.log(this.playButton)
-      //   if (this.playButton.innerText === 'Play') {
-      //     this.playButton.innerText = 'Pause';
-      //   } else {
-      //     this.playButton.innerText = 'Play';
-      //     clearInterval(interval);
-      //     return;
-      //   }
-      //   // Check if slider position is max
-      //   if (+this.slider.value === this.dates.length - 1) {
-      //     this.slider.value = 0;
-      //   }
-      //
-      //   this.sliderDate.innerHTML = this.dates[this.slider.value];
-      //
-      //   let interval = setInterval(() => {
-      //     this.slider.value++;
-      //     this.sliderDate.innerHTML = this.dates[this.slider.value];
-      //     this.updatePolygonsData();
-      //     if (+this.slider.value === this.dates.length - 1) {
-      //       this.playButton.innerHTML = 'Play';
-      //       clearInterval(interval);
-      //     }
-      //   }, 200);
-      // });
-      // if ('oninput' in this.slider) {
-      //   this.slider.addEventListener(
-      //       'input',
-      //       () =>{
-      //         this.updatePolygonsData();
-      //       },
-      //       false
-      //   );
-      // }
       WORLD_COUNTRIES.forEach(element => {
         this.CN_COUNTRIES[element.name.toUpperCase()]=element.translation;
       });

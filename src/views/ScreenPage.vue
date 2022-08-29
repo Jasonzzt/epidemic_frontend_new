@@ -107,7 +107,6 @@ export default {
     bar,
     ring,
     CenterTop,
-
   },
   data() {
     return {
@@ -344,19 +343,19 @@ export default {
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
-        this.$refs.map.setData(0, this.confirmIncreaseList)
+        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
-        this.$refs.map.setData(0, this.confirmList)
+        this.$refs.map.setData('累计确诊', this.confirmList)
         this.$refs.ring.setData(this.confirmList)
         this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
-        this.$refs.map.setData(0, this.cureList)
+        this.$refs.map.setData('累计治愈', this.cureList)
         this.$refs.ring.setData(this.cureList)
         this.$refs.provincebar.setData(this.cureList)
       } else {
-        this.$refs.map.setData(0, this.deadList)
+        this.$refs.map.setData('累计死亡', this.deadList)
         this.$refs.ring.setData(this.deadList)
         this.$refs.provincebar.setData(this.deadList)
       }
@@ -384,8 +383,6 @@ export default {
       }
       this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {"date": "2022-08-19"}, config).then(res => {
         let msg = res.data.msg;
-        msg.shift()
-        msg.shift()
         for(let item of msg){
           this.deadList.push({
             name:item["provinceName"],
@@ -404,7 +401,10 @@ export default {
             value:item["confirm"]
           })
         }
-        this.$refs.map.setData(0, this.confirmIncreaseList)
+        // this.$nextTick(_ => {
+        //   this.$refs.map.setData("新增确诊", this.confirmIncreaseList)
+        // })
+        this.$refs.map.setData("新增确诊", this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       })

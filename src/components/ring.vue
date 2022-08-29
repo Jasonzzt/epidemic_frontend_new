@@ -45,7 +45,8 @@ export default {
       for (let i=0;i<nowData.length;i++){
         arr.push({'name':nowData[i].name,'value':nowData[i].value})
       }
-      var BtObj = {
+      console.log(arr,123)
+      let BtObj = {
         radious: 80,
         activeRadius: 88,
         lineWidth: 40,
@@ -57,8 +58,6 @@ export default {
         digitalFlopToFixed:3
       }
       this.BtObj=BtObj
-
-      console.log(this.BtObj.data,123)
     }
   },
   mounted() {

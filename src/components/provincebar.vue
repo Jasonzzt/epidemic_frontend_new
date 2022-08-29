@@ -30,9 +30,7 @@ export default {
       let zdata=[]
       let m =0 ;
 
-      console.log(dataList,123256)
       for(let i = 0;i<dataList.length;++i) {
-        console.log(dataList[i])
         if (dataList[i].name !== "台湾省" && dataList[i].name !== "香港特别行政区") {
           xdata.push(dataList[i]["name"])
           ydata.push(dataList[i]["value"])
@@ -40,11 +38,9 @@ export default {
         }
       }
 
-
       for(let i = 0;i<ydata.length;++i){
         zdata.push(m)
       }
-      console.log(xdata,ydata,zdata,123)
       this.options = {
 
         grid: {
