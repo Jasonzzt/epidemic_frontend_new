@@ -49,6 +49,13 @@
         </dv-border-box-8>
 
       </div>
+      <div class="pos6" @click="push6">
+        <dv-border-box-8 :reverse="true">
+          <button class="demo" style="font-size: 20px;color: #f5f6f6;padding: 5px 10px;border-color: #02093f" v-wave="{ color: 'white', }">出行建议</button>
+          <i class="el-icon-d-arrow-right" style="font-size: 25px"></i>
+        </dv-border-box-8>
+
+      </div>
     </div>
 
 
@@ -81,6 +88,9 @@ export default {
     },
     push5(){
       router.push('/coviddetect')
+    },
+    push6(){
+      router.push('/advicepage')
     },
 
   }
@@ -188,13 +198,19 @@ li {
   float: right;
   position: relative;
   right: 10px;
-  top:125px;
+  top:95px;
 }
 .pos5{
   float: right;
   position: relative;
   right: -120px;
-  top:225px;
+  top:185px;
+}
+.pos6{
+  float: right;
+  position: relative;
+  right: -250px;
+  top:275px;
 }
 .decr1{
   position: relative;
