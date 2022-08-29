@@ -392,6 +392,7 @@ const WORLD_COUNTRIES = [
   { name: 'Yugoslavia', abbreviation: 'YU', translation: '南斯拉夫' },
   { name: 'Zambia', abbreviation: 'ZM', translation: '赞比亚' },
   { name: 'Zimbabwe', abbreviation: 'ZW', translation: '津巴布韦' },
+  { name: 'Taiwan', abbreviation: 'TW', translation: '中国台湾' },
 ];
 export default {
   name: "earth",
