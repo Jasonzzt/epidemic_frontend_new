@@ -383,12 +383,13 @@ export default {
       }
       this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {'provinceName':provinceName,"date": "2022-08-30"}, config).then(res => {
         let msg = res.data.msg;
-        msg.shift()
+
         this.confirmList =[]
         this.confirmIncreaseList=[]
         this.deadList=[]
         this.cureList=[]
         for(let item of msg){
+          if(item['cityName']===provinceName)continue
           this.deadList.push({
             name:item["cityName"],
             value:item["death"]

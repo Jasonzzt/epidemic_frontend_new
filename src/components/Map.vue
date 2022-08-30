@@ -54,10 +54,9 @@ export default {
         内蒙古: 'neimenggu',
         宁夏: 'ningxia',
         西藏: 'xizang',
-        北京: 'beijing',
-        天津: 'tianjin',
-        上海: 'shanghai',
-        重庆: 'chongqing',
+        // 北京: 'beijing',
+        // 天津: 'tianjin',
+        // 重庆: 'chongqing',
         香港: 'xianggang',
         澳门: 'aomen'
       },

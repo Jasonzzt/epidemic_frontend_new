@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import 'echarts' // 核心文件
+import * as echarts from 'echarts' // 核心文件
 // const echarts = require("echarts");
 import { loopShowTooltip } from "../tooltip-auto-show-vue.js";
 export default {
@@ -37,7 +37,7 @@ export default {
           m = Math.max(m, dataList[i]["value"])
         }
       }
-
+      m = Math.max(m,1)
       for(let i = 0;i<ydata.length;++i){
         zdata.push(m)
       }

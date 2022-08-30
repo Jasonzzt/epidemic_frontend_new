@@ -42,7 +42,8 @@ export default {
     setData(nowData) {
       let arr=[]
       for (let i=0;i<nowData.length;i++){
-        arr.push({'name':nowData[i].name,'value':nowData[i].value})
+        if(nowData[i].value!==0)
+            arr.push({'name':nowData[i].name,'value':nowData[i].value})
       }
       // console.log(arr,123)
       let BtObj = {
