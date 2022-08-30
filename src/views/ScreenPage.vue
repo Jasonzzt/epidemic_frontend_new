@@ -474,7 +474,7 @@ export default {
 
 .p_tip {
   margin-bottom: -15px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   text-align: center;
   text-overflow: ellipsis;

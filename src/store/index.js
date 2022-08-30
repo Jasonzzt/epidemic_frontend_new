@@ -80,6 +80,15 @@ export default new Vuex.Store({
       state.asymptomaticIncrease=val.asymptomaticIncrease
       state.asymptomatic=val.asymptomatic
       state.riskAreaNumber=val.riskAreaNumber
+    },
+    clear(state,val){
+      state.increaseSug=0
+      state.deadSug=0
+      state.curedSug=0
+      state.confirmSug=0
+      state.asymptomaticIncrease=0
+      state.asymptomatic=0
+      state.riskAreaNumber=0
     }
   },
   actions: {},

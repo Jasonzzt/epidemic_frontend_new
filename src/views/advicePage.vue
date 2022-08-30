@@ -79,7 +79,7 @@
           <el-col :span="10" style="font-size: 19px;margin-left: 50px" >
             <dv-border-box-1><div class="contentout bgc-size flex">出行建议
               <vue-scroll :ops="ops" style="width:550px;height:400px">
-                <div>{{this.$data.out}}</div>
+                <div v-html="this.out"></div>
               </vue-scroll></div></dv-border-box-1>
           </el-col>
         </el-row>
@@ -145,6 +145,7 @@ export default {
 
     goBack() {
       router.push('/')
+      this.$store.commit("clear",{})
     },
 
     search(){
@@ -156,24 +157,24 @@ export default {
       this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value[1], "date":"2022-08-30"},config).then(res=> {
         let msg = res.data.msg
         if(msg.confirmIncrease>0||msg.asymptomaticIncrease>0){
-          this.textIncrease1="始发地有新增确诊（无症状）病例，"
+          this.textIncrease1="1.始发地有新增确诊（无症状）病例，"
           this.count1++
         }
         if(msg.riskAreaNumber>0){
           if(this.count1>0){
-            this.textArea1="存在风险区域，有疫情外溢风险。"
+            this.textArea1="存在风险区域，有疫情外溢风险。<br>"
             this.count1++
           }
           else {
-            this.textArea1="始发地存在风险区域，有一定的疫情外溢风险。"
+            this.textArea1="1.始发地存在风险区域，有一定的疫情外溢风险。<br>"
           }
         }
         else{
           if(this.count1==0){
-            this.textArea1="始发地疫情风险低，可外出。"
+            this.textArea1="1.始发地疫情风险低，可外出。<br>"
           }
           else{
-            this.textArea1="存在一定的疫情外溢风险。"
+            this.textArea1="存在一定的疫情外溢风险。<br>"
           }
         }
         this.$axios.post('http://116.62.153.183/getPopulationAnalysis',{"cityId":this.value1[1]},config).then(res=>{
@@ -187,11 +188,11 @@ export default {
           this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value1[1], "date":"2022-08-30"},config).then(res=>{
             let msg= res.data.msg
             if(msg.confirmIncrease>0||msg.asymptomaticIncrease>0){
-              this.textIncrease="目的地有新增确诊（无症状）病例，"
+              this.textIncrease="2.目的地有新增确诊（无症状）病例，"
               this.count++
             }
             else{
-              this.textIncrease="目的地无新增确诊（无症状）病例，"
+              this.textIncrease="2.目的地无新增确诊（无症状）病例，"
             }
             if(msg.nowConfirm>0){
               if(this.count==0)
@@ -212,13 +213,17 @@ export default {
             }
             this.out=this.textIncrease+this.textComfirm+this.textArea+this.analysis
             if(this.count==0){
-              this.out=this.out+"综上所述，该地区疫情风险低，可放心前往，旅途中注意疫情防控。"
+              this.out=this.out+"<br>3.综上所述，该地区疫情风险低，可放心前往，旅途中注意疫情防控。"
             }
             else{
-              this.out=this.out+"综上所述，该地区疫情风险高，非必要不建议前往。"
+              this.out=this.out+"<br>3.综上所述，该地区疫情风险高，非必要不建议前往。"
             }
-            this.in=this.textIncrease1+this.textArea1
-            this.out=this.in+this.out
+            this.$axios.post('http://116.62.153.183/getPolicy',{"cityId":this.value1[1]},config).then(res=>{
+              let msg=res.data.msg
+              this.in=this.textIncrease1+this.textArea1
+              this.out=this.in+this.out+"<br>4.防疫政策："+msg.policyIn
+            })
+
           })
         })
 
@@ -227,6 +232,7 @@ export default {
 
       this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value1[1], "date":"2022-08-30"},config).then(res=>{
         let msg= res.data.msg
+        console.log(msg)
         this.$store.commit("setSugData",{'increase':msg.confirmIncrease,'confirm':msg.confirm,'cured':msg.cured,'dead':msg.death,'asymptomaticIncrease':msg.asymptomaticIncrease,'asymptomatic':msg.asymptomatic,'riskAreaNumber':msg.riskAreaNumber})
       })
 
