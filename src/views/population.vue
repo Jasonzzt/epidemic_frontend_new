@@ -8,7 +8,7 @@
     <el-header style="font-size: 35px;font-family:新宋体">
       <dv-decoration-7 style="width:350px;height:20px;margin-left: 170px">人口流动数据<i class="el-icon-user-solid"></i></dv-decoration-7>
     </el-header>
-    <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;" dur="4" />
+    <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;"  />
   <div class="box" ref="echartsMap">
   </div>
     <div class="select_btn">

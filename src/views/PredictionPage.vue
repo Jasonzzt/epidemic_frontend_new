@@ -7,7 +7,7 @@
     <el-header style="font-size: 35px;font-family:新宋体">
       <dv-decoration-7 style="width:350px;height:18px;">疫情预测数据<i class="el-icon-s-data"></i></dv-decoration-7>
     </el-header>
-    <dv-decoration-5  :dur="dur" style="width:1000px;margin-left: 300px;height:30px;"  />
+    <dv-decoration-5   style="width:1000px;margin-left: 300px;height:30px;"  />
 
     <div style="width: 500px">
       <el-container>

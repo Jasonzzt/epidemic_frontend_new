@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MapPage from '../views/MapPage'
 import ScreenPage from '../views/ScreenPage'
-import MonthPage from '../views/MonthPage'
-import CountryTopPage from '../views/CountryTopPage'
 import CovidDetectPage from "../views/CovidDetectPage";
 import PolicyPage from "@/views/PolicyPage";
 import PopulationPage from "@/views/PopulationPage";
@@ -17,7 +14,7 @@ const routes = [
     {
     path: '/',
     component: FrontPage,
-      meta:{index:0}
+      meta:{index:1}
   },
   {
     path: "/population1",
@@ -25,43 +22,32 @@ const routes = [
   },
 
   {
-    path: '/mappage',
-    component: MapPage,
-    meta:{index:1}
-  },
-  {
     path: '/screenpage',
     component: ScreenPage,
     meta:{index:0}
   },
-  {
-    path: '/monthpage',
-    component: MonthPage,
-
-  },
-  {
-    path: '/countrytop',
-    component: CountryTopPage,
-
-  },{
+{
     path: '/coviddetect',
     component: CovidDetectPage,
-    meta:{index:1}
+    meta:{index:2}
   },{
     path: '/policy',
     component: PolicyPage,
-    meta:{index:1}
+    meta:{index:2}
   },{
     path: '/population',
     component: PopulationPage,
-    meta:{index:1}
+    meta:{index:0}
   },{
     path: '/prediction',
     component: PredictionPage,
-    meta:{index:1}
+    meta:{index:0}
   },{
     path: '/advicepage',
     component: advicePage,
+    meta: {
+      index:2
+    }
   }
 
 
