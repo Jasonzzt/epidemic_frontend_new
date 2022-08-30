@@ -181,7 +181,7 @@ export default {
             smooth: true
           },
           {
-            name:'预测新增确诊',
+            name:'预测新增',
             type:'line',
             lineStyle:{
               color:"rgba(255,40,73,0.89)"
@@ -324,7 +324,7 @@ export default {
               smooth: true
             },
             {
-              name:'预测新增确诊',
+              name:'预测新增',
               type:'line',
               lineStyle:{
                 color:"rgba(255,45,77,0.85)"

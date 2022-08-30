@@ -451,7 +451,7 @@ export default {
             value:item["confirm"]
           })
         }
-        console.log()
+
         this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
