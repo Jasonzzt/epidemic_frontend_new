@@ -100,6 +100,7 @@ import CenterTop from "../components/CenterTop";
 import Provincebar from "../components/provincebar";
 
 export default {
+  name:"screenpage",
   components: {
     Provincebar,
     myMap,
@@ -155,6 +156,7 @@ export default {
       },
     }
   },
+
   methods: {
     getDate() {
       const now = new Date()
@@ -231,69 +233,6 @@ export default {
         console.log(msg)
       })
     },
-
-    pushto1() {
-      router.push('/prediction')
-    },
-    pushto2() {
-      router.push('/population')
-    },
-    pushto3() {
-      router.push('/policy')
-    },
-    pushto4() {
-      router.push('/coviddetect')
-    },
-
-    /*async getCountryData() {
-      const url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5',
-          params = {name: 'disease_h5'}
-      // const res = await this.$jsonp(url, params)
-      const res = await this.$http.get(url)
-      const obj = JSON.parse(res.data)
-
-      this.allDataList = obj.areaTree[0].children.map((item) => ({
-        name: item.name,
-        value: item.total.confirm,
-      }))
-      this.allNowDataList = obj.areaTree[0].children.map((item) => ({
-        name: item.name,
-        value: item.total.nowConfirm,
-      }))
-      this.allDeadList = obj.areaTree[0].children.map((item) => ({
-        name: item.name,
-        value: item.total.dead,
-      }))
-      this.allTodayCreadList = obj.areaTree[0].children.map((item) => ({
-        name: item.name,
-        value: item.today.confirm,
-      }))
-      this.chinaTotal = {
-        confirm: obj.chinaTotal.confirm,
-        nowConfirm: obj.chinaTotal.nowConfirm,
-        importedCase: obj.chinaTotal.importedCase,
-        dead: obj.chinaTotal.dead,
-      }
-      this.chinaAdd = {
-        confirm:
-            obj.chinaAdd.confirm > 0
-                ? '+' + obj.chinaAdd.confirm
-                : obj.chinaAdd.confirm,
-        nowConfirm:
-            obj.chinaAdd.nowConfirm > 0
-                ? '+' + obj.chinaAdd.nowConfirm
-                : obj.chinaAdd.nowConfirm,
-        importedCase:
-            obj.chinaAdd.importedCase > 0
-                ? '+' + obj.chinaAdd.importedCase
-                : obj.chinaAdd.importedCase,
-        dead:
-            obj.chinaAdd.dead > 0 ? '+' + obj.chinaAdd.dead : obj.chinaAdd.dead,
-      }
-      console.log(this.chinaAdd)
-      // this.updateChart('现有确诊', this.allNowDataList)
-      this.pushData()
-    },*/
     pushData() {
       const val = {
         allDataList: this.allDataList,
@@ -344,22 +283,22 @@ export default {
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
-        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+        // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.title='新增确诊'
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
-        this.$refs.map.setData('累计确诊', this.confirmList)
+        // this.$refs.map.setData('累计确诊', this.confirmList)
         this.title='累计确诊'
         this.$refs.ring.setData(this.confirmList)
         this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
-        this.$refs.map.setData('累计治愈', this.cureList)
+        // this.$refs.map.setData('累计治愈', this.cureList)
         this.title='累计治愈'
         this.$refs.ring.setData(this.cureList)
         this.$refs.provincebar.setData(this.cureList)
       } else {
-        this.$refs.map.setData('累计死亡', this.deadList)
+        // this.$refs.map.setData('累计死亡', this.deadList)
         this.title='累计死亡'
         this.$refs.ring.setData(this.deadList)
         this.$refs.provincebar.setData(this.deadList)
@@ -380,44 +319,56 @@ export default {
       })
     },
 
-    getData() {
+    getChinaData() {
       let config = {
         headers: {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {"date": "2022-08-19"}, config).then(res => {
+      this.$axios.post('http://116.62.153.183/getChinaEpidemicDataByDate', {"date": "2022-08-30"}, config).then(res => {
         let msg = res.data.msg;
-        let deadListNum=0
-        let confirmIncreaseNum=0
-        let cureListNum=0
-        let confirmListNum=0
-        for(let i=0;i<2;i++){
-          confirmIncreaseNum+=msg[i].confirmIncrease
-          confirmListNum+=msg[i].confirm
-          cureListNum+=msg[i].cured
-          deadListNum+=msg[i].death
+        let deadListNum = 0
+        let confirmIncreaseNum = 0
+        let cureListNum = 0
+        let confirmListNum = 0
+        for (let i = 0; i < 2; i++) {
+          confirmIncreaseNum += msg[i].confirmIncrease
+          confirmListNum += msg[i].confirm
+          cureListNum += msg[i].cured
+          deadListNum += msg[i].death
         }
-        this.$store.commit('setBasicData',{'increase':confirmIncreaseNum,'confirm':confirmListNum,'cured':cureListNum,'dead':deadListNum})
-        for(let item of msg){
+        this.$store.commit('setBasicData', {
+          'increase': confirmIncreaseNum,
+          'confirm': confirmListNum,
+          'cured': cureListNum,
+          'dead': deadListNum
+        })
+        this.confirmList =[]
+        this.confirmIncreaseList=[]
+        this.deadList=[]
+        this.cureList=[]
+        for (let item of msg) {
           this.deadList.push({
-            name:item["provinceName"],
-            value:item["death"]
+            name: item["provinceName"],
+            value: item["death"]
           })
           this.confirmIncreaseList.push({
-            name:item["provinceName"],
-            value:item["confirmIncrease"]
+            name: item["provinceName"],
+            value: item["confirmIncrease"]
           })
           this.cureList.push({
-            name:item["provinceName"],
-            value:item["cured"]
+            name: item["provinceName"],
+            value: item["cured"]
           })
           this.confirmList.push({
-            name:item["provinceName"],
-            value:item["confirm"]
+            name: item["provinceName"],
+            value: item["confirm"]
           })
         }
-        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+        // this.$refs.map.chinaMaprsult('china')
+
+        // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
         this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
@@ -430,9 +381,13 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {'provinceName':provinceName,"date": "2022-08-19"}, config).then(res => {
+      this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {'provinceName':provinceName,"date": "2022-08-30"}, config).then(res => {
         let msg = res.data.msg;
-
+        msg.shift()
+        this.confirmList =[]
+        this.confirmIncreaseList=[]
+        this.deadList=[]
+        this.cureList=[]
         for(let item of msg){
           this.deadList.push({
             name:item["cityName"],
@@ -452,11 +407,19 @@ export default {
           })
         }
 
-        this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
+        // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
         this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
       })
+
+    },
+    getData(areaName){
+      if(areaName=='china'){
+        this.getChinaData()
+      }else{
+        this.getProvinceData(areaName)
+      }
 
     }
   },
@@ -467,6 +430,9 @@ export default {
         this.changeKeyframe()
       })
     },
+    isActive(newVal){
+      this.$refs.map.setData(newVal)
+    }
   },
   created() {
     this.getChinaNews()
@@ -480,7 +446,7 @@ export default {
   },
 
   mounted() {
-    this.getData()
+    this.getChinaData()
     window.addEventListener('resize', this.resizeChangekeyFrame())
 
   },
