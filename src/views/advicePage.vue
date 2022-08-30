@@ -102,10 +102,19 @@ export default {
   },
   data() {
     return {
+      textIncrease:'',
+      textIncrease1:'',
+      textComfirm:'',
+      textArea:'',
+      textArea1:'',
+      count:0,
+      count1:0,
       split1: 0.5,
       value: [],
       value1:[],
       out:'',
+      in:'',
+      analysis:'',
       tableData: [],
       ops: {
         vuescroll: {},
@@ -144,11 +153,83 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      console.log(this.value1[0])
+      this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value[1], "date":"2022-08-30"},config).then(res=> {
+        let msg = res.data.msg
+        if(msg.confirmIncrease>0||msg.asymptomaticIncrease>0){
+          this.textIncrease1="始发地有新增确诊（无症状）病例，"
+          this.count1++
+        }
+        if(msg.riskAreaNumber>0){
+          if(this.count1>0){
+            this.textArea1="存在风险区域，有疫情外溢风险。"
+            this.count1++
+          }
+          else {
+            this.textArea1="始发地存在风险区域，有一定的疫情外溢风险。"
+          }
+        }
+        else{
+          if(this.count1==0){
+            this.textArea1="始发地疫情风险低，可外出。"
+          }
+          else{
+            this.textArea1="存在一定的疫情外溢风险。"
+          }
+        }
+        this.$axios.post('http://116.62.153.183/getPopulationAnalysis',{"cityId":this.value1[1]},config).then(res=>{
+          let msg=res.data.msg
+
+          console.log(msg)
+          this.analysis=msg
+          if(msg.endsWith("风险。")){
+            this.count++
+          }
+          this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value1[1], "date":"2022-08-30"},config).then(res=>{
+            let msg= res.data.msg
+            if(msg.confirmIncrease>0||msg.asymptomaticIncrease>0){
+              this.textIncrease="目的地有新增确诊（无症状）病例，"
+              this.count++
+            }
+            else{
+              this.textIncrease="目的地无新增确诊（无症状）病例，"
+            }
+            if(msg.nowConfirm>0){
+              if(this.count==0)
+                this.textComfirm="但现存确诊病例，有一定疫情风险,"
+              else{
+                this.textComfirm="现存确诊病例，有一定疫情风险,"
+              }
+            }
+            else{
+              this.textComfirm="无现存确诊病例，"
+            }
+            if(msg.riskAreaNumber==0){
+              this.textArea="无风险区域，"
+            }
+            else{
+              this.textArea="存在风险区域，"
+              this.count++
+            }
+            this.out=this.textIncrease+this.textComfirm+this.textArea+this.analysis
+            if(this.count==0){
+              this.out=this.out+"综上所述，该地区疫情风险低，可放心前往，旅途中注意疫情防控。"
+            }
+            else{
+              this.out=this.out+"综上所述，该地区疫情风险高，非必要不建议前往。"
+            }
+            this.in=this.textIncrease1+this.textArea1
+            this.out=this.in+this.out
+          })
+        })
+
+      })
+
+
       this.$axios.post('http://116.62.153.183/geteEpidemicDataByIdAndDate',{ "cityId":this.value1[1], "date":"2022-08-30"},config).then(res=>{
         let msg= res.data.msg
         this.$store.commit("setSugData",{'increase':msg.confirmIncrease,'confirm':msg.confirm,'cured':msg.cured,'dead':msg.death,'asymptomaticIncrease':msg.asymptomaticIncrease,'asymptomatic':msg.asymptomatic,'riskAreaNumber':msg.riskAreaNumber})
       })
+
       this.$axios.post('http://116.62.153.183/getPopulationInByCityId',{"cityId":this.value1[1]},config).then(res=>{
         let msg=res.data.msg
         let arr=[]
@@ -157,13 +238,8 @@ export default {
         }
         this.tableData=arr
       })
-      // this.$axios.post('http://116.62.153.183/getPolicy',{"cityId":this.value1[1]},config).then(res=>{
-      //
-      // })
-      this.$axios.post('http://116.62.153.183/getSuggestion',{"cityOutId":this.value[1],"cityInId":this.value1[1]},config).then(res=>{
-        let msg=res.data.msg
-        this.out=msg
-      })
+
+
     },
     tableRowClassName({row, rowIndex}) {
       if (rowIndex%2 === 1)  //=>这里可以改成 rowIndex%2=== 1，后面直接else即可达到隔行变色效果。

@@ -39,6 +39,10 @@ export default new Vuex.Store({
       state.allNowDataList = val.nowdata;
       state.allTodayCreadList = val.cread;
 
+      state.increase=0
+      state.confirm=0
+      state.cured=0
+      state.dead=0
       for(let i=0;i<val.dataList.length;i++){
         state.increase+=val.nowdata[i].value
         state.confirm+=val.dataList[i].value
