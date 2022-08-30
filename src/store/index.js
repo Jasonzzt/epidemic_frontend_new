@@ -18,6 +18,13 @@ export default new Vuex.Store({
     dead:0,
     cured:0,
     confirm:0,
+    increaseSug:0,
+    deadSug:0,
+    curedSug:0,
+    confirmSug:0,
+    asymptomaticIncrease:0,
+    asymptomatic:0,
+    riskAreaNumber:0,
   },
   mutations: {
     setBasicData(state,val){
@@ -60,6 +67,15 @@ export default new Vuex.Store({
       }
       state.xData=arr1;
       state.yData=arr2;
+    },
+    setSugData(state,val){
+      state.increaseSug=val.increase
+      state.confirmSug=val.confirm
+      state.curedSug=val.cured
+      state.deadSug=val.dead
+      state.asymptomaticIncrease=val.asymptomaticIncrease
+      state.asymptomatic=val.asymptomatic
+      state.riskAreaNumber=val.riskAreaNumber
     }
   },
   actions: {},
