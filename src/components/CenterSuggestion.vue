@@ -1,5 +1,6 @@
 <template>
   <div id="vmcentertop">
+<!--    vueX显示数据-->
     <div class="tophd">
       <ul>
         <li>{{this.$store.state.increaseSug}}</li>
@@ -8,9 +9,9 @@
         <li>{{this.$store.state.curedSug}}</li>
         <li>{{this.$store.state.deadSug}}</li>
         <li>{{this.$store.state.riskAreaNumber}}</li>
-
       </ul>
     </div>
+
     <div class="topbd">
       <ul>
         <li>新增确诊</li>
@@ -28,25 +29,6 @@
 <script>
 export default {
   name:'centertop',
-  data() {
-    return {
-      confirm: 0,
-      confirmIncrease:0,
-      cure:0,
-      death:0,
-    }
-  },
-  methods:{
-    setData(confirm,
-            confirmIncrease,
-            cure,
-            death){
-      this.confirm = confirm
-      this.confirmIncrease = confirmIncrease
-      this.cure = cure
-      this.death = death
-    }
-  },
 }
 </script>
 <style scoped>
@@ -56,16 +38,19 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+
 #vmcentertop{
   background-color: rgba(101, 132, 226, 0.1);
   padding: 15px;
   height:20px
 }
+
 .tophd{
   position: relative;
   border: 1px solid rgba(25, 186, 139, 0.17);
   height: 50px;
 }
+
 .tophd:before{
   position: absolute;
   top: 0;
@@ -76,6 +61,7 @@ export default {
   border-top: 2px solid #02a6b5;
   border-left: 2px solid #02a6b5;
 }
+
 .tophd:after{
   position: absolute;
   bottom: 0;
@@ -90,6 +76,7 @@ export default {
 .tophd ul{
   display: flex;
 }
+
 .tophd li{
   position: relative;
   flex: 1;
@@ -100,6 +87,7 @@ export default {
   text-align: center;
   font-family:electronicFont;
 }
+
 .tophd lI:after{
   content: '';
   position: absolute;
@@ -108,13 +96,12 @@ export default {
   height: 50%;
   width: 1px;
   background-color: rgba(255, 255, 255, 0.2);
-
 }
-
 
 .topbd ul{
   display: flex;
 }
+
 .topbd ul li{
   flex: 1;
   height: 40px;
@@ -123,5 +110,4 @@ export default {
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
 }
-
 </style>

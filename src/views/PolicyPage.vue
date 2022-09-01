@@ -3,12 +3,14 @@
   <div class="com-page2">
 
     <el-page-header @back="goBack" content=" "></el-page-header>
+
     <el-container>
+<!--      标题-->
     <el-header style="font-size: 35px;font-family:新宋体">
       <dv-decoration-7 style="width:350px;height:20px;">防疫政策查询<i class="el-icon-s-order"></i></dv-decoration-7>
       </el-header>
       <dv-decoration-5  style="width:1000px;margin-left: 300px;height:30px;"  />
-<!--  <dv-decoration-2 style="width:1400px;height:5px;margin-left: 90px;position: relative;color: #b1bcff " />*/-->
+<!--    主体内容-->
     <el-main style="font-size: 22px; font-family: 宋体">请选择出发地与目的地所在城市: <br>
       <div class="block">
         <div class="select_btn">
@@ -29,8 +31,7 @@
             @change="handleChange"></el-cascader>
     <el-button @click="search" type="primary"  icon="el-icon-search"  style="margin-left: 50px">   搜索</el-button>
       </div></div>
-<!--      <el-divider></el-divider>-->
-
+<!--两个选择框-->
       <el-row :gutter="20" style="margin-top: 20px">
         <el-col :span="10" style="font-size: 19px;margin-left: 90px">
           <dv-border-box-1><div class="contentin bgc-size flex" >出发地
@@ -45,18 +46,7 @@
         </el-col>
       </el-row>
         <dv-decoration-2 style="width:1100px;height:5px;margin-left: 200px;position: relative" />
-<!--      <div class="advice bgc-size flex" style="margin-left: 150px;width: 1200px;font-size: 20px" >-->
-<!--      <dv-border-box-1>出行建议-->
-<!--        <vue-scroll :ops="ops" style="width:1050px;height:200px">-->
-<!--          <div style="font-size: 19px">（示例）【湖区8.23全员核酸检测志愿者招募】-->
-<!--            现进行湖区8.23全员核酸检测志愿者库招募工作，以备核酸检测工作需要。-->
-<!--            具体服务时间为8月23日8：00～11：30、11：20～13：30（请务必提前十分钟到指定地点集合），地点体育馆、纪忠楼，具体分班情况待定-->
-<!--            欢迎同学们积极参与报名，先行填写问卷、加入qq群，等待后续录用排班-->
-<!--            </div></vue-scroll></dv-border-box-1>-->
-<!--  </div>-->
-
     </el-main>
-<!--    </dv-border-box-11>-->
   </el-container>
 
   </div>

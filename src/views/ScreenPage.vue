@@ -1,8 +1,8 @@
 <template>
   <div class="screen-page">
-
-
+    <!--    返回-->
     <el-page-header @back="goBack" content=" "></el-page-header>
+    <!--    选择模式-->
     <header>
       <h1 class="title" style="margin-top: -50px">新冠疫情数据可视化</h1>
       <div ref="a" class="header-box" style="width: 500px;position: relative;margin-right: -530px">
@@ -16,15 +16,15 @@
     </header>
 
     <div class="content">
+      <!--      左边栏-->
       <aside class="flex-column">
-
+        <!--      动态环图-->
         <div class="total bgc-size flex">
-          <div class="total_tip p_tip"><p>地区：中国</p><p>{{ data }}</p></div>
+          <div class="total_tip p_tip"><p>地区：中国</p>
+            <p>{{ data }}</p></div>
           <ring class="bar" ref="ring">123</ring>
-
-<!--          <panel class="panel"></panel>-->
-<!--          <div class="show_box total_box">-->
         </div>
+        <!--       实时新闻-->
         <div class="broadcast bgc-size">
           <p class="p_tip">实时播报</p>
           <div class="data">
@@ -47,71 +47,50 @@
             </ul>
           </div>
         </div>
-
       </aside>
       <!-- 中间栏 -->
       <div class="middle-box flex-column">
         <!-- 地图 -->
         <div class="map bgc-size flex">
           <CenterTop class="centerTop" ref="centerTop"></CenterTop>
-<!--          <div
-              :class="[
-              fullScreenStatus.map ? 'show_box h fullscreen' : 'show_box h',
-            ]"
-          >-->
-            <myMap ref="map" v-if="show3"></myMap>
-<!--            <div
-                @click="changeSize('map')"
-                :class="[fullScreenStatus.map ? 'compress' : 'expand']"
-            ></div>-->
-          </div>
+          <myMap ref="map" v-if="show3"></myMap>
         </div>
       </div>
-      <!-- 右边栏 -->
-      <div class="right-asside flex-column">
-        <div class="trend bgc-size">
-          <p class="p_tip1">各省市{{title}}情况</p>
-<!--          <div
-              :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
-          <vue-scroll :ops="ops" style="width:550px;height:550px">
+    </div>
+    <!-- 右边栏 -->
+    <div class="right-asside flex-column">
+      <div class="trend bgc-size">
+        <p class="p_tip1">各省市{{ title }}情况</p>
+        <!--          <div
+                      :class="[fullScreenStatus.top ? 'show_box fullscreen' : 'show_box']">-->
+        <vue-scroll :ops="ops" style="width:550px;height:550px">
           <provincebar class="bar" style="margin-left: -5px" ref="provincebar">123</provincebar>
-          </vue-scroll>
-          </div>
-<!--            <div>{{this.$data.in}}</div>-->
-
-<!--            <div
-                @click="changeSize('top')"
-                :class="[fullScreenStatus.top ? 'compress' : 'expand']"
-            ></div>-->
-      </div>
+        </vue-scroll>
       </div>
 
-
+    </div>
+  </div>
 </template>
-
-
 
 <script>
 import myMap from '../components/Map'
 import router from "@/router";
-import bar from "../components/bar";
-import ring from "../components/ring"
+import ring from "../components/Ring"
 import CenterTop from "../components/CenterTop";
-import Provincebar from "../components/provincebar";
-
+import Provincebar from "../components/ProvinceBar";
 export default {
-  name:"screenpage",
+  name: "screenpage",
+
   components: {
     Provincebar,
     myMap,
-    bar,
     ring,
     CenterTop,
-
   },
+
   data() {
     return {
-      title:'新增确诊',
+      title: '新增确诊',
       fullScreenStatus: {
         map: false,
         month: false,
@@ -145,7 +124,7 @@ export default {
           gutterOfEnds: null,    //轨道距 x 和 y 轴两端的距离
           gutterOfSide: '0',   //距离容器的距离
           keepShow: false,   //是否即使 bar 不存在的情况下也保持显示
-          border:'none' ,  //边框
+          border: 'none',  //边框
           padding: true
         },
         bar: {
@@ -158,6 +137,7 @@ export default {
   },
 
   methods: {
+    // 获取日期
     getDate() {
       const now = new Date()
       let year = now.getFullYear(),
@@ -165,6 +145,7 @@ export default {
           date = now.getDate()
       this.data = `${year}/${month}/${date}`
     },
+    // 获取时间
     getTime() {
       const now = new Date()
       let hour = (now.getHours() + '').padStart(2, '0'),
@@ -172,9 +153,11 @@ export default {
           second = (now.getSeconds() + '').padStart(2, '0')
       this.time = `${hour}:${minute}:${second}`
     },
+    // 获取当前时间
     getNowTime() {
       setInterval(this.getTime, 1000)
     },
+    //获取新闻时间
     getNewsTime(time) {
       const now = Math.floor(new Date() / 1000)
       let hour = Math.floor((now - parseInt(time)) / 60 / 60)
@@ -184,6 +167,7 @@ export default {
       ).padStart(2, '0')
       return hour ? `${hour}小时${minute}` : `${minute}`
     },
+    // 改变关键帧
     changeKeyframe() {
       const styleObj = {
         'update-item-box': 'rolling',
@@ -212,7 +196,7 @@ export default {
         }
       }
     },
-
+    // 重置关键帧
     resizeChangekeyFrame() {
       let timer = null
       return () => {
@@ -222,32 +206,11 @@ export default {
         }, 1000)
       }
     },
-    setData(url, index, data){
-      let config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-      this.$axios.post(url, data, config).then(res => {
-        let msg = res.data.msg;
-        console.log(msg)
-      })
-    },
-    pushData() {
-      const val = {
-        allDataList: this.allDataList,
-        allDeadList: this.allDeadList,
-        allNowDataList: this.allNowDataList,
-        allTodayCreadList: this.allTodayCreadList,
-        chinaTotal: this.chinaTotal,
-        chinaAdd: this.chinaAdd,
-      }
-      this.$store.commit('initData', val)
-      this.show1 = true
-    },
+
     goBack() {
       router.push('/')
     },
+    // 获取新闻
     async getChinaNews() {
       const url = 'https://opendata.baidu.com/data/inner'
       const prarms = {
@@ -277,48 +240,34 @@ export default {
         siteName: item.siteName,
       }))
     },
-    clickIndex(e) {
-      this.isActive = parseInt(e.target.dataset.index)
-    },
+
+    // 切换模式
     handClick(e) {
       this.isActive = parseInt(e.target.dataset.index)
       if (this.isActive === 0) {
         // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
-        this.title='新增确诊'
+        this.title = '新增确诊'
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
       } else if (this.isActive === 1) {
         // this.$refs.map.setData('累计确诊', this.confirmList)
-        this.title='累计确诊'
+        this.title = '累计确诊'
         this.$refs.ring.setData(this.confirmList)
         this.$refs.provincebar.setData(this.confirmList)
       } else if (this.isActive === 2) {
         // this.$refs.map.setData('累计治愈', this.cureList)
-        this.title='累计治愈'
+        this.title = '累计治愈'
         this.$refs.ring.setData(this.cureList)
         this.$refs.provincebar.setData(this.cureList)
       } else {
         // this.$refs.map.setData('累计死亡', this.deadList)
-        this.title='累计死亡'
+        this.title = '累计死亡'
         this.$refs.ring.setData(this.deadList)
         this.$refs.provincebar.setData(this.deadList)
       }
     },
 
-
-    changeSize(type) {
-      this.fullScreenStatus[type] = !this.fullScreenStatus[type]
-      this.$nextTick(() => {
-        this.$refs[type].screenAdapter()
-      })
-    },
-    changeSize1(type) {
-      this.fullScreenStatus[type] = !this.fullScreenStatus[type]
-      this.$nextTick(() => {
-        this.$refs[type].screenAdapter()
-      })
-    },
-
+    // 获取中国数据
     getChinaData() {
       let config = {
         headers: {
@@ -343,10 +292,10 @@ export default {
           'cured': cureListNum,
           'dead': deadListNum
         })
-        this.confirmList =[]
-        this.confirmIncreaseList=[]
-        this.deadList=[]
-        this.cureList=[]
+        this.confirmList = []
+        this.confirmIncreaseList = []
+        this.deadList = []
+        this.cureList = []
         for (let item of msg) {
           this.deadList.push({
             name: item["provinceName"],
@@ -365,98 +314,107 @@ export default {
             value: item["confirm"]
           })
         }
-        // this.$refs.map.chinaMaprsult('china')
-
-        // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
-
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
-        this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
+        this.$store.commit('setAllData', {
+          'dead': this.deadList,
+          'cread': this.cureList,
+          'nowdata': this.confirmIncreaseList,
+          'dataList': this.confirmList
+        })
       })
     },
-    getProvinceData(provinceName){
+
+    // 获取省份数据
+    getProvinceData(provinceName) {
       console.log(provinceName)
       let config = {
         headers: {
           'Content-Type': 'application/json'
         }
       }
-      this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {'provinceName':provinceName,"date": "2022-08-30"}, config).then(res => {
+      this.$axios.post('http://116.62.153.183/getProvinceEpidemicDataByNameAndDate', {
+        'provinceName': provinceName,
+        "date": "2022-08-30"
+      }, config).then(res => {
         let msg = res.data.msg;
-
-        this.confirmList =[]
-        this.confirmIncreaseList=[]
-        this.deadList=[]
-        this.cureList=[]
-        for(let item of msg){
-          if(item['cityName']===provinceName)continue
+        this.confirmList = []
+        this.confirmIncreaseList = []
+        this.deadList = []
+        this.cureList = []
+        for (let item of msg) {
+          if (item['cityName'] === provinceName) continue
           this.deadList.push({
-            name:item["cityName"],
-            value:item["death"]
+            name: item["cityName"],
+            value: item["death"]
           })
           this.confirmIncreaseList.push({
-            name:item["cityName"],
-            value:item["confirmIncrease"]
+            name: item["cityName"],
+            value: item["confirmIncrease"]
           })
           this.cureList.push({
-            name:item["cityName"],
-            value:item["cured"]
+            name: item["cityName"],
+            value: item["cured"]
           })
           this.confirmList.push({
-            name:item["cityName"],
-            value:item["confirm"]
+            name: item["cityName"],
+            value: item["confirm"]
           })
         }
 
         // this.$refs.map.setData('新增确诊', this.confirmIncreaseList)
         this.$refs.ring.setData(this.confirmIncreaseList)
         this.$refs.provincebar.setData(this.confirmIncreaseList)
-        this.$store.commit('setAllData',{'dead':this.deadList,'cread':this.cureList,'nowdata':this.confirmIncreaseList,'dataList':this.confirmList})
+        this.$store.commit('setAllData', {
+          'dead': this.deadList,
+          'cread': this.cureList,
+          'nowdata': this.confirmIncreaseList,
+          'dataList': this.confirmList
+        })
       })
 
     },
-    getData(areaName){
-      if(areaName=='china'){
+
+    // 获取数据
+    getData(areaName) {
+      if (areaName == 'china') {
         this.getChinaData()
-      }else{
+      } else {
         this.getProvinceData(areaName)
       }
-
     }
   },
+
   watch: {
+    // 监控新闻
     news() {
       this.$nextTick(() => {
         this.show2 = true
         this.changeKeyframe()
       })
     },
-    isActive(newVal){
+    // 监控模式
+    isActive(newVal) {
       this.$refs.map.setData(newVal)
     }
   },
+
   created() {
     this.getChinaNews()
     this.getDate()
     this.getNowTime()
-
-    // this.allNowDataList = this.$refs.map.updateChart("现存确诊")
-    // console.log(this.allNowDataList)
-    // this.$refs.ring.setData(this.allNowDataList)
-    // this.$refs.bar.updateChart(this.allNowDataList)
   },
 
   mounted() {
     this.getChinaData()
     window.addEventListener('resize', this.resizeChangekeyFrame())
-
   },
 }
 </script>
 
 <style lang="less">
 
-.centerTop{
+.centerTop {
   margin-top: -27px;
 }
 
@@ -481,6 +439,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .p_tip1 {
   position: relative;
   margin-top: 23px;
@@ -619,7 +578,6 @@ header {
 }
 
 // Start 侧边栏
-
 aside {
   width: 25%;
   // flex: 1;
@@ -673,6 +631,7 @@ aside {
   cursor: pointer;
   background-image: url(../../public/static/img/aleftboxtmidd.png);
 }
+
 .hot-item {
   position: relative;
   padding: 8px 15px 8px 25px;
@@ -756,7 +715,7 @@ aside {
 }
 
 .p {
-  margin-top:15px;
+  margin-top: 15px;
 }
 
 .h {
@@ -765,11 +724,11 @@ aside {
 
 .right-asside {
   position: relative;
-  height:640px;
+  height: 640px;
   width: 25%;
   // flex: 1;
   float: right;
-  top:-635px;
+  top: -635px;
   left: -23px;
 }
 
@@ -849,8 +808,8 @@ aside {
   z-index: 1000;
   background-color: rgba(16, 24, 129, 0.8);
 }
-.bar{
+
+.bar {
   margin-left: -20px;
 }
-
 </style>
